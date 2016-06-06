@@ -1,0 +1,223 @@
+Adding a Remote Url
+__________________________________________________________________________
+To add a new remote, use the git remote add command on the terminal, in the directory your repository is stored at.
+
+The git remote add command takes two arguments:
+
+A remote name, for example, origin
+A remote URL, for example, https://github.com/user/repo.git
+For example:
+
+git remote add origin https://github.com/user/repo.git
+# Set a new remote
+
+git remote -v
+# Verify new remote
+origin  https://github.com/user/repo.git (fetch)
+origin  https://github.com/user/repo.git (push)
+
+_________________________________________________________________________________________________
+Troubleshooting
+
+You may encounter these errors when trying to add a remote.
+
+Remote name already exists
+
+This error means you've tried to add a remote with a name that already exists in your local repository:
+
+git remote add origin https://github.com/octocat/Spoon-Knife
+fatal: remote origin already exists.
+To fix this, you can
+
+Use a different name for the new remote
+Rename the existing remote
+Delete the existing remote
+
+____________________________________________________________________________________________________________
+Adding an existing project to GitHub using the command line
+__________________________________________________________________________
+Create a new repository on GitHub. To avoid errors, do not initialize the new repository with README, license, or gitignore files. You can add these files after your project has been pushed to GitHub.
+Open Terminal.
+
+Change the current working directory to your local project.
+
+Initialize the local directory as a Git repository.
+
+git init
+Add the files in your new local repository. This stages them for the first commit.
+
+git add .
+# Adds the files in the local repository and stages them for commit. To unstage a file, use 'git reset HEAD YOUR-FILE'.
+Commit the files that you've staged in your local repository.
+
+git commit -m "First commit"
+# Commits the tracked changes and prepares them to be pushed to a remote repository.
+ To remove this commit and modify the file, use 'git reset --soft HEAD~1' and commit and add the file again.
+Copy remote repository URL fieldAt the top of your GitHub repository's Quick Setup page,
+ click  to copy the remote repository URL.
+
+In Terminal, add the URL for the remote repository where your local repository will be pushed.
+
+git remote add origin remote repository URL
+# Sets the new remote
+git remote -v
+# Verifies the new remote URL
+Push the changes in your local repository to GitHub.
+
+git push origin master
+# Pushes the changes in your local repository up to the remote repository you specified as the origin
+
+_______________________________________________________________________________________________________________________________
+Adding a file to a repository from the command line
+____________________________________________________________________________________________________________________________
+On your computer, move the file you'd like to upload to GitHub into the local directory that was created when you cloned the repository.
+Open Terminal.
+
+Change the current working directory to your local repository.
+
+Stage the file for commit to your local repository.
+
+git add .
+# Adds the file to your local repository and stages it for commit. To unstage a file, use 'git reset HEAD YOUR-FILE'.
+Commit the file that you've staged in your local repository.
+
+git commit -m "Add existing file"
+# Commits the tracked changes and prepares them to be pushed to a remote repository. To remove this commit and modify the file, use 'git reset --soft HEAD~1' and commit and add the file again.
+Push the changes in your local repository to GitHub.
+
+git push origin your-branch
+# Pushes the changes in your local repository up to the remote repository you specified as the origin
+__________________________________________________________________________________________________________________________
+Changing a remote's URL
+___________________________________________________________________________________________________________________________
+The git remote set-url command changes an existing remote repository URL.
+
+Tip: For information on the difference between HTTPS and SSH URLs, see "Which remote URL should I use?"
+The git remote set-url command takes two arguments:
+
+An existing remote name. For example, origin or upstream are two common choices.
+A new URL for the remote. For example:
+
+If you're updating to use HTTPS, your URL might look like:
+
+https://github.com/USERNAME/OTHERREPOSITORY.git
+If you're updating to use SSH, your URL might look like:
+
+git@github.com:USERNAME/OTHERREPOSITORY.git
+Switching remote URLs from SSH to HTTPS
+
+Open Terminal.
+
+Change the current working directory to your local project.
+
+List your existing remotes in order to get the name of the remote you want to change.
+
+git remote -v
+origin  git@github.com:USERNAME/REPOSITORY.git (fetch)
+origin  git@github.com:USERNAME/REPOSITORY.git (push)
+Change your remote's URL from SSH to HTTPS with the git remote set-url command.
+
+git remote set-url origin https://github.com/USERNAME/OTHERREPOSITORY.git
+Verify that the remote URL has changed.
+
+git remote -v
+# Verify new remote URL
+origin  https://github.com/USERNAME/OTHERREPOSITORY.git (fetch)
+origin  https://github.com/USERNAME/OTHERREPOSITORY.git (push)
+The next time you git fetch, git pull, or git push to the remote repository, you'll be asked for your GitHub username and password.
+
+If you have two-factor authentication enabled, you must create a personal access token to use instead of your GitHub password.
+You can use a credential helper so Git will remember your GitHub username and password every time it talks to GitHub.
+Switching remote URLs from HTTPS to SSH
+
+Open Terminal.
+
+Change the current working directory to your local project.
+
+List your existing remotes in order to get the name of the remote you want to change.
+
+git remote -v
+origin  https://github.com/USERNAME/REPOSITORY.git (fetch)
+origin  https://github.com/USERNAME/REPOSITORY.git (push)
+Change your remote's URL from HTTPS to SSH with the git remote set-url command.
+
+git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git
+Verify that the remote URL has changed.
+
+git remote -v
+# Verify new remote URL
+origin  git@github.com:USERNAME/OTHERREPOSITORY.git (fetch)
+origin  git@github.com:USERNAME/OTHERREPOSITORY.git (push)
+Troubleshooting
+
+You may encounter these errors when trying to changing a remote.
+
+No such remote '[name]'
+
+This error means that the remote you tried to change doesn't exist:
+
+git remote set-url sofake https://github.com/octocat/Spoon-Knife
+fatal: No such remote 'sofake'
+Check that you've correctly typed the remote name.
+___________________________________________________________________________________________________________________________
+Switching remote URLs from SSH to HTTPS
+
+____________________________________________________________________________________________________________________
+Open Terminal.
+
+Change the current working directory to your local project.
+
+List your existing remotes in order to get the name of the remote you want to change.
+
+git remote -v
+origin  git@github.com:USERNAME/REPOSITORY.git (fetch)
+origin  git@github.com:USERNAME/REPOSITORY.git (push)
+Change your remote's URL from SSH to HTTPS with the git remote set-url command.
+
+git remote set-url origin https://github.com/USERNAME/OTHERREPOSITORY.git
+Verify that the remote URL has changed.
+
+git remote -v
+# Verify new remote URL
+origin  https://github.com/USERNAME/OTHERREPOSITORY.git (fetch)
+origin  https://github.com/USERNAME/OTHERREPOSITORY.git (push)
+The next time you git fetch, git pull, or git push to the remote repository, you'll be asked for your GitHub username and password.
+
+If you have two-factor authentication enabled, you must create a personal access token to use instead of your GitHub password.
+You can use a credential helper so Git will remember your GitHub username and password every time it talks to GitHub.
+
+
+____________________________________________________________________________________________________________________
+Switching remote URLs from HTTPS to SSH
+
+____________________________________________________________________________________________________________________
+
+Open Terminal.
+
+Change the current working directory to your local project.
+
+List your existing remotes in order to get the name of the remote you want to change.
+
+git remote -v
+origin  https://github.com/USERNAME/REPOSITORY.git (fetch)
+origin  https://github.com/USERNAME/REPOSITORY.git (push)
+Change your remote's URL from HTTPS to SSH with the git remote set-url command.
+
+git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git
+Verify that the remote URL has changed.
+
+git remote -v
+# Verify new remote URL
+origin  git@github.com:USERNAME/OTHERREPOSITORY.git (fetch)
+origin  git@github.com:USERNAME/OTHERREPOSITORY.git (push)
+Troubleshooting
+
+You may encounter these errors when trying to changing a remote.
+
+No such remote '[name]'
+
+This error means that the remote you tried to change doesn't exist:
+
+git remote set-url sofake https://github.com/octocat/Spoon-Knife
+fatal: No such remote 'sofake'
+Check that you've correctly typed the remote name.
