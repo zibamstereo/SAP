@@ -18,8 +18,9 @@
   <body>
 
     <div class="header">
-      <span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><img src="images/ajebo.png" alt="Ajebo Market" height="45px" width="111px"></span>
-      <span style="width:auto;float:left;margin:0.8em 0 0 1em;"><i class="fa fa-th"></i> SALES AGENT PLATFORM </span>
+      <span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><img src="images/ajebo.png" alt="Ajebo Market" height="45px" width="90px"></span>
+      <span style="width:auto;float:left;margin:0.8em 0 0 1em;"><i class="fa fa-th"></i> SALES AGENT PLATFORM  <span style="width:auto;color:#ee3d43; font-size:0.8em;" > <i class="fa  fa-chevron-right"></i> REGISTER | LOGIN </span>
+
        </div>
 
 <br>
