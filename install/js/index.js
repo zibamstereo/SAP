@@ -3,7 +3,7 @@
 
   function install_db()
   {
-    window.location= "http://localhost/sap/install/installed.php" ;
+    window.location= "http://localhost/project/install/installed.php" ;
 
   }
 

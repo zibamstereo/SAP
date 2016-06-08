@@ -35,11 +35,11 @@
 </div>
 
 <!-- /container -->
-<script src="js/classie.js"></script>
-<script src="js/main.js"></script>
-
-
-
+<?php 
+// Add Js Files needed
+        echo $utils->addJs('classie');
+        echo $utils->addJs('main');
+   ?>
 
 
 </body>

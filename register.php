@@ -17,13 +17,24 @@ $utils = new Functions_Utility();
         <?php
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; // Add favicon
         echo $utils->addCss('index'); // Add css file for the index.php in the root folder
-
+        echo $utils->addJs('jquery.min'); // Add jquery
+        echo $utils->addCss('infinitelife'); // Add Infinitelife Css for this page 
+        echo $utils->addJs('infinitelife'); // Add Infinitelife Js for this page 
         // Add font css
         echo $utils->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css'); 
         echo $utils->addFile('Css', 'dashboard/fonts/fonts.css');
         ?>
 
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+    $('#regForm').submit(function(e) {
+      register();
+      e.preventDefault(); 
+    }); 
+  });
+</script>
 
 
   </head>
@@ -45,28 +56,11 @@ $utils = new Functions_Utility();
  <i class="fa fa-group"> </i> REGISTER | LOGIN
 
 </div>
-
+  
   <div class="form">
-<!-- This is login form -->
-    <form id="loginForm" class="search-form" action="index.php">
-
-      <input type="text" id="email_login" name="email_login" placeholder="Email"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
-      <input type="password" id="password_login" name="password_login" placeholder="Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
-
-        </br>
-        <div class="button" name="Login" onClick="login_user();"> LOGIN</div>
-        <p class="message">Not Registered ? <span class="change">  <i class="fa fa-chevron-circle-right"></i> Register </span></p>
-
-
-    </form>
-
-    <!-- This is login form -->
-
-
-
-
+  <div id='msg'></div>
 <!-- This is registration form -->
-    <form id="regForm" class="address-form" action="<?php echo USER_URL; ?>process/registration.php" method="POST">
+    <form id="regForm" class="address-form" action="<?php echo USER_URL; ?>process/register" method="POST">
   <input type="text" id="full_name" name="full_name" placeholder="Full Name"/><span class="form-icon"> <i class="fa fa-user"> </i></span>
   <textarea name="address" id="address" placeholder="Address"></textarea><span class="form-icon"> <i class="fa fa-map"> </i></span>
   <input type="text" id="phone" name="phone" placeholder="Phone"/><span class="form-icon"> <i class="fa fa-tablet"> </i></span>
@@ -76,22 +70,13 @@ $utils = new Functions_Utility();
 
       </br>
       <!--<div class="button" name="register" onClick="create_account();"> Register</div>-->
-      <button class="button" name="register">Register</button>
-      <p class="message">Already Registered ? <span class="change">  <i class="fa fa-chevron-circle-right"></i> Login </span></p>
+      <input class="button" type='submit' name="register" value="Register"> <?php echo $utils->addImg('loading.gif','','','loading..','','loading') ?>
+      <p class="message">Already Registered ? <i class="fa fa-chevron-circle-right"></i> <a href='login.php'> Login </a></p>
     </form>
     <!-- This is registration form -->
   </div>
 </div>
 
 </div>
-
-     <?php
-        echo $utils->addJs('jquery.min'); // Add jquery
-        echo $utils->addJs('index'); // Add js for the index.php in the root folder
-      ?>
-
-
-
-
   </body>
 </html>

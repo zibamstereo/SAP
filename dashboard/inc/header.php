@@ -1,51 +1,37 @@
+<?php 
+// directory separator
+defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
+
+//include DBFunc and config.php via Autoloader
+ require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."Autoloader.php");
+
+//Instantiate Functions_Utility Object
+$utils = new Functions_Utility();
+$usr = new Functions_User();
+ $usr->checkLogin('9');
+
+ $getuser = $usr->getUserRecords($_SESSION['user_id']);
+?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title> Ajebo Market Sales Agent Platform </title>
+		<title> <?php echo $utils->addTitle(); ?></title>
 
-    <link rel="shortcut icon" href="images/ajebo.ico">
-		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/user-panel.css" />
-		<link rel="stylesheet" type="text/css" href="fonts/fonts.css" />
+		<?php
+		// Add Favicon
+        echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; 
 
+        // Add Css files needed
+        echo $utils->addCss('normalize'); // Add css file for the index.php in the root folder
+        echo $utils->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css');
+        echo $utils->addCss('user-panel'); // Add css file for user panel
+        echo $utils->addFile('Css', 'dashboard/fonts/fonts.css');
 
-
-		<script src="js/jquery.min.js"></script>
-		<script src="js/modernizr.custom.js"></script>
-
-
-
-
-
+        // Add Js Files needed
+        echo $utils->addJs('jquery.min');
+        echo $utils->addJs('modernizr.custom.min');
+        ?>
 </head>
-	<body>
-
-
-		<div class="container">
-			<button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
-			<div id="theSidebar" class="sidebar">
-
-	<section  class="one-head ">
-
-	<span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><img src="images/ajebo.png" alt="Ajebo Market" height="50px" width="111px"></span>
-	<span style="width:auto;float:left;margin:0.7em 0 0 0.5em;"> <i class="fa fa-th"></i> SALES AGENT PLATFORM </span>
-
-
-
-	</section>
-
-				<button class="close-button"><i class="fa fa-close"></i></button>
-
-
-	<div class"related">
-
-		<div class="profile-pic ">
-
-		</div>
-
-
-		 </div>

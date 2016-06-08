@@ -1,3 +1,6 @@
+<?php
+include_once('installed.php');
+?>
 <!DOCTYPE html>
 <html >
   <head>
@@ -37,8 +40,16 @@
 
   <div class="form">
 
-<form id="form1" name="form1" method="post" action="installed.php">
+<form id="form1" name="form1" method="post" action="index.php">
 <table border="0">
+	  <tr>
+    <td colspan='2'>
+     <?php if (!empty($msg)):
+			echo $msg;
+			endif;		
+		?>
+    </td>
+  </tr>
   <tr>
     <td width="31%">   <i class="fa fa-server" style="color:#ee3d43;"> </i> Host Server</td>
     <td>
@@ -79,7 +90,7 @@
   </tr>
   <tr>
     <td colspan="2">
-      <div class="button" name="Submit" id="Submit" onClick="create_project();"><i class="fa fa-chevron-circle-right"> </i> Install</div>
+      <button class="button" name="submit" id="submit"><i class="fa fa-chevron-circle-right"> </i> Install</button>
     </td>
     </tr>
 </table>
@@ -89,8 +100,5 @@
 
 </div>
 
-
-<script src='js/jquery.min.js'></script>
-<script src="js/index.js"></script>
 </body>
 </html>
