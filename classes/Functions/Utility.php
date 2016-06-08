@@ -28,17 +28,17 @@ class Functions_Utility extends Db_DBFunc
      * @param 		$ips-The ips to return
      * @return 		Returns the ip
      */
-	private function ip_first ( $ips ) 
+	private function ip_first ( $ips )
 	{
 		if ( ( $pos = strpos ( $ips, ',' ) ) != false ) {
 			return substr ( $ips, 0, $pos );
-		} 
+		}
 		else {
 			return $ips;
 		}
 	}
 
-	
+
 	/**
      *  ip_valid - will try to determine if a given ip is valid or not
      *
@@ -59,7 +59,7 @@ class Functions_Utility extends Db_DBFunc
 		}
 		return false;
 	}
-	
+
 
 
 
@@ -73,20 +73,20 @@ class Functions_Utility extends Db_DBFunc
      * @param 		N/A
      * @return 		Returns visitor's IP
      */
-	protected function getIP () 
+	protected function getIP ()
 	{
 		$check = array(
 		'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_FORWARDED_FOR',
 		'HTTP_FORWARDED', 'HTTP_VIA', 'HTTP_X_COMING_FROM', 'HTTP_COMING_FROM',
 		'HTTP_CLIENT_IP'
 		);
-		
+
 		foreach ( $check as $c ) {
 			if ( $this->ip_valid ( $_SERVER [ $c ] ) ) {
 				return $this->ip_first ( $_SERVER [ $c ] );
 			}
 		}
-		
+
 		return $_SERVER['REMOTE_ADDR'];
 	}
 
@@ -95,14 +95,14 @@ class Functions_Utility extends Db_DBFunc
 
     // Public Methods
     //===================================================
-    
+
     // Class Construct
         public function __construct()
     {
         parent::__construct();
     }
 
-	
+
     /**
      *  This method add css files in the pages
      *  Just initiate the class $var = new Functions_Utility and echo $var->addCss('name_of_style'); without the .css
@@ -134,16 +134,16 @@ class Functions_Utility extends Db_DBFunc
 
     /**
      *  This method add image files in the pages
-     *  Just initiate the class $var = new Functions_Utility and echo $var->addImg('name_of_image.ext'); 
+     *  Just initiate the class $var = new Functions_Utility and echo $var->addImg('name_of_image.ext');
      *  Its relative to images folder i.e if images/image_file.ext use $var->addJs('image_file.ext'); if images/ie/image_file.ext use $var->addJs('ie/image_file.ext');
      *  Note that if the image file is not within the website images folder in the dashboadrd in the root, use $var->addFile('absolute_path_to_image_file.ext');
      *
      * @param       $imgName is the image name with extention inclusive
-     * @param       $w  its optional its for image's width 
-     * @param       $h  its optional its for image's height 
-     * @param       $alt  its optional its for image's alternative text 
-     * @param       $title  its optional its for image's title 
-     * @param       $id  its optional its for image's id  
+     * @param       $w  its optional its for image's width
+     * @param       $h  its optional its for image's height
+     * @param       $alt  its optional its for image's alternative text
+     * @param       $title  its optional its for image's title
+     * @param       $id  its optional its for image's id
      * @param       $class  its optional its for image's class
      * @return      Returns the image full path
      */
@@ -155,7 +155,7 @@ class Functions_Utility extends Db_DBFunc
 
      /**
      *  This method add css, js, image files that are not within the css, js, image directories in the pages
-     *  Just initiate the class $var = new Functions_Utility and echo $var->addFile('path_to_file/file name.ext', type, width, height, alt); 
+     *  Just initiate the class $var = new Functions_Utility and echo $var->addFile('path_to_file/file name.ext', type, width, height, alt);
      *  Its relative to the php, phtml file adding the file or absolute url path of the file itself
      *
      * @param       $type is the type of file adding which are Img, Js, Css
@@ -181,14 +181,14 @@ class Functions_Utility extends Db_DBFunc
         if (strtoupper($type) === 'IMG' ){
         return "<img src='".$fileName."' width='".$w."px' heigth='".$h."px' alt='".$alt."' title='".$title."' id='".$id."' class='".$class."'>";
         }
-        
+
     }
 
 
     /**
      *  This method gets the current file name
      *  Checks if it is imploded with "_" or "-" and explode it with " "(space)
-     *  
+     *
      * @return      Returns output the resule with function ucwords() i.e First  Cap
      */
     public function addTitle()
@@ -200,7 +200,7 @@ class Functions_Utility extends Db_DBFunc
         }else{
             $title = str_replace('_',' ',  $filename);
             $title = str_replace('-',' ',  $title);
-            return ">>".ucwords($title)."<<";
+            return ucwords($title)."-"."S.A.P";
         }
     }
 
@@ -237,13 +237,13 @@ class Functions_Utility extends Db_DBFunc
      * @return 		Returns the random strings
      */
 	public function random_string($type = 'alnum', $len = 5)
-	{					
+	{
 		switch($type)
 		{
 			case 'alnum'	:
 			case 'numeric'	:
 			case 'nozero'	:
-			
+
 			switch ($type)
 			{
 				case 'alnum'	:	$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -253,7 +253,7 @@ class Functions_Utility extends Db_DBFunc
 				case 'nozero'	:	$pool = '123456789';
 				break;
 			}
-			
+
 			$str = '';
 			for ($i=0; $i < $len; $i++)
 			{
@@ -270,7 +270,7 @@ class Functions_Utility extends Db_DBFunc
 	//---------checks if record stored in db already exists or not--------
 
 
-	
+
 	/**
      *  Check if username already exist
      *
@@ -282,14 +282,14 @@ class Functions_Utility extends Db_DBFunc
 		$user = $this->secureInput($user);
 		$sql = "SELECT username FROM users WHERE username = '" . $user ."' ";
 		$num = $this->resultNum($sql);  // Method gotten from DBFunc
-		
+
 		if ($num > 0){
 			return true;
 		}else{
 			return false;
-		}	
+		}
 	}
-	
+
 	/**
      *  Check if user email already exist
      *
@@ -301,17 +301,17 @@ class Functions_Utility extends Db_DBFunc
 		$email = $this->secureInput($email);
 		$sql = "SELECT email FROM users WHERE email = '" . $email ."' ";
 		$num = $this->resultNum($sql);  // Method gotten from DBFunc
-		
+
 		if ($num > 0){
 			return true;
 		}else{
 			return false;
 		}
 	}
-	
+
 
 	/**
-     *  Function for checking existence of users 
+     *  Function for checking existence of users
      *
      * @param 		$id The id of the user info in check
      * @return 		Returns boolean false if it exist and true if not
@@ -319,10 +319,10 @@ class Functions_Utility extends Db_DBFunc
 	public function checkUserInfo($id)
 	{
 		$id = $this->secureInput($id);
-		
+
 		$sql = "SELECT id FROM users WHERE id='".$id."'";
 		$num = $this->resultNum($sql);  // Method gotten from DBFunc
-		
+
 		if ($num == 0){
 			return true;
 		}else{
@@ -332,7 +332,7 @@ class Functions_Utility extends Db_DBFunc
 
 
 	//*******************************Function for validating an email address**************************
-	
+
 	/**
      *  Validating an email address
      *
@@ -353,13 +353,13 @@ class Functions_Utility extends Db_DBFunc
      * @param 		$int The numeric input to be validated
      * @return 		Returns boolean true if valid number address or false if not
      */
-	
+
 	public function validateNum($int)
 	{
 		$int = $this->secureInput($int);
 		return (filter_var($int, FILTER_VALIDATE_INT) === true) ? true : false;
 	}
-	
+
 
 	/**
      *  Validating a given string against numeric characters

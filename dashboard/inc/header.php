@@ -1,4 +1,4 @@
-<?php 
+<?php
 // directory separator
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
@@ -22,16 +22,16 @@ $usr = new Functions_User();
 
 		<?php
 		// Add Favicon
-        echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; 
+        echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>";
 
         // Add Css files needed
         echo $utils->addCss('normalize'); // Add css file for the index.php in the root folder
-        echo $utils->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css');
+        echo $utils->addFile('Css', '../../dashboard/fonts/font-awesome/css/font-awesome.min.css');
         echo $utils->addCss('user-panel'); // Add css file for user panel
-        echo $utils->addFile('Css', 'dashboard/fonts/fonts.css');
+        echo $utils->addFile('Css', '../../dashboard/fonts/fonts.css');
 
         // Add Js Files needed
         echo $utils->addJs('jquery.min');
-        echo $utils->addJs('modernizr.custom.min');
+        echo $utils->addJs('modernizr.custom');
         ?>
 </head>
