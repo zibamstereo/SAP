@@ -1,6 +1,6 @@
 var process_path = window.location.origin + '/sap-git/dashboard/users/process/';
 
-	//login page redirection function
+	//login page redirection function after a successful registration 
 function login_page()
 {window.location = window.location.origin + '/sap-git/login';}
 
@@ -54,7 +54,7 @@ function register()
 					//add success message
 				$('#msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt);
 
-					//redirect to login page after 4 seconds
+					//redirect to login page after 8 seconds
         setTimeout(function(){ login_page(); }, 8000);
 
 			}

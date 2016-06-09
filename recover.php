@@ -47,7 +47,7 @@ $utils = new Functions_Utility();
 
     <div class="header">
       <span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><?php echo $utils->addImg('ajebo.png', 90, 45, 'Ajebo Market'); ?></span>
-      <span style="width:auto;float:left;margin:0.65em 0 0 1em;"><i class="fa fa-th"></i> SALES AGENT PLATFORM  <span style="width:auto;color:#ee3d43; font-size:0.8em;" > <i class="fa  fa-chevron-right"></i> LOGIN </span>
+      <span style="width:auto;float:left;margin:0.65em 0 0 1em;"><i class="fa fa-th"></i> SALES AGENT PLATFORM  <span style="width:auto;color:#ee3d43; font-size:0.8em;" > <i class="fa  fa-chevron-right"></i> Recover Password </span>
  </div>
 
 <br>
@@ -62,25 +62,24 @@ $utils = new Functions_Utility();
   <div class="sap-wrapper">
 
 <div class="sap-wrapper-header">
- <i class="fa fa-sign-in"> </i> LOGIN
+ <i class="fa fa-unlock-alt"> </i> Recover Password
 
 </div>
 
   <div class="form">
   <div id='msg'></div>
 <!-- This is login form -->
-    <form id="loginForm" class="address-form" action="<?php echo USER_URL; ?>process/login" method="POST">
+    <form id="loginForm" class="address-form" action="<?php echo USER_URL; ?>process/recover" method="POST">
       <!--Call the $url variable -->
             <input  name='returnurl' type='hidden' value='<?php echo $url ;?>'/>
       <input type="text" id="email_login" name="email" placeholder="Email"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
-      <input type="password" id="password_login" name="password" placeholder="Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
 
         </br>
         <!--<button class="button" name="Login" onClick="login_user();"> LOGIN</button>-->
-        <input class="button" type='submit' name="login" value="Login"> <?php echo $utils->addImg('loading.gif','','','loading..','','loading') ?>
-        <p class="message">Not Registered ? <i class="fa fa-chevron-circle-right"></i> <a href='register'> Register </a></p>
-        <p class="message">Forgot Your Password ? <i class="fa fa-chevron-circle-right"></i> <a href='recover'> Recover </a></p>
+        <input class="button" type='submit' name="recover" value="recover"> <?php echo $utils->addImg('loading.gif','','','loading..','','loading') ?>
+        <p class="message">Recovered Your Password ? <i class="fa fa-chevron-circle-right"></i> <a href='login'> login </a></p>
 
+        <p class="message">Not Registered ? <i class="fa fa-chevron-circle-right"></i> <a href='register'> Register </a></p>
 
     </form>
 
