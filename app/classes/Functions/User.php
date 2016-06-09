@@ -389,7 +389,6 @@ Class Functions_User extends Functions_Utility
 		}
 		return $getuser;
 	}
-
 	/**
 	 *	This function logs off user using user's id
 	 *
@@ -417,7 +416,7 @@ Class Functions_User extends Functions_Utility
 			//destroy what's left
 			session_destroy ();
 
-			header("Location: ".APP_PATH."login.php");
+			header("Location: ".APP_PATH."login");
 		}
 
 		//It is safest to set the cookies with a date that has already expired.
@@ -430,7 +429,6 @@ Class Functions_User extends Functions_Utility
 			setcookie ( "cookie_id", '', time() - 3600);
 			setcookie ( "authenticate", '', time() - 3600 );
 		}
-
 
 	}
 

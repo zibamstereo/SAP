@@ -1,4 +1,4 @@
-<?php 
+<?php
 // directory separator
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
@@ -35,7 +35,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 		 </div>
 
-<?php 
+<?php
 // require vertical menu
 require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."vmenu.php");
 ?>
@@ -54,8 +54,7 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."vmenu.php");
 <div id="user_welcome" class="animated slideDown">
 
 <div class="icon">
-<i class="fa fa-dashboard"></i><h2 class="top-bar__headline"> Dashboard</h2>
-<?php echo $getuser[0]['full_name'];?>
+<i class="fa fa-dashboard"></i><h2 class="top-bar__headline"> Dashboard | Welcome <?php echo $getuser[0]['full_name'];?> </h2>
 </div>
 </div>
 
@@ -139,8 +138,8 @@ Block Data will come here
 
 
 
-<?php 
+<?php
 // require header
- require_once (realpath(dirname(__FILE__)).DS."inc".DS."header.php");
+ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."footer.php");
 
 ?>

@@ -1,0 +1,18 @@
+Update | Fixes | S.A.P Project
+__________________________________________________________________________________________________________
+- Registration page update
+- Login page update
+- Ajax call fixes | Updates | for registration & login |Infinitelife.js | dashoard>user>process>login & register.php |
+  | smaller buttons with ajax loader by the right hand side |function to redirect user to login page after 8 seconds |
+- | Fixes for Dashboard Pages path call error for index, manage_customers,manage_orders,my_account,statistics |
+  | font.css | font-awesome.css | modernizr custom.js |
+- Css Updates to Infinitelife.css | Index.css |
+- Js Updates to Infinitelife.js | Index.Jss |
+- Header Updates for Login | Registration |
+- Header Title Update For Login & Registration Pages now | Login - S.A.P | Register - S.A.P |
+
+Will update this note as i progress...that's about all for now, dont forget to update your note as well Dayo lol.
+Cheers.
+
+Will work on the Index Page Later tonight and dayo pls validate the email field for the login page many thanks
+Cheers.

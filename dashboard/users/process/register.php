@@ -1,4 +1,4 @@
-<?php 
+<?php
 // 	This is Sales Agent Platform User Registration Processing Page Created By Ogunyemi Oludayo (Gentle) of Infinitelife Inc
 
 // directory separator
@@ -28,7 +28,7 @@ $site_url = $sitesettings[0]['site_url'];
 	{
 		die(msg(0,"Please enter a username."));
 	}
-	
+
 	if(strlen($_POST['username'])<3 || strlen($_POST['username'])>15)
 	{
 		die(msg(0,"Username must be between 3 and 15 characters."));
@@ -42,41 +42,41 @@ $site_url = $sitesettings[0]['site_url'];
 
 	if(!$_POST['full_name'])
 	{
-		die(msg(0,"Please enter your full name"));
+		die(msg(0,"<i class='fa fa-user'></i>  Please enter your Full Name","full_name"));
 	}
 	elseif(!$_POST['address'])
 	{
-		die(msg(0,"Please enter your full address."));
+		die(msg(0,"<i class='fa fa-map'></i> Please enter your Address.","address"));
 	}
 	elseif(!$_POST['phone'])
 	{
-		die(msg(0,"Please enter phone."));
+		die(msg(0,"<i class='fa fa-tablet'></i> Enter Your Phone No.","phone"));
 	}
 	elseif(!$_POST['email'])
 	{
-		die(msg(0,"Please enter an email address."));
+		die(msg(0,"<i class='fa fa-envelope-o'></i> Enter an Email Address.","email"));
 	}
-	
+
 	elseif(!$usr->validateEmail($_POST['email']))
 	{
-		die(msg(0,"Invalid email address."));
+		die(msg(0,"<i class='fa fa-envelope-o'></i> Invalid Email Address.","email"));
 	}
 
 	elseif($usr->uniqueEmail($_POST['email']))
 	{
-		die(msg(0,"Email taken. Please select another email address."));
+		die(msg(0,"<i class='fa fa-envelope-o'></i> Email taken. Change Email Address.", "email"));
 	}
 	elseif(!$_POST['password'])
 	{
-		die(msg(0,"Please enter a password."));
+		die(msg(0,"<i class='fa fa-ellipsis-h'></i> Please Enter a password.", "password"));
 	}
 	elseif(strlen($_POST['password'])<5)
 	{
-		die(msg(0,"Password must be atleast 5 characters."));
+		die(msg(0,"<i class='fa fa-ellipsis-h'></i> Password must be atleast 5 characters.", "password"));
 	}
 	elseif($_POST['password'] !== $_POST['cpassword'])
 	{
-		die(msg(0,"Password must match."));
+		die(msg(0,"<i class='fa fa-ellipsis-h'></i> Password must match.", "cpassword"));
 	}
 	/*elseif(empty($_POST['answer']))
 	{
@@ -99,19 +99,19 @@ $site_url = $sitesettings[0]['site_url'];
 			$site_url
 			);
 				if ($res == 1){
-					die(msg(0,"Failed to send activation email. Please contact the site admin."));
+					die(msg(0,"<i class='fa fa-info-circle'></i> Failed to send activation email. Please contact the Site Admin.",""));
 				}
 				if ($res == 2){
-					die(msg(0,"There was an error registering your details. Please contact the site admin."));
+					die(msg(0,"<i class='fa fa-info-circle'></i> There was an error creating your account. Please contact the Site Admin.",""));
 				}
 				if ($res == 99){
-					echo(msg(1,"You have been succefully registered as a Sales Agent in Ajebom Market Ltd.<br/> Go to your inbox and activate your accout."));
+					echo(msg(1,"<i class='fa fa-info-circle'></i> You account as a Sales Agent has been succefully setup but is not active.<br/> We've sent you a mail on how to activate your account.",""));
 				}
 		}
 
-	function msg($status,$txt)
+	function msg($status,$txt,$txt2)
 	{
-		return '{"status":'.$status.',"txt":"'.$txt.'"}';
+		return '{"status":'.$status.',"txt":"'.$txt.'","txt2":"'.$txt2.'"}';
 	}
 
 
