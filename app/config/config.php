@@ -47,15 +47,17 @@ defined("ROOT_PATH") || define("ROOT_PATH", $_SERVER['DOCUMENT_ROOT'] . DS);//we
 
 // ========================== OTHER CONFIGURATIONS============================================================
 
+// dashboard folder
+defined("APP_DIR") || define("APP_DIR", "app");
 
 // dashboard folder
 defined("DASHBOARD_DIR") || define("DASHBOARD_DIR", "dashboard");
 
 // classes folder
-defined("CLASSES_DIR") || define("CLASSES_DIR", "classes");
+defined("CLASSES_DIR") || define("CLASSES_DIR", APP_DIR.DS."classes");
 
 // config folder
-defined("CONFIG_DIR") || define("CONFIG_DIR", "config");
+defined("CONFIG_DIR") || define("CONFIG_DIR", APP_DIR.DS."config");
 
 // css directory
 defined("CSS_DIR") || define("CSS_DIR", DASHBOARD_DIR.DS."css");
@@ -75,7 +77,7 @@ defined("MOD_DIR") || define("MOD_DIR", DASHBOARD_DIR.DS."mod");
 
 
 // library folder
-defined("LIB_DIR") || define("LIB_DIR", "lib");
+defined("LIB_DIR") || define("LIB_DIR", APP_DIR.DS."lib");
 
 // inc folder
 defined("INC_DIR") || define("INC_DIR", DASHBOARD_DIR.DS."inc");
@@ -120,6 +122,7 @@ defined("USER_URL") || define("USER_URL", APP_PATH.DASHBOARD_DIR."/users/");
 // add all above directories to the include path
 set_include_path(implode(PS, array(
 	realpath(ROOT_PATH.DS.CLASSES_DIR), //eg /store/Classes/
+	realpath(ROOT_PATH.DS.APP_DIR), //eg /store/app/
 	realpath(ROOT_PATH.DS.CONFIG_DIR), //eg /store/config/
 	realpath(ROOT_PATH.DS.LIB_DIR), //eg /store/lib/
 	realpath(ROOT_PATH.DS.INC_DIR), //eg /store/dashboard/inc/

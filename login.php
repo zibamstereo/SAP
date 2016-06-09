@@ -3,10 +3,11 @@
  // directory separator
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
- require_once (realpath(dirname(__FILE__)).DS."Autoloader.php");
+//require_once (realpath(dirname(__FILE__)).DS."Autoloader.php");
+ require_once (realpath(dirname(__FILE__)).DS."app".DS."Autoloader.php");
 
  //set redirect url if logged in before
- $url=isset($_REQUEST['returnurl']) ? SITE_URL.urldecode(base64_decode(htmlspecialchars($_REQUEST['returnurl']))) :'';
+ $url=isset($_REQUEST['returnurl']) ? rtrim(SITE_URL,"/").urldecode(base64_decode(htmlspecialchars($_REQUEST['returnurl']))) :'';
 
 //Instantiate Functions_Utility Object
 $utils = new Functions_Utility();

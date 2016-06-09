@@ -1,0 +1,5 @@
+--  I have put the folders classes, config, and lib in a folder called app for proper view of project folder
+
+--  Done with email validation on login page
+
+--  Fixed the confirm_user_reg.php

@@ -17,6 +17,69 @@ Class Functions_User extends Functions_Utility
 {
 
 
+
+	//---------checks if record stored in db already exists or not--------
+	/**
+     *  Check if username already exist
+     *
+     * @param 		$user The username in check
+     * @return 		Returns boolean true if it exist and false if not
+     */
+	public function uniqueUser($user)
+	{
+		$user = $this->secureInput($user);
+		$sql = "SELECT username FROM users WHERE username = '" . $user ."' ";
+		$num = $this->resultNum($sql);  // Method gotten from DBFunc
+
+		if ($num > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/**
+     *  Check if user email already exist
+     *
+     * @param 		$email The user email in check
+     * @return 		Returns boolean true if it exist and false if not
+     */
+	public function uniqueEmail($email)
+	{
+		$email = $this->secureInput($email);
+		$sql = "SELECT email FROM users WHERE email = '" . $email ."' ";
+		$num = $this->resultNum($sql);  // Method gotten from DBFunc
+
+		if ($num > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+
+	/**
+     *  Function for checking existence of users
+     *
+     * @param 		$id The id of the user info in check
+     * @return 		Returns boolean false if it exist and true if not
+     */
+	public function checkUserInfo($id)
+	{
+		$id = $this->secureInput($id);
+
+		$sql = "SELECT id FROM users WHERE id='".$id."'";
+		$num = $this->resultNum($sql);  // Method gotten from DBFunc
+
+		if ($num == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+
+
 	/**
      *  This method  addUser is used to add users to the platform
      *
@@ -326,8 +389,12 @@ Class Functions_User extends Functions_Utility
 		}
 		return $getuser;
 	}
-
-	//----------Function for logging off users----------
+	/**
+	 *	This function logs off user using user's id
+	 *
+     * @param 		$id The user id
+     * @return 		returns log out the user and set online off
+	 */
 	public function logoff($id)
 	{
 		//session must be started before anything
@@ -363,7 +430,40 @@ Class Functions_User extends Functions_Utility
 			setcookie ( "authenticate", '', time() - 3600 );
 		}
 
+	}
 
+
+	/**
+	 *	This function confirms user through email submitted
+	 *
+     * @param 		$activation_key The activation key for activation
+     * @return 		returns log out the user and set online off
+	 */
+	public function confirm_user_reg($activation_key)
+	{
+		$activation_key = $this->quote($activation_key);
+
+		$query = "SELECT id,active,act_key FROM users WHERE act_key = '".$activation_key."'";
+
+		if($this->resultNum($query)==1)
+		{
+			$row = $this->fetchOne($query);
+			$id = $row['id'];
+			if($row['active']==0)
+			{
+				$update = $this->proccessSql("UPDATE users SET active=1,act_key='' WHERE id = '".$id."'");
+				if($update){
+					return 99;
+				} else return 1;
+			}
+			if($row['active']==1)
+			{
+				return 2;
+			}
+		}
+		else {
+			return 3;
+		}
 	}
 
 }
