@@ -10,7 +10,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  //Instantiate Db_DBFunc Object
 //$db = new Db_DBFunc();
 
-//Instantiate Functions_Utility  and Functions_SiteSettings Object
+//Instantiate Functions_User  and Functions_SiteSettings Object
 $usr = new Functions_User();
 $set = new Functions_Sitesettings();
 

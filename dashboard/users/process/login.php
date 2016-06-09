@@ -9,14 +9,17 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS."..".DS).DS."app".DS."Autoloader.php");
 // Get the return URL
  $returnURL = (isset($_POST['returnurl']) && !empty($_POST['returnurl'])) ? $_POST['returnurl']: USER_URL.'index';
-//$returnURL = USER_URL.'index';
 
-//Instantiate Functions_Utility Object
+//Instantiate Functions_User Object
 $usr = new Functions_User();
 
 if(!$_POST['email'])
 	{
 	die(msg(0,"<i class='fa fa-envelope-o'></i> Email cannot be empty!","email_login"));
+}
+elseif(!$usr->validateEmail($_POST['email']))
+{
+  die(msg(0,"<i class='fa fa-envelope-o'></i> Invalid Email Address.","email_login"));
 }
 elseif(!$_POST['password'])
 {
