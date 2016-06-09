@@ -62,10 +62,7 @@ $utils = new Functions_Utility();
 
   <div class="sap-wrapper">
 
-<div class="sap-wrapper-header">
- <i class="fa fa-sign-in"> </i> RECOVER PASSWORD
-
-</div>
+<div class="sap-wrapper-header"><i class="fa fa-sign-in"> </i> RECOVER PASSWORD</div>
 
   <div class="form">
   <div id='msg'></div>
@@ -80,7 +77,6 @@ $utils = new Functions_Utility();
     <!--<button class="button" name="Login" onClick="login_user();"> LOGIN</button>-->
     <input class="button" type='submit' name="recover" value="recover"> <?php echo $utils->addImg('loading.gif','','','loading..','','loading') ?>
     <p class="message">Recovered Your Password ? <i class="fa fa-chevron-circle-right"></i> <a href='login'> login </a></p>
-
     <p class="message">Not Registered ? <i class="fa fa-chevron-circle-right"></i> <a href='register'> Register </a></p>
 
     </form>
