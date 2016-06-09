@@ -49,7 +49,7 @@ function register()
 				//show the success message
 
 					//hide registration form
-				$('#regForm').fadeOut('slow');
+				$('#regForm').fadeOut('100');
 
 					//add success message
 				$('#msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt);

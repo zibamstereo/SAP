@@ -20,10 +20,21 @@ font-family: 'open_sanssemibold';
 }
 
 
+.welcome {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 100%;
+  margin: 0 auto 10px 0;
+  padding: 15px;
+  min-height:400px;
+  text-align: center;
+border: 1px solid rgba(0, 0, 0, 0.05);
+}
 
 
 .sap-wrapper-header {
-  padding:4% 0 3% 5%;
+  padding:3% 0 3% 5%;
   margin: auto;
   background: #ee3343;
   border: 1px solid rgba(0, 0, 0, 0.02);
@@ -34,7 +45,7 @@ font-family: 'open_sanssemibold';
   z-index: 1;
   background: #FFFFFF;
   max-width: 360px;
-  margin: 0 auto 100px;
+  margin: auto;
   padding: 15px;
   text-align: center;
 border: 1px solid rgba(0, 0, 0, 0.05);
@@ -235,6 +246,13 @@ opacity: 0.1;
 
   }
 
+  .sap-welcome{
+
+      width: 90%;
+      padding: 1em;
+      margin: 10% auto 5% auto ;
+  }
+
   .sap-wrapper {
     width: 360px;
     padding: 15% 0 0;
@@ -254,6 +272,12 @@ opacity: 0.1;
 
   }
 
+  .sap-welcome{
+
+      width: 90%;
+      padding: 1em;
+      margin: 5% auto 5% auto ;
+  }
 
   .sap-wrapper {
     width: 360px;
@@ -273,6 +297,12 @@ padding: 3.5% 0 0 0;
 
   }
 
+  .sap-welcome{
+
+      width: 90%;
+      padding: 1em;
+      margin: 5% auto 5% auto ;
+  }
 
   .sap-wrapper {
     width: 360px;
@@ -292,6 +322,12 @@ padding: 3.5% 0 0 0;
 
   }
 
+  .sap-welcome{
+
+      width: 90%;
+      padding: 1em;
+      margin: 5% auto 5% auto ;
+  }
 
   .sap-wrapper {
     width: 360px;
@@ -309,6 +345,13 @@ padding: 3.5% 0 0 0;
       height:auto !important;
       overflow:hidden !important;
 
+  }
+
+  .sap-welcome{
+
+      width: 90%;
+      padding: 1em;
+      margin: 5% auto 5% auto ;
   }
 
   .sap-wrapper {
@@ -330,12 +373,17 @@ padding: 3.5% 0 0 0;
       overflow-y: auto;
 
   }
+  .sap-welcome{
 
+      width: 90%;
+      padding: 1em;
+      margin: 10% auto 5% auto ;
+  }
 
   .sap-wrapper {
     width: 360px;
     padding: 15% 0 0;
-    margin: auto;
+    margin: auto auto 2em auto;
   }
 
 
@@ -346,4 +394,5 @@ padding: 3.5% 0 0 0;
     background: #5d0e5b;
     color: #F9F9F9;
     text-shadow: none;
+
   }

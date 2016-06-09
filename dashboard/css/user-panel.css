@@ -151,9 +151,7 @@ button:focus {
 color: #393f4f;
     background: rgba(255, 255, 255, 0.96);
 	 		text-shadow: none;
-
-
-  text-align: center;
+text-align: center;
   z-index: 1000;
   position: fixed;
   width: 285px;
@@ -162,7 +160,7 @@ color: #393f4f;
   height: 100vh;
   top: 0;
   left: 0;
-  padding: 2em 0.1em 0 0;
+  padding: 0.1em 0.1em 0 0;
   z-index:99999;
 }
 
@@ -772,8 +770,8 @@ border: solid 1px rgba(0,0,0,0.1);
   }
 
 .icon {
-    widht: auto;
-    padding: 0.3em;
+    width: auto;
+    padding: 0.1em 0.3em 0.3em 0.3em;
     background: rgba(255, 255, 255, 0.96);
 
     font-size: 1em;
@@ -1244,18 +1242,13 @@ left:0;
 
 }
 
-.pico-top {
-    padding: 2em 0.2em 0 0.2em;
-    text-align: center;
-    height: auto;
 
-}
 .icon
 
 {
 
   width:auto;
-  padding:0.3em;
+  padding: 0.1em 0.3em 0.3em 0.3em;
   background: rgba(255, 255, 255, 0.96);
     font-size:1.2em;
               -webkit-box-shadow: 0 10px 6px -6px rgba(0,0,0,0.001);

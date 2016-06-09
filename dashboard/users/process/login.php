@@ -15,28 +15,28 @@ $usr = new Functions_User();
 
 if(!$_POST['email'])
 	{
-	die(msg(0,"Email cannot be empty!","email_login"));
+	die(msg(0,"<i class='fa fa-envelope-o'></i> Email cannot be empty!","email_login"));
 }
 elseif(!$_POST['password'])
 {
-	die(msg(0,"Password cannot be empty!","password_login"));
+	die(msg(0,"<i class='fa fa-ellipsis-h'></i> Password cannot be empty!","password_login"));
 }
 
 else
 	{
 			$res = $usr->login($_POST['email'],$_POST['password']);
 				if ($res == 1){
-					die(msg(0,"Login Details incorrect!",""));
+					die(msg(0,"<i class='fa fa-info-circle'></i> Login Details incorrect!",""));
 				}
 
 				if ($res == 2){
-					die(msg(0,"Sorry! Your account has been suspended!",""));
+					die(msg(0,"<i class='fa fa-info-circle'></i> Sorry! Your account has been suspended!",""));
 				}
 				if ($res == 3){
-					die(msg(0,"Sorry! Your account has not been activated. Please check your email's inbox or spam folder for a link to activate your account.",""));
+					die(msg(0,"<i class='fa fa-info-circle'></i> Sorry! Your account has not been activated. Please check your inbox or spam folder for your activation link .",""));
 				}
 				if ($res == 4){
-					die(msg(0,"Please login on Admin page!",""));
+					die(msg(0,"<i class='fa fa-info-circle'></i> Please login on Admin page!",""));
 				}
 				if ($res == 99){
 					echo(msg(1,$returnURL,""));

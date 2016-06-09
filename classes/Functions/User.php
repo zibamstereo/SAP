@@ -2,7 +2,7 @@
 
 /**
 * This Class Functions_User is made by Gentle of Infinitelife Inc.
-* This class is responsible for adding users and editting users 
+* This class is responsible for adding users and editting users
 */
 
 
@@ -44,30 +44,30 @@ Class Functions_User extends Functions_Utility
 		//$state = $this->secureInput($state);
 		//$country = $this->secureInput($country);
 		$phone = $this->secureInput($phone);
-		
+
 		//Encrypt password for database
 		$salt1 = 's+(_a*';
 		$salt2 = '@-)(%#';
 		$pass = md5($salt1.$pass.$salt2);
-		
+
 		$rand_str = $this->random_string('alnum', 8);
 		$activation_key = md5($salt1.$rand_str.$salt2);
-		
+
 		$reg_date = date("l, M j, Y, g:i a");
-		
-		/*$sql = "INSERT INTO users (email,password,full_name,address,city,state,country,phone,active,level_access,act_key,reg_date) 
+
+		/*$sql = "INSERT INTO users (email,password,full_name,address,city,state,country,phone,active,level_access,act_key,reg_date)
 		VALUES ('".$email."','".$pass."','".$full_name."','".$address."','".$city."','".$state."','".$country."','".$phone."',0,'".$level_access."','".$activation_key."','".$reg_date."')"; */
 
-		$sql = "INSERT INTO users (email,password,full_name,address,phone,active,level_access,act_key,reg_date) 
+		$sql = "INSERT INTO users (email,password,full_name,address,phone,active,level_access,act_key,reg_date)
 		VALUES ('".$email."','".$pass."','".$full_name."','".$address."','".$phone."', 0,'".$level_access."','".$activation_key."','".$reg_date."')";
-		
+
 		$res = $this->proccessSql($sql);
 		if($res){
 			//build email to be sent
 			$to = $email;
 			$subject = $site_url;
 			$subject .= ": Activate Your Account";
-			
+
 			$message = "
 			<html>
 			<head>
@@ -87,18 +87,18 @@ Class Functions_User extends Functions_Utility
 			</body>
 			</html>
 			";
-			
+
 			// To send HTML mail, the Content-type header must be set
 			$headers = "MIME-Version: 1.0\r\n";
 			$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
 			$headers .= "From: SITE NAME<yourname@yoursite.com>" . "\r\n";//Modified By GENTLE to show the FROM in the message
-			
+
 			if($mail_send = mail($email, $subject, $message, $headers)) {
 			} return 99;
 			return 1;
 		}
 		else return 2;
-		
+
 	}
 
 
@@ -131,10 +131,10 @@ Class Functions_User extends Functions_Utility
 		$country = $this->secureInput($country);
 		$phone = $this->secureInput($phone);
 		$level_access = $this->secureInput($level_access);
-		
-		
+
+
 		if (!empty($country)){
-			$sql = "UPDATE users SET 
+			$sql = "UPDATE users SET
 			title = '" . $title . "',
 			full_name = '" . $full_name . "',
 			dob = '" . $dob . "',
@@ -146,9 +146,9 @@ Class Functions_User extends Functions_Utility
 			phone = '" . $phone . "',
 			level_access = '" . $level_access . "'
 			WHERE id = '" . $id . "'";
-		} 
+		}
 		else{
-			$sql = "UPDATE users SET 
+			$sql = "UPDATE users SET
 			title = '" . $title . "',
 			first_name = '" . $first_name . "',
 			last_name = '" . $last_name . "',
@@ -162,20 +162,20 @@ Class Functions_User extends Functions_Utility
 			phone = '" . $phone . "',
 			level_access = '" . $level_access . "'
 			WHERE id = '" . $id . "'";		//Edit 7
-			
+
 		}
 
 			$res = $this->proccessSql($sql);
 			if(!$res) return 4;
 			return 99;
 	}
-	
 
-// ==== If email and password are correct set login sessions=================	
+
+// ==== If email and password are correct set login sessions=================
 
 	/**
 	 *	This function is used for user login, with email and password
-	 * 
+	 *
      * @param 		$email	Email address of the user that wants to login
      * @param 		$pass	The password the user
      * @return 		It redirects to the dashboard
@@ -185,7 +185,7 @@ Class Functions_User extends Functions_Utility
 	{
 		$email = $this->secureInput($email);
 		$pass = $this->secureInput($pass);
-		
+
 		//Encrypt password for database
 		$salt1 = 's+(_a*';
 		$salt2 = '@-)(%#';
@@ -193,16 +193,16 @@ Class Functions_User extends Functions_Utility
 
 		$lastLogin = date("l, M j, Y, g:i a");
 		$online= 'ON';
-		
+
 		//Use the input email and password and check against 'users' table
 		$query = 'SELECT id, email, password, active, level_access, online FROM users WHERE email = "'.$email.'" AND password = "'.$pass.'" AND level_access != 0';
-		
+
 		if($this->resultNum($query) == 1)
 		{
 			$row = $this->fetchOne($query);
 			if ($row['active'] == 1 ) {
 				$this->set_login_sessions ( $row['id'], $row['password'] ? TRUE : FALSE );
-				if ($row['level_access'] != 1)  {	
+				if ($row['level_access'] != 1)  {
 				$update = $this->proccessSql('UPDATE users SET last_login = "'.$lastLogin.'",online = "'.$online.'" WHERE id = "'.$row['id'].'"');
 					return 99;
 					}else{
@@ -210,13 +210,13 @@ Class Functions_User extends Functions_Utility
 				}
 			}
 			if ($row['active'] == 2) {return 2;}
-			if ($row['active'] == 0) {return 3;}		
+			if ($row['active'] == 0) {return 3;}
 		} else return 1;
 	}
 
 	/**
 	 *	This function Sets Login Sessions
-	 * 
+	 *
      * @param 		$userId	the Id of the user as stored in database
      * @param 		$pass	The password the user
      * @return 		It redirects to the dashboard
@@ -225,25 +225,25 @@ Class Functions_User extends Functions_Utility
 	{
 		//start the session
 		session_start();
-		
+
 		//set the sessions
 		$_SESSION['user_id'] = $userId;
-		$_SESSION['logged_in'] = TRUE;		
+		$_SESSION['logged_in'] = TRUE;
 	}
-	
+
 
 // ==== If email and password are correct set login sessions============================
 
 
-//==== Use the to check pages if user have access level to view them====================	
-	
+//==== Use the to check pages if user have access level to view them====================
+
 	/**
 	 *	This function Get the level access of the user
-	 * 
+	 *
      * @param 		$userId The user the access level is checked on
      * @return 		returns the level access
 	 */
-	
+
 	public function get_level_access ($userId)
 	{
 		$query = "SELECT `level_access` FROM `users` WHERE `id` = '" . 	$this->quote($userId) . "'";
@@ -256,31 +256,31 @@ Class Functions_User extends Functions_Utility
 
 	/**
 	 *	This function Check the level access of the user
-	 * 
-     * @param 		$levels The user levels to determine access level of the user logging in 
+	 *
+     * @param 		$levels The user levels to determine access level of the user logging in
      * @return 		returns boolean true or false
 	 */
 	public function checkLogin ( $levels )
 	{
 		session_start ();
 		$kt = explode ( ' ', $levels );
-		
+
 		if ( ! $_SESSION['logged_in'] ) {
-			
+
 			$access = FALSE;
-			
+
 			if ( isset ( $_COOKIE['cookie_id'] ) ) {//if we have a cookie
-				
+
 				$query = 'SELECT * FROM users WHERE id = "'.$this->quote($_COOKIE['cookie_id']).'"';
-				
+
 				if($this->resultNum($query) == 1)
 				$row = $this->fetchOne($query);
-				
+
 				if ( $_COOKIE['authenticate'] == md5 ( $this->getIP () . $row['password'] . $_SERVER['USER_AGENT'] ) ) {
 					//we set the sessions so we don't repeat this step over and over again
-					$_SESSION['user_id'] = $row['id'];			
+					$_SESSION['user_id'] = $row['id'];
 					$_SESSION['logged_in'] = TRUE;
-					
+
 					//now we check the level access, we might not have the permission
 					if ( in_array ( $this->get_level_access( $_SESSION['user_id'] ), $kt ) ) {
 						//we do?! horray!
@@ -289,34 +289,34 @@ Class Functions_User extends Functions_Utility
 				}
 			}
 		}
-		else {			
+		else {
 			$access = FALSE;
-			
+
 			if ( in_array ( $this->get_level_access($_SESSION['user_id']), $kt ) ) {
 				$access = TRUE;
 			}
 		}
-		
-		if ( $access == FALSE ) {		
+
+		if ( $access == FALSE ) {
 			header("Location: ".APP_PATH."login.php?returnurl=".base64_encode(urlencode($_SERVER['REQUEST_URI'])));
 			//header("Location: ".APP_PATH."login.php");
-		}		
+		}
 	}
-	
-	//==== Use the to check pages if user have access level to view them====================	
-	
+
+	//==== Use the to check pages if user have access level to view them====================
+
 //----------Function for getting user records----------
 
 	/**
 	 *	This function gets user records from the id
-	 * 
-     * @param 		$id The user id 
+	 *
+     * @param 		$id The user id
      * @return 		returns user records
 	 */
 	public function getUserRecords($id)
 	{
 
-		$sql = "SELECT * FROM users WHERE id = '". $id . "'";		
+		$sql = "SELECT * FROM users WHERE id = '". $id . "'";
 		//return $this->fetch($sql);
 		$rows = $this->fetch($sql);
 		$c=0;
@@ -326,44 +326,44 @@ Class Functions_User extends Functions_Utility
 		}
 		return $getuser;
 	}
-	
+
 	//----------Function for logging off users----------
 	public function logoff($id)
 	{
 		//session must be started before anything
 		session_start ();
-		
+
 		//if we have a valid session
 		if ( $_SESSION['logged_in'] == TRUE )
-		{	
+		{
 			$lastActive = date("l, M j, Y, g:i a");
 			$online= 'OFF';
-			$sql = "SELECT id,online, last_active FROM users WHERE id = '".$id."'"; 
+			$sql = "SELECT id,online, last_active FROM users WHERE id = '".$id."'";
 			$res = $this->proccessSql($sql);
 		if ($res){
 			$update = "UPDATE users SET online ='".$online."', last_active ='".$lastActive."'  WHERE id = '".$id."'";
 			$result = $this->proccessSql($update);
-		} 
-			//unset the sessions (all of them - array given)
-			unset ( $_SESSION ); 
-			//destroy what's left
-			session_destroy (); 
-
-			header("Location: ".APP_PATH."login.php");
 		}
-		
+			//unset the sessions (all of them - array given)
+			unset ( $_SESSION );
+			//destroy what's left
+			session_destroy ();
+
+			header("Location: ".APP_PATH."login");
+		}
+
 		//It is safest to set the cookies with a date that has already expired.
 		if ( isset ( $_COOKIE['cookie_id'] ) && isset ( $_COOKIE['authenticate'] ) ) {
 			/**
-				* uncomment the following line if you wish to remove all cookies 
+				* uncomment the following line if you wish to remove all cookies
 				* (don't forget to comment or delete the following 2 lines if you decide to use clear_cookies)
 			*/
 			//clear_cookies ();
 			setcookie ( "cookie_id", '', time() - 3600);
 			setcookie ( "authenticate", '', time() - 3600 );
 		}
-		
-		
+
+
 	}
 
 }
