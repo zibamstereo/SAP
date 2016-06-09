@@ -7,7 +7,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  require_once (realpath(dirname(__FILE__)).DS."app".DS."Autoloader.php");
 
  //set redirect url if logged in before
- $url=isset($_REQUEST['returnurl']) ? SITE_URL.urldecode(base64_decode(htmlspecialchars($_REQUEST['returnurl']))) :'';
+ $url=isset($_REQUEST['returnurl']) ? rtrim(SITE_URL,"/").urldecode(base64_decode(htmlspecialchars($_REQUEST['returnurl']))) :'';
 
 //Instantiate Functions_Utility Object
 $utils = new Functions_Utility();
@@ -23,22 +23,22 @@ $utils = new Functions_Utility();
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; // Add favicon
         echo $utils->addCss('index'); // Add css file for the index.php in the root folder
         echo $utils->addJs('jquery.min'); // Add jquery
-        echo $utils->addCss('infinitelife'); // Add Infinitelife Css for this page 
-        echo $utils->addJs('infinitelife'); // Add Infinitelife Js for this page 
+        echo $utils->addCss('infinitelife'); // Add Infinitelife Css for this page
+        echo $utils->addJs('infinitelife'); // Add Infinitelife Js for this page
         // Add font css
-        echo $utils->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css'); 
+        echo $utils->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css');
         echo $utils->addFile('Css', 'dashboard/fonts/fonts.css');
         ?>
 
 <script type='text/javascript'>
   $(document).ready(function(){
-    
+
     $('#loginForm').submit(function(e) {
       login();
-      e.preventDefault(); 
-    }); 
+      e.preventDefault();
+    });
   });
-  
+
 </script>
 
 
@@ -62,7 +62,7 @@ $utils = new Functions_Utility();
 
 </div>
 
-  <div class="form">  
+  <div class="form">
   <div id='msg'></div>
 <!-- This is login form -->
     <form id="loginForm" class="address-form" action="<?php echo USER_URL; ?>process/login" method="POST">
