@@ -3,7 +3,8 @@
  // directory separator
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
- require_once (realpath(dirname(__FILE__)).DS."Autoloader.php");
+//require_once (realpath(dirname(__FILE__)).DS."Autoloader.php");
+ require_once (realpath(dirname(__FILE__)).DS."app".DS."Autoloader.php");
 
 //Instantiate Functions_Utility Object
 $utils = new Functions_Utility();
