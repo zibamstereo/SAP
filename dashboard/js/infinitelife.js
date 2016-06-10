@@ -1,6 +1,6 @@
 var process_path = window.location.origin + '/sap-git/dashboard/users/process/';
 
-	//login page redirection function after a successful registration 
+	//login page redirection function after a successful registration
 function login_page()
 {window.location = window.location.origin + '/sap-git/login';}
 
@@ -71,6 +71,38 @@ function register()
 	});
 
 }
+
+function pass_recovery()
+{
+	hideshow('loading',1);
+
+	$.ajax({
+		type: "POST",
+		url: process_path + "pass_recovery",
+		data: $('#pass_recovery').serialize(),
+		dataType: "json",
+		success: function(msg){
+
+			if(parseInt(msg.status)==1)
+			{
+				//hide the form
+				//$('#umscript').fadeOut('slow');
+
+				//show the success message
+				$('#msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+			}
+			else if(parseInt(msg.status)==0)
+			{
+				hideshow('msg',1);
+				$('#msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+			}
+
+			hideshow('loading',0);
+		}
+	});
+
+}
+
 
 function hideshow(el,act)
 {

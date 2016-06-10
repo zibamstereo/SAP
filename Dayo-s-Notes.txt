@@ -1,5 +1,24 @@
+Update | Fixes | S.A.P Project
+__________________________________________________________________________________________________________
+June 3 2016
+============
+--  As at the above date I have already written most of the classes and methods inside "classes" folder and most are working fine, some     need to be tested on a live server and some are not working fine-part of which I have fixed and the other part I am fixing
+
+June 9 2016
+============
 --  I have put the folders classes, config, and lib in a folder called app for proper view of project folder
 
 --  Done with email validation on login page
 
 --  Fixed the confirm_user_reg.php
+
+June 10 2016
+============
+--  I change the name recover.php to pass_recovery.php
+--  I made the processing page for the pass_recovery.php for users to recover their password
+--  The processing page calls method from the class Functions_User to process
+--  I created another page called confirm_pass.php, so that when user click on pass_recovery link the former page would process it
+--  I made the jquery xmlrequest also for the pass_recovery processing
+--  I created a database field to store user login, logoff status and time for future use
+--  I called the email validating method to validate the email field for the login page
+--  We will move on from there, I need to go and sleep now it 4:25am thanks Dika for your effort

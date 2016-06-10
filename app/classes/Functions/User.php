@@ -124,7 +124,7 @@ Class Functions_User extends Functions_Utility
 		$sql = "INSERT INTO users (email,password,full_name,address,phone,active,level_access,act_key,reg_date)
 		VALUES ('".$email."','".$pass."','".$full_name."','".$address."','".$phone."', 0,'".$level_access."','".$activation_key."','".$reg_date."')";
 
-		$res = $this->proccessSql($sql);
+		$res = $this->processSql($sql);
 		if($res){
 			//build email to be sent
 			$to = $email;
@@ -157,12 +157,46 @@ Class Functions_User extends Functions_Utility
 			$headers .= "From: SITE NAME<yourname@yoursite.com>" . "\r\n";//Modified By GENTLE to show the FROM in the message
 
 			if($mail_send = mail($email, $subject, $message, $headers)) {
-			} return 99;
-			return 1;
-		}
-		else return 2;
+				return 99;
+			}return 1;
+		}else return 2;
 
 	}
+
+
+		/**
+		 *	This function confirms user through email submitted
+		 *
+	     * @param 		$activation_key The activation key for activation
+	     * @return 		returns log out the user and set online off
+		 */
+		public function confirm_user_reg($activation_key)
+		{
+			$activation_key = $this->quote($activation_key);
+
+			$query = "SELECT id,active,act_key FROM users WHERE act_key = '".$activation_key."'";
+
+			if($this->resultNum($query)==1)
+			{
+				$row = $this->fetchOne($query);
+				$id = $row['id'];
+				if($row['active']==0)
+				{
+					$update = $this->processSql("UPDATE users SET active=1,act_key='' WHERE id = '".$id."'");
+					if($update){
+						return 99;
+					} else return 1;
+				}
+				if($row['active']==1)
+				{
+					return 2;
+				}
+			}
+			else {
+				return 3;
+			}
+		}
+
 
 
 
@@ -228,7 +262,7 @@ Class Functions_User extends Functions_Utility
 
 		}
 
-			$res = $this->proccessSql($sql);
+			$res = $this->processSql($sql);
 			if(!$res) return 4;
 			return 99;
 	}
@@ -266,7 +300,7 @@ Class Functions_User extends Functions_Utility
 			if ($row['active'] == 1 ) {
 				$this->set_login_sessions ( $row['id'], $row['password'] ? TRUE : FALSE );
 				if ($row['level_access'] != 1)  {
-				$update = $this->proccessSql('UPDATE users SET last_login = "'.$lastLogin.'",online = "'.$online.'" WHERE id = "'.$row['id'].'"');
+				$update = $this->processSql('UPDATE users SET last_login = "'.$lastLogin.'",online = "'.$online.'" WHERE id = "'.$row['id'].'"');
 					return 99;
 					}else{
 					return 4;
@@ -395,10 +429,13 @@ Class Functions_User extends Functions_Utility
      * @param 		$id The user id
      * @return 		returns log out the user and set online off
 	 */
-	public function logoff($id)
+	public function logoff()
 	{
 		//session must be started before anything
 		session_start ();
+
+		// Add the session name user_id to a variable $id
+		$id = $_SESSION['user_id'];
 
 		//if we have a valid session
 		if ( $_SESSION['logged_in'] == TRUE )
@@ -406,10 +443,10 @@ Class Functions_User extends Functions_Utility
 			$lastActive = date("l, M j, Y, g:i a");
 			$online= 'OFF';
 			$sql = "SELECT id,online, last_active FROM users WHERE id = '".$id."'";
-			$res = $this->proccessSql($sql);
+			$res = $this->processSql($sql);
 		if ($res){
 			$update = "UPDATE users SET online ='".$online."', last_active ='".$lastActive."'  WHERE id = '".$id."'";
-			$result = $this->proccessSql($update);
+			$result = $this->processSql($update);
 		}
 			//unset the sessions (all of them - array given)
 			unset ( $_SESSION );
@@ -431,32 +468,92 @@ Class Functions_User extends Functions_Utility
 		}
 
 	}
-
-
+//== PAssword Recovery Process=================================================================
 	/**
-	 *	This function confirms user through email submitted
+	 *	This function set password recovery process in case a user forgot his/her password
 	 *
-     * @param 		$activation_key The activation key for activation
-     * @return 		returns log out the user and set online off
+   * @param 		$email The email address of the user
+   * @param			$site_url The web site URL
+   * @return 		sends the recovery password to the user email address
 	 */
-	public function confirm_user_reg($activation_key)
+	//----------Function for password recovery----------
+	public function pass_recovery($email,$site_url)
 	{
-		$activation_key = $this->quote($activation_key);
+		$email = $this->secureInput($email);
+		$site_url = $this->secureInput($site_url);
 
-		$query = "SELECT id,active,act_key FROM users WHERE act_key = '".$activation_key."'";
+		$sql = "SELECT id,username,password,email,level_access FROM users WHERE email = '".$email."'";
+		$num = $this->resultNum($sql);
+		$row = $this->fetchOne($sql);
+
+		if($num == 1)
+		{
+			$temp_password = $this->random_string('alnum', 8);
+			//Encrypt password for database
+			$salt1 = 's+(_a*';
+			$salt2 = '@-)(%#';
+			$temp_pass = md5($salt1.$temp_password.$salt2);
+
+			$update = $this->processSql("UPDATE users SET password='".$temp_pass."',temp_pass='".$temp_password."',temp_pass_active=1 WHERE email='".$email."'");
+
+			if($update){
+				//build email to be sent
+				$to = $row['email'];
+				$subject = "Password Reset Request";
+
+				$message = "
+				<html>
+				<head>
+				<title>Password Reset</title>
+				</head>
+				<body>
+				<h3>Your New Password</h3>
+				<p>Dear ".$row['username'].", someone (presumably you), has requested a password reset.</p>
+				<p>Your new temporary password is: ".$temp_password.".</p>
+				<p>To confirm this change and activate your new password, please follow this link to our website:</p>
+				<a href=\"".$site_url."/confirm_pass.php?id=".$row['id']."&new=".$temp_password."&level_access=".$row['level_access']."\">".$site_url."</a>.
+				<p>If the above link does not work, copy and paste the below URL to your browser's address bar:</p>
+				<b><i>http://".$site_url."/confirm_pass.php?id=".$row['id']."&new=".$temp_password."&level_access=".$row['level_access']."</b></i>
+				<p>Don't forget to update your profile as well after confirming this change and create a new password.</p><br/>
+				<p>If you did not initiate this request, simply disregard this email, and we're sorry for bothering you.</p>
+				<br/><br/>
+				<p>Sincerely,</p>
+				<p>SiteName Team.</p>
+				</body>
+				</html>
+				";
+
+				// To send HTML mail, the Content-type header must be set
+				$headers = "MIME-Version: 1.0\r\n";
+				$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+				$headers .= "From: SITE NAME<yourname@yoursite.com>" . "\r\n";//Modified By GENTLE to show the FROM in the message
+
+				if($mail_send = mail($row['email'], $subject, $message, $headers)) {
+					return 99;
+				} else { return 1;}
+			} else {return 2;}
+		} else {return 3;}
+	}
+
+	//----------Function for confirming password----------
+	public function confirm_pass($id,$new)
+	{
+		$id = $this->secureInput($id);
+		$new = $this->secureInput($new);
+
+		$query = "SELECT password,temp_pass,temp_pass_active FROM users WHERE id = '".$id."'";
 
 		if($this->resultNum($query)==1)
 		{
 			$row = $this->fetchOne($query);
-			$id = $row['id'];
-			if($row['active']==0)
+			if($row['temp_pass']==$_GET['new'] && $row['temp_pass_active']==1)
 			{
-				$update = $this->proccessSql("UPDATE users SET active=1,act_key='' WHERE id = '".$id."'");
+				$update = $this->processSql("UPDATE users SET temp_pass_active=0 WHERE id = '".$this->quote($_GET['id'])."'");
 				if($update){
 					return 99;
 				} else return 1;
 			}
-			if($row['active']==1)
+			else
 			{
 				return 2;
 			}
@@ -465,6 +562,8 @@ Class Functions_User extends Functions_Utility
 			return 3;
 		}
 	}
+
+	//== PAssword Recovery Process=================================================================
 
 }
 
