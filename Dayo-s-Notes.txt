@@ -3,7 +3,7 @@ ________________________________________________________________________________
 June 3 2016
 ============
 Code 1111
---  As at the above date I have already written most of the classes and methods inside "classes" folder and most are working fine, some     need to be tested on a live server and some are not working fine-part of which I have fixed and the other part I am fixing
+--  As at the above date I have already written most of the classes and methods inside "classes" folder and most are working fine, some need to be tested on a live server and some are not working fine-part of which I have fixed and the other part I am fixing
 
 June 9 2016
 ============
