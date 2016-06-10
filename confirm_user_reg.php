@@ -9,19 +9,19 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 //Instantiate Functions_Utility Object
 $usr = new Functions_User();
 /**
-    *  @Description:  Get Level Access, and Actication Key 
+    *  @Description:  Get Level Access, and Actication Key
   */
   $level = isset($_REQUEST['level_access']) ? $_REQUEST['level_access'] : '';
   $activation_key = isset($_REQUEST['activation_key']) ? $_REQUEST['activation_key'] : '';
-  
+
   /**
-    *  @Description:  Define which login page to redirect to 
+    *  @Description:  Define which login page to redirect to
   */
   $login = APP_PATH.'login.php';
-  
-  
-  
-  
+
+
+
+
   $res = $usr->confirm_user_reg($activation_key);
   if ($res == 1){
     $error = "Failed to activate account. Please contact the site admin.";
@@ -35,7 +35,7 @@ $usr = new Functions_User();
   if ($res == 99){
     $message = "Congratulations! Your account has been activated. You may now <a href='".$login."'>login</a> and start using it.";
   }
-  
+
 
 
 ?>
@@ -47,10 +47,12 @@ $usr = new Functions_User();
 
         <?php
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; // Add favicon
-        // Add font css
-        echo $usr->addCss('index'); // Add Infinitelife Css for this page 
-        echo $usr->addCss('infinitelife'); // Add Infinitelife Css for this page 
-        echo $usr->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css'); 
+        echo $utils->addJs('config'); // Add jquery
+        echo $utils->addCss('index'); // Add css file for the index.php in the root folder
+        echo $utils->addJs('jquery.min'); // Add jquery
+        echo $utils->addCss('infinitelife'); // Add Infinitelife Css for this page
+        echo $utils->addJs('infinitelife'); // Add Infinitelife Js for this page
+        echo $usr->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css');
         echo $usr->addFile('Css', 'dashboard/fonts/fonts.css');
         ?>
 
@@ -75,7 +77,7 @@ $usr = new Functions_User();
 
 </div>
 
-  <div class="form">  
+  <div class="form">
 <table align='center' width='100%' style='border: 1px thin #8080FF;'>
     <tr>
       <td>
@@ -85,7 +87,7 @@ $usr = new Functions_User();
           }
           else if(isset($message)) {
             echo '<div class="done">' . $message . '</div>' . "\n";
-          } 
+          }
         ?>
       </td>
     </tr>

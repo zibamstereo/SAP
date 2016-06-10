@@ -25,3 +25,10 @@ Code 1113
 --  I created a database field to store user login, logoff status and time for future use
 --  I called the email validating method to validate the email field for the login page
 --  We will move on from there, I need to go and sleep now it 4:25am thanks Dika for your effort
+
+June 10 2016
+============
+Code 1114
+--  We don't have to start configuring the application path in the javascript again
+--  I have made it to auto write during installation just like the config.ini
+--  The config.js must therefore be always put at the top of any page in case another js file wants to use the configuration

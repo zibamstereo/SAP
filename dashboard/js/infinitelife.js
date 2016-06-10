@@ -1,8 +1,9 @@
-var process_path = window.location.origin + '/sap-git/dashboard/users/process/';
+// Call app_path from config.js
+var process_path = app_path + 'dashboard/users/process/';
 
 	//login page redirection function after a successful registration
 function login_page()
-{window.location = window.location.origin + '/sap-git/login';}
+{window.location = app_path + 'login';}
 
 function login()
 {

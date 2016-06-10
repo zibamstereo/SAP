@@ -17,8 +17,11 @@ $utils = new Functions_Utility();
 
         <?php
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; // Add favicon
+        echo $utils->addJs('config'); // Add jquery
         echo $utils->addCss('index'); // Add css file for the index.php in the root folder
-
+        echo $utils->addJs('jquery.min'); // Add jquery
+        echo $utils->addCss('infinitelife'); // Add Infinitelife Css for this page
+        echo $utils->addJs('infinitelife'); // Add Infinitelife Js for this page
         // Add font css
         echo $utils->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css');
         echo $utils->addFile('Css', 'dashboard/fonts/fonts.css');
