@@ -2,10 +2,12 @@ Update | Fixes | S.A.P Project
 __________________________________________________________________________________________________________
 June 3 2016
 ============
+Code 1111
 --  As at the above date I have already written most of the classes and methods inside "classes" folder and most are working fine, some     need to be tested on a live server and some are not working fine-part of which I have fixed and the other part I am fixing
 
 June 9 2016
 ============
+Code 1112
 --  I have put the folders classes, config, and lib in a folder called app for proper view of project folder
 
 --  Done with email validation on login page
@@ -14,6 +16,7 @@ June 9 2016
 
 June 10 2016
 ============
+Code 1113
 --  I change the name recover.php to pass_recovery.php
 --  I made the processing page for the pass_recovery.php for users to recover their password
 --  The processing page calls method from the class Functions_User to process
