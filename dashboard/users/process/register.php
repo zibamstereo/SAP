@@ -52,6 +52,10 @@ $site_url = $sitesettings[0]['site_url'];
 	{
 		die(msg(0,"<i class='fa fa-tablet'></i> Enter Your Phone No.","phone"));
 	}
+  elseif(!$usr->validatePhone($_POST['phone']))
+	{
+		die(msg(0,"<i class='fa fa-tablet'></i> Phone number must be numeric.","phone"));
+	}
 	elseif(!$_POST['email'])
 	{
 		die(msg(0,"<i class='fa fa-envelope-o'></i> Enter an Email Address.","email"));
@@ -78,15 +82,6 @@ $site_url = $sitesettings[0]['site_url'];
 	{
 		die(msg(0,"<i class='fa fa-ellipsis-h'></i> Password must match.", "cpassword"));
 	}
-	/*elseif(empty($_POST['answer']))
-	{
-		die(msg(0,"Captcha code not entered!"));
-	}
-	elseif(!PhpCaptcha::Validate($_POST['answer']))
-	{
-		die(msg(0,"Invalid Captcha Code!"));
-	}*/
-
 	else
 		{
 			$res = $usr->addUser(

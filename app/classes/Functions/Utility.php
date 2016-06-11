@@ -292,21 +292,31 @@ class Functions_Utility extends Db_DBFunc
 	public function validateNum($int)
 	{
 		$int = $this->secureInput($int);
-		return (filter_var($int, FILTER_VALIDATE_INT) === true) ? true : false;
-	}
+		if (preg_match('/^[1-9][0-9]*$/', $int) && filter_var($int, FILTER_VALIDATE_INT)) {
+			return true;
+		} else {
+			return false;
+		}
+}
 
 
 	/**
-     *  Validating a given string against numeric characters
+     *  Validating  phone number
      *
-     * @param 		$str The string input to be validated
+     * @param 		$str The phone number input to be validated
      * @return 		Returns boolean true if valid number address or false if not
      */
-	function validateStr($str)
-	{
-		$str = $this->secureInput($str);
-		return ( preg_match("/^[+][ 0-9\.]+$/", $str)) ? true : false;
-	}
+	public function validatePhone($phone) {
+		$phone = $this->secureInput($phone);
+    $numbersOnly = preg_replace("/[^0-9]/", "", $phone);
+    $numberOfDigits = strlen($numbersOnly);
+		// For American and most African phone number type
+    if ($numberOfDigits == 7 || $numberOfDigits == 10 || $numberOfDigits == 11) {
+        return true;
+    } else {
+	      return false;
+    }
+}
 
 
 }

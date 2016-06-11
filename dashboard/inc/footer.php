@@ -35,10 +35,10 @@
 </div>
 
 <!-- /container -->
-<?php 
+<?php
 // Add Js Files needed
-        echo $utils->addJs('classie');
-        echo $utils->addJs('main');
+        echo $usr->addJs('classie');
+        echo $usr->addJs('main');
    ?>
 
 

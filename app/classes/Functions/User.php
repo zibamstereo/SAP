@@ -198,9 +198,6 @@ Class Functions_User extends Functions_Utility
 		}
 
 
-
-
-
 	/**
      *  This method  editUser is used to edit users in the platform
      *
@@ -212,55 +209,24 @@ Class Functions_User extends Functions_Utility
      * @param 		$state the user's state
      * @param 		$country the user's country
      * @param 		$phone the user's phone
-     * @param 		$level_access the user's Access Level
-     * @param 		$site_url the URL of the address in used
      * @return 		Returns the random strings
      */
-	public function editUser($id,$title,$full_name,$dob,$gender,$address,$city,$state,$country,$phone,$level_access) //Edit 4
+	//public function editProfile($id,$title,$full_name,$dob,$gender,$address,$city,$state,$country,$phone,$level_access)
+	public function editProfile($id,$title,$full_name,$dob,$gender,$address,$city,$state,$country,$phone)
 	{
 		$title = $this->secureInput($title);
 		$full_name = $this->secureInput($full_name);
 		$dob = $this->secureInput($dob);
 		$gender = $this->secureInput($gender);
 		$address = $this->secureInput($address);
-		$city = $this->secureInput($city);
-		$state = $this->secureInput($state);
-		$country = $this->secureInput($country);
+		//$city = $this->secureInput($city);
+		//$state = $this->secureInput($state);
+		//$country = $this->secureInput($country);
 		$phone = $this->secureInput($phone);
-		$level_access = $this->secureInput($level_access);
 
+//$sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name . "', dob = '" . $dob . "', gender = '" . $gender . "', address = '" . $address . "', city = '" . $city . "', state = '" . $state . "', country = '" . $country . "', phone = '" . $phone . "' WHERE id = '" . $id . "'";
 
-		if (!empty($country)){
-			$sql = "UPDATE users SET
-			title = '" . $title . "',
-			full_name = '" . $full_name . "',
-			dob = '" . $dob . "',
-			gender = '" . $gender . "',
-			address = '" . $address . "',
-			city = '" . $city . "',
-			state = '" . $state . "',
-			country = '" . $country . "',
-			phone = '" . $phone . "',
-			level_access = '" . $level_access . "'
-			WHERE id = '" . $id . "'";
-		}
-		else{
-			$sql = "UPDATE users SET
-			title = '" . $title . "',
-			first_name = '" . $first_name . "',
-			last_name = '" . $last_name . "',
-			email = '" . $email . "',
-			dob = '" . $dob . "',
-			gender = '" . $gender . "',
-			marital_status = '" . $marital_status . "',
-			r_address = '" . $r_address . "',
-			city = '" . $city . "',
-			state = '" . $state . "',
-			phone = '" . $phone . "',
-			level_access = '" . $level_access . "'
-			WHERE id = '" . $id . "'";		//Edit 7
-
-		}
+$sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name . "', dob = '" . $dob . "', gender = '" . $gender . "', address = '" . $address . "', phone = '" . $phone . "' WHERE id = '" . $id . "'";
 
 			$res = $this->processSql($sql);
 			if(!$res) return 4;
@@ -357,7 +323,7 @@ Class Functions_User extends Functions_Utility
      * @param 		$levels The user levels to determine access level of the user logging in
      * @return 		returns boolean true or false
 	 */
-	public function checkLogin ( $levels )
+	public function checkUserLogin ( $levels )
 	{
 		session_start ();
 		$kt = explode ( ' ', $levels );
@@ -476,7 +442,7 @@ Class Functions_User extends Functions_Utility
    * @param			$site_url The web site URL
    * @return 		sends the recovery password to the user email address
 	 */
-	//----------Function for password recovery----------
+
 	public function pass_recovery($email,$site_url)
 	{
 		$email = $this->secureInput($email);
@@ -535,7 +501,14 @@ Class Functions_User extends Functions_Utility
 		} else {return 3;}
 	}
 
-	//----------Function for confirming password----------
+	/**
+	 *	This function confirms password based on pass_recovery above
+	 *
+   * @param 		$id The id of the user to confirm password for
+   * @param			$new The new password sent to the user email address to know if the user is the one requesting for password recovery
+   * @return 		confirms the password sent
+	 */
+
 	public function confirm_pass($id,$new)
 	{
 		$id = $this->secureInput($id);
@@ -564,6 +537,44 @@ Class Functions_User extends Functions_Utility
 	}
 
 	//== PAssword Recovery Process=================================================================
+
+	/**
+	 *	This function works when user has already logged in and wish to change his/her password for one reason or the other
+	 *
+	 * @param 		$id The id of the user changing his/her password
+	 * @param			$opass The old password changed
+	 * @param			$pass The new password changed to
+	 * @return 		changes user password immediately
+	 */
+		public function updatePass($id,$opass,$pass)
+		{
+			$id = $this->ecureInput($id);
+			$opass = $this->secureInput($opass);
+			$pass = $this->secureInput($pass);
+
+			//Encrypt password for database
+			$salt1 = 's+(_a*';
+			$salt2 = '@-)(%#';
+			$opasssalt = md5($salt1.$opass.$salt2);
+
+			$query = 'SELECT `password` FROM `users` WHERE `id` = "'.$id.'"';
+			$row = $this->fetchOne($query);
+
+			if ($opasssalt != $row['password']){
+				return 2;
+				}else{
+
+				//Encrypt password for database
+	 	 		//$salt1 = 's+(_a*';
+	 	 		//$salt2 = '@-)(%#';
+				$new_password = md5($salt1.$pass.$salt2);
+
+				$sql = "UPDATE users SET password = '" . $new_password . "' WHERE id = '" . $id . "'";
+				$res = $this->processSql($sql);
+				if(!$res) return 3;
+				return 99;
+			}
+		}
 
 }
 

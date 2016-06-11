@@ -68,8 +68,8 @@ unlink("../install.txt");
 //LOGIN INFO
 $msg= '<p>Ajebo Market Sales Agent Platform has been installed!</p>
 <p>The Admin Login Info is as follows<br />
-Username: <strong>Admin</strong><br />
-Password: <strong>Password</strong><br />
+Username: <strong>admin@test.com</strong><br />
+Password: <strong>password</strong><br />
 <br />
 Go to <a href="../" target="_blank">Home Page</a> to login<br/>
 Go to <a href="../admin/" target="_blank">Admin Area</a> to login<br/>';

@@ -1,9 +1,9 @@
-<?php 
+<?php
 // directory separator
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
 // require header
- require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."header.php");
+ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_header.php");
 
 ?>
 
@@ -16,7 +16,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 	<section  class="one-head ">
 
-	<span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><?php echo $utils->addImg('ajebo.png', 111, 50, 'Ajebo Market'); ?></span>
+	<span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><?php echo $adm->addImg('ajebo.png', 111, 50, 'Ajebo Market'); ?></span>
 	<span style="width:auto;float:left;margin:0.7em 0 0 0.5em;"> <i class="fa fa-th"></i> SALES AGENT PLATFORM </span>
 
 
@@ -35,14 +35,14 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 		 </div>
 
-
-<?php 
+<?php
 // require vertical menu
- require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."vmenu.php");
-
+require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.php");
 ?>
 
+
 </div>
+
 
 
 
@@ -54,8 +54,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <div id="user_welcome" class="animated slideDown">
 
 <div class="icon">
-<i class="fa fa-sitemap"></i><h2 class="top-bar__headline">Dummy Page</h2>
-
+<i class="fa fa-dashboard"></i><h2 class="top-bar__headline"> Dashboard | Manage Sales Agents</h2>
 </div>
 </div>
 
@@ -83,7 +82,7 @@ Block Data will come here
 </span>
 
 
-<span class="grid__info animated fadeInDown">
+<span class="grid__item animated fadeInDown">
 	<h2 class="title title--preview"><i class="fa fa-database"></i> Block 3</h2>
 	<span class="category"> <i class="fa fa-info"></i>
 Block Data will come here
@@ -91,8 +90,40 @@ Block Data will come here
 </span>
 
 
-<span class="grid__info animated fadeInDown">
+<span class="grid__item animated fadeInDown">
      <h2 class="title title--preview"><i class="fa fa-database"></i> Block 4</h2>
+
+	 <span class="category"> <i class="fa fa-info"></i>
+	 Block Data will come here
+      </span>
+</span>
+
+<span class="grid__item animated fadeInDown">
+     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 5</h2>
+
+	 <span class="category"> <i class="fa fa-info"></i>
+	 Block Data will come here
+      </span>
+</span>
+
+<span class="grid__item animated fadeInDown">
+     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 6</h2>
+
+	 <span class="category"> <i class="fa fa-info"></i>
+	 Block Data will come here
+      </span>
+</span>
+
+<span class="grid__action animated fadeInDown">
+     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 7</h2>
+
+	 <span class="category"> <i class="fa fa-info"></i>
+	 Block Data will come here
+      </span>
+</span>
+
+<span class="grid__setting animated fadeInDown">
+     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 8</h2>
 
 	 <span class="category"> <i class="fa fa-info"></i>
 	 Block Data will come here
@@ -102,9 +133,13 @@ Block Data will come here
 
 
 
-<?php 
 
+
+
+
+
+<?php
 // require header
- require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."footer.php");
+ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_footer.php");
 
 ?>

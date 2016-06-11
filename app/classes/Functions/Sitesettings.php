@@ -2,7 +2,7 @@
 
 /**
 * This Class Functions_SiteSettings is made by Gentle of Infinitelife Inc.
-* This class is responsible for adding users and editting users
+* This class is responsible all site configurations
 */
 
 

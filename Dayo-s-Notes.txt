@@ -3,7 +3,7 @@ ________________________________________________________________________________
 June 3 2016
 ============
 Code 1111
---  As at the above date I have already written most of the classes and methods inside "classes" folder and most are working fine, some     need to be tested on a live server and some are not working fine-part of which I have fixed and the other part I am fixing
+--  As at the above date I have already written most of the classes and methods inside "classes" folder and most are working fine, some need to be tested on a live server and some are not working fine-part of which I have fixed and the other part I am fixing
 
 June 9 2016
 ============
@@ -32,3 +32,47 @@ Code 1114
 --  We don't have to start configuring the application path in the javascript again
 --  I have made it to auto write during installation just like the config.ini
 --  The config.js must therefore be always put at the top of any page in case another js file wants to use the configuration
+
+
+June 11 2016
+============
+Code 1115
+--  admin_login.php for admin login page,
+--  I added two other classes Functions_Admin for any admin actions Functions_Image for Imaging activities
+--  I made all these:
+--     dashboard/admin/index.php,
+--     dashboard/admin/log_off.php,
+--     dashboard/admin/process/,
+--     dashboard/admin/profile_pic/,
+--     dashboard/inc/admin_footer.php,
+--     dashboard/inc/admin_header.php,
+--     dashboard/inc/admin_hmenu.php,
+--     dashboard/inc/admin_vmenu.php,
+--     dashboard/users/process/change_pass.php,
+--     dashboard/users/process/edit_profile.php,
+--     dashboard/users/process/process_photo.php,
+--     dashboard/users/profile_pic/
+
+--  I also modified these:
+--  app/classes/Functions/Sitesettings.php
+--  app/classes/Functions/User.php
+--  app/classes/Functions/Utility.php
+--  app/config/config.php
+--  confirm_pass.php
+--  confirm_user_reg.php
+--  dashboard/admin/manage_sales_agents.php
+--  dashboard/inc/footer.php
+--  dashboard/inc/header.php
+--  dashboard/js/infinitelife.js
+--  dashboard/users/index.php
+--  dashboard/users/manage_customers.php
+--  dashboard/users/manage_orders.php
+--  dashboard/users/my_account.php
+--  dashboard/users/process/register.php
+--  dashboard/users/statistics.php
+--  index.php
+--  install/installed.php
+--  install/umdb.sql
+--  login.php
+--  pass_recovery.php
+--  register.php

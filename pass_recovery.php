@@ -7,26 +7,26 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  require_once (realpath(dirname(__FILE__)).DS."app".DS."Autoloader.php");
 
 
-//Instantiate Functions_Utility Object
-$utils = new Functions_Utility();
+//Instantiate Functions_User Object
+$usr = new Functions_User();
 
 ?>
 <!DOCTYPE html>
 <html >
   <head>
     <meta charset="UTF-8">
-    <title> <?php echo $utils->addTitle(); ?></title>
+    <title> <?php echo $usr->addTitle(); ?></title>
 
         <?php
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; // Add favicon
-        echo $utils->addJs('config'); // Add jquery
-        echo $utils->addCss('index'); // Add css file for the index.php in the root folder
-        echo $utils->addJs('jquery.min'); // Add jquery
-        echo $utils->addCss('infinitelife'); // Add Infinitelife Css for this page
-        echo $utils->addJs('infinitelife'); // Add Infinitelife Js for this page
+        echo $usr->addJs('config'); // Add jquery
+        echo $usr->addCss('index'); // Add css file for the index.php in the root folder
+        echo $usr->addJs('jquery.min'); // Add jquery
+        echo $usr->addCss('infinitelife'); // Add Infinitelife Css for this page
+        echo $usr->addJs('infinitelife'); // Add Infinitelife Js for this page
         // Add font css
-        echo $utils->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css');
-        echo $utils->addFile('Css', 'dashboard/fonts/fonts.css');
+        echo $usr->addFile('Css', 'dashboard/fonts/font-awesome/css/font-awesome.min.css');
+        echo $usr->addFile('Css', 'dashboard/fonts/fonts.css');
         ?>
 
         <script type="text/javascript">
@@ -46,7 +46,7 @@ $utils = new Functions_Utility();
   <body>
 
     <div class="header">
-      <span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><?php echo $utils->addImg('ajebo.png', 90, 45, 'Ajebo Market'); ?></span>
+      <span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><?php echo $usr->addImg('ajebo.png', 90, 45, 'Ajebo Market'); ?></span>
       <span style="width:auto;float:left;margin:0.65em 0 0 1em;"><i class="fa fa-th"></i> SALES AGENT PLATFORM  <span style="width:auto;color:#ee3d43; font-size:0.8em;" > <i class="fa  fa-chevron-right"></i> RECOVER PASSWORD </span>
  </div>
 
@@ -72,7 +72,7 @@ $utils = new Functions_Utility();
 
     </br>
     <!--<button class="button" name="Login" onClick="login_user();"> LOGIN</button>-->
-    <input class="button" type='submit' name="recover" value="recover"> <?php echo $utils->addImg('loading.gif','','','loading..','','loading') ?>
+    <input class="button" type='submit' name="recover" value="recover"> <?php echo $usr->addImg('loading.gif','','','loading..','','loading') ?>
     <p class="message">Recovered Your Password ? <i class="fa fa-chevron-circle-right"></i> <a href='login'> login </a></p>
     <p class="message">Not Registered ? <i class="fa fa-chevron-circle-right"></i> <a href='register'> Register </a></p>
 

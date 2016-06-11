@@ -16,7 +16,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 	<section  class="one-head ">
 
-	<span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><?php echo $utils->addImg('ajebo.png', 111, 50, 'Ajebo Market'); ?></span>
+	<span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><?php echo $usr->addImg('ajebo.png', 111, 50, 'Ajebo Market'); ?></span>
 	<span style="width:auto;float:left;margin:0.7em 0 0 0.5em;"> <i class="fa fa-th"></i> SALES AGENT PLATFORM </span>
 
 
@@ -36,7 +36,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 		 </div>
 
 
-<?php 
+<?php
 // require vertical menu
  require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."vmenu.php");
 
@@ -102,7 +102,7 @@ Block Data will come here
 
 
 
-<?php 
+<?php
 
 // require header
  require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."footer.php");

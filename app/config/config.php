@@ -114,6 +114,9 @@ defined("IMG_URL") || define("IMG_URL", APP_PATH.DASHBOARD_DIR."/images/");
 // Define USER URL PATH
 defined("USER_URL") || define("USER_URL", APP_PATH.DASHBOARD_DIR."/users/");
 
+// Define ADMIN URL PATH
+defined("ADM_URL") || define("ADM_URL", APP_PATH.DASHBOARD_DIR."/admin/");
+
 // ========================== OTHER CONFIGURATIONS============================================================
 
 

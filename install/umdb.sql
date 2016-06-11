@@ -62,14 +62,14 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `title`, `full_name`, `email`, `dob`, `gender`, `address`, `city`, `state`, `country`, `phone`, `thumb_path`, `img_path`, `active`, `level_access`, `act_key`, `temp_pass`, `temp_pass_active`, `reg_date`, `last_login`, `last_active`, `online`) VALUES
-(1, 'admin', '317da97d438875c141a4b5f9f67dfdd0', 'Mr', 'Site Admin', 'admin@test.com', '', '', '', '',  '', '', '', '', '', 1, 1, '', '', 0, 'Wednesday, Sep 28, 2011, 8:47 am', '', '', '0'),
-(2, 'moderator', '317da97d438875c141a4b5f9f67dfdd0', 'Mr', 'Site Moderator', 'moderator@test.com', '',  '', '', '', '', '', '', '', '', 1, 2, '', '', 0, 'Wednesday, Sep 28, 2011, 8:47 am', '', '', '0'),
-(3, 'user1', 'ccd4a3a648f9068072deecc8465e4819', 'Mr', 'John Doe', 'user@test.com', '', '', '', '', '',  '', '', '', '', 1, 9, '', '', 0, 'Wednesday, Sep 28, 2011, 8:47 am', '', '', '0'),
-(4, 'inactive', '317da97d438875c141a4b5f9f67dfdd0', 'Mr', 'John Doe', 'notactivate@test.com', '', '', '', '', '',  '', '', '', '', 0, 9, '', '10697a00fb066fb4d037ac65f121ec5d', 0, 'Saturday, Feb 23, 2013, 10:00 am', '', '', '0');
+(1, 'admin', '53d157e011f917f3822fe7e49d543d73', 'Mr', 'Site Admin', 'admin@test.com', '', '', '', '',  '', '', '', '', '', 1, 1, '', '', 0, 'Wednesday, Sep 28, 2011, 8:47 am', '', '', '0'),
+(2, 'moderator', '53d157e011f917f3822fe7e49d543d73', 'Mr', 'Site Moderator', 'moderator@test.com', '',  '', '', '', '', '', '', '', '', 1, 2, '', '', 0, 'Wednesday, Sep 28, 2011, 8:47 am', '', '', '0'),
+(3, 'user1', '53d157e011f917f3822fe7e49d543d73', 'Mr', 'John Doe', 'user@test.com', '', '', '', '', '',  '', '', '', '', 1, 9, '', '', 0, 'Wednesday, Sep 28, 2011, 8:47 am', '', '', '0'),
+(4, 'inactive', '53d157e011f917f3822fe7e49d543d73', 'Mr', 'John Doe', 'notactivate@test.com', '', '', '', '', '',  '', '', '', '', 0, 9, '', '10697a00fb066fb4d037ac65f121ec5d', 0, 'Saturday, Feb 23, 2013, 10:00 am', '', '', '0');
 
 
 
-CREATE TABLE IF NOT EXISTS `user_level_access` (						
+CREATE TABLE IF NOT EXISTS `user_level_access` (
   `id` int(7) NOT NULL AUTO_INCREMENT,
   `level_access_id` int(1) NOT NULL,
   `level_access` varchar(45) NOT NULL,
@@ -88,4 +88,3 @@ INSERT INTO `user_level_access` (`id`, `level_access_id`, `level_access`) VALUES
 (7, 7, ''),
 (8, 8, ''),
 (9, 9, 'Sales Agent');
-
