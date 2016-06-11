@@ -27,7 +27,7 @@ font-family: 'open_sanssemibold';
   max-width: 100%;
   margin: 0 auto 10px 0;
   padding: 15px;
-  min-height:400px;
+  min-height:500px;
   text-align: center;
 border: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -250,7 +250,7 @@ opacity: 0.1;
 
       width: 90%;
       padding: 1em;
-      margin: 10% auto 5% auto ;
+      margin: 7% auto 5% auto ;
   }
 
   .sap-wrapper {
@@ -377,7 +377,7 @@ padding: 3.5% 0 0 0;
 
       width: 90%;
       padding: 1em;
-      margin: 10% auto 5% auto ;
+      margin: 7% auto 5% auto ;
   }
 
   .sap-wrapper {
