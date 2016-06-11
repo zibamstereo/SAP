@@ -6,8 +6,6 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 //require_once (realpath(dirname(__FILE__)).DS."Autoloader.php");
  require_once (realpath(dirname(__FILE__)).DS."app".DS."Autoloader.php");
 
- //set redirect url if logged in before
- $url=isset($_REQUEST['returnurl']) ? rtrim(SITE_URL,"/").urldecode(base64_decode(htmlspecialchars($_REQUEST['returnurl']))) :'';
 
 //Instantiate Functions_Utility Object
 $utils = new Functions_Utility();
@@ -21,6 +19,7 @@ $utils = new Functions_Utility();
 
         <?php
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; // Add favicon
+        echo $utils->addJs('config'); // Add jquery
         echo $utils->addCss('index'); // Add css file for the index.php in the root folder
         echo $utils->addJs('jquery.min'); // Add jquery
         echo $utils->addCss('infinitelife'); // Add Infinitelife Css for this page
@@ -30,16 +29,16 @@ $utils = new Functions_Utility();
         echo $utils->addFile('Css', 'dashboard/fonts/fonts.css');
         ?>
 
-<script type='text/javascript'>
-  $(document).ready(function(){
+        <script type="text/javascript">
+        	$(document).ready(function(){
 
-    $('#loginForm').submit(function(e) {
-      login();
-      e.preventDefault();
-    });
-  });
+        		$('#pass_recovery').submit(function(e) {
+        			pass_recovery();
+        			e.preventDefault();
+        		});
+        	});
 
-</script>
+        </script>
 
 
   </head>
@@ -67,10 +66,8 @@ $utils = new Functions_Utility();
   <div class="form">
   <div id='msg'></div>
 <!-- This is login form -->
-    <form id="loginForm" class="address-form" action="<?php echo USER_URL; ?>process/login" method="POST">
-      <!--Call the $url variable -->
+    <form id="pass_recovery" class="address-form" action="<?php echo USER_URL; ?>process/pass_recovery" method="POST">
 
-      <input  name='returnurl' type='hidden' value='<?php echo $url ;?>'/>
   <input type="text" id="email_login" name="email" placeholder="Email"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
 
     </br>

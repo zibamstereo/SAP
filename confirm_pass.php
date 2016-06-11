@@ -9,32 +9,33 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 //Instantiate Functions_Utility Object
 $usr = new Functions_User();
 /**
-    *  @Description:  Get Level Access, and Actication Key
-  */
-  $level = isset($_REQUEST['level_access']) ? $_REQUEST['level_access'] : '';
-  $activation_key = isset($_REQUEST['activation_key']) ? $_REQUEST['activation_key'] : '';
+ *  @Description:  Get ID, Level Access, and New Password
+ */
+$id = isset($_REQUEST['id']) && is_numeric($_REQUEST['id']) ? $usr->secureInput($_REQUEST['id']) : '';
+$level = isset($_REQUEST['level_access']) ? $_REQUEST['level_access'] : '';
+$new = isset($_REQUEST['new']) ? $usr->secureInput($_REQUEST['new']) : '';
 
   /**
-    *  @Description:  Define which login page to redirect to
-  */
+   *  @Description:  Define which login page to redirect to
+   */
   $login = APP_PATH.'login.php';
 
 
 
 
-  $res = $usr->confirm_user_reg($activation_key);
-  if ($res == 1){
-    $error = "Failed to activate account. Please contact the site admin.";
-  }
-  if ($res == 2){
-    $error = "Your account is already active!";
-  }
-  if ($res == 3){
-    $error = "This user does not exist.";
-  }
-  if ($res == 99){
-    $message = "Congratulations! Your account has been activated. You may now <a href='".$login."'>login</a> and start using it.";
-  }
+  $res = $usr->confirm_pass($id,$new);
+	if ($res == 1){
+		$error = "Unable to update new password. Please contact the site admin.";
+	}
+	if ($res == 2){
+		$error = "The new password is already confirmed or is incorrect!";
+	}
+	if ($res == 3){
+		$error = "This user does not exist.";
+	}
+	if ($res == 99){
+		$message = "Your new password has been confirmed. You may <a href='".$login."'>login</a> using it.";
+	}
 
 
 
@@ -47,6 +48,7 @@ $usr = new Functions_User();
 
         <?php
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; // Add favicon
+        // Add font css
         echo $utils->addJs('config'); // Add jquery
         echo $utils->addCss('index'); // Add css file for the index.php in the root folder
         echo $utils->addJs('jquery.min'); // Add jquery

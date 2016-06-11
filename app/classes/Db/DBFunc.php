@@ -28,7 +28,7 @@ class Db_DBFunc
      * @param       $query  the query to proccess
      * @return      Returns the result of the query
      */
-    public function proccessSql($query)
+    public function processSql($query)
 	{
 		$res = $this->db->query($query);
 		return $res;
@@ -43,7 +43,7 @@ class Db_DBFunc
      */
     public function fetch($query) {
         $rows = array();
-        $result = $this->proccessSql($query);
+        $result = $this->processSql($query);
         if($result === false) {
             return false;
         }
@@ -60,7 +60,7 @@ class Db_DBFunc
      * @return bool False on failure / array Database rows on success
      */
     public function fetchOne($query) {
-        $result = $this->proccessSql($query);
+        $result = $this->processSql($query);
         if($result === false) {
             return false;
         }
@@ -76,7 +76,7 @@ class Db_DBFunc
      * @return Number of Rows in a result
      */
     public function resultNum($query) {
-        $result = $this->proccessSql($query);
+        $result = $this->processSql($query);
         return $result->num_rows;
     }
 
@@ -84,7 +84,7 @@ class Db_DBFunc
 
     /**
      * Fetch the last error from the database
-     * 
+     *
      * @return string Database error message
      */
     public function error() {
@@ -100,7 +100,7 @@ class Db_DBFunc
     public function quote($value) {
         return $this->db->real_escape_string($value);
     }
-		
+
 
 
 

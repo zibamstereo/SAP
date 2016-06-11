@@ -3,7 +3,7 @@
 *   This Class Functions_Utility is made by Gentle of Infinitelife Inc.
 *   if there is need to use any mysqli functions in this class connect true $this->db->mysqli_methodname
 *   But most of this method would have being used to create methods in DBFunc class eg quote() for mysqli_real_escape_string
-*   proccessSql() for mysqli_query, fetch() for mysqli_fecth_assoc etc for these use $this->methodname
+*   processSql() for mysqli_query, fetch() for mysqli_fecth_assoc etc for these use $this->methodname
 */
 
 

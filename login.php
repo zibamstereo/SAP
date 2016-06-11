@@ -21,6 +21,7 @@ $utils = new Functions_Utility();
 
         <?php
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>"; // Add favicon
+        echo $utils->addJs('config'); // Add jquery
         echo $utils->addCss('index'); // Add css file for the index.php in the root folder
         echo $utils->addJs('jquery.min'); // Add jquery
         echo $utils->addCss('infinitelife'); // Add Infinitelife Css for this page
@@ -80,7 +81,7 @@ $utils = new Functions_Utility();
         <!--<button class="button" name="Login" onClick="login_user();"> LOGIN</button>-->
         <input class="button" type='submit' name="login" value="Login"> <?php echo $utils->addImg('loading.gif','','','loading..','','loading') ?>
         <p class="message">Not Registered ? <i class="fa fa-chevron-circle-right"></i> <a href='register'> Register </a></p>
-        <p class="message">Forgot Your Password ? <i class="fa fa-chevron-circle-right"></i> <a href='recover'> Recover </a></p>
+        <p class="message">Forgot Your Password ? <i class="fa fa-chevron-circle-right"></i> <a href='pass_recovery'> Recover </a></p>
 
 
     </form>

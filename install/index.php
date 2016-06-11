@@ -46,7 +46,7 @@ include_once('installed.php');
     <td colspan='2'>
      <?php if (!empty($msg)):
 			echo $msg;
-			endif;		
+			endif;
 		?>
     </td>
   </tr>
@@ -60,17 +60,17 @@ include_once('installed.php');
   <tr>
     <td>  <i class="fa fa-user" style="color:#ee3d43;"> </i> Host Username</td>
     <td><label for="user"></label>
-      <input type="text" placeholder="root" name="user" id="user"/></td>
+      <input type="text" placeholder="eg. root" name="user" id="user"/></td>
   </tr>
   <tr>
     <td>  <i class="fa fa-ellipsis-h" style="color:#ee3d43;"> </i> Host Password</td>
     <td><label for="pass"></label>
-      <input type="password" placeholder="password" name="pass" id="pass" /></td>
+      <input type="password" placeholder="eg. password" name="pass" id="pass" /></td>
   </tr>
   <tr>
     <td><i class="fa fa-database" style="color:#ee3d43;"> </i> Database Name</td>
     <td><label for="dbname"></label>
-      <input type="text" placeholder="Database1" name="dbname" id="dbname" /></td>
+      <input type="text" placeholder="eg. projectdb" name="dbname" id="dbname" /></td>
   </tr>
   <tr>
     <td><i class="fa fa-folder" style="color:#ee3d43;"> </i> Project Name</td>

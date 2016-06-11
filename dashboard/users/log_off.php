@@ -1,4 +1,4 @@
-<?php 
+<?php
 // directory separator
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
@@ -6,10 +6,11 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."app".DS."Autoloader.php");
 
 
-
+// Instantiate new Functions_user Object
 $usr = new Functions_User();
-$getuser = $usr->getUserRecords($_SESSION['user_id']);
-$usr->logoff($getuser[0]['id']);
+
+//Use object to get logoff method
+$usr->logoff();
 
 
 ?>
