@@ -1,6 +1,14 @@
-<?php 
-$CurrentPage = basename($_SERVER['SCRIPT_NAME']); 
+<?php
+$CurrentPage = basename($_SERVER['SCRIPT_NAME']);
 ?>
+<div class"related">
+
+  <div class="profile-pic">
+<?php echo $img->displayProfilePicture($_SESSION['user_id'],130,130);?>
+  </div>
+
+   </div>
+
 <div class="menu-mobile">
 <ul class="nav-mobile animated fadeInDown">
   <li><a href="<?php echo USER_URL;?>index" <?php if ($CurrentPage == 'index.php') {echo 'class="activated"';} ?>> <i class="fa fa-dashboard"></i> Dashboard</a></li>

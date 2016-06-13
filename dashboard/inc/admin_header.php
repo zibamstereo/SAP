@@ -6,8 +6,12 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  //require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."Autoloader.php");
   require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."app".DS."Autoloader.php");
 
-
+//Instantiate Functions_Admin Object
 $adm = new Functions_Admin();
+
+//Instantiate Functions_Image Object
+$img = new Functions_Image();
+
 $adm->checkAdminLogin('1');
 
  $getuser = $adm->getAdminRecords($_SESSION['user_id']);

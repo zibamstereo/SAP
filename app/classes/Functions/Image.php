@@ -96,7 +96,7 @@ Class Functions_Image extends Functions_Utility
     	public function createThumb($file, $ext, $width)
     	{
     		$im = '';
-    		$im = $his->openImage($file);
+    		$im = $this->openImage($file);
 
     		if (empty($im)) {
     			return false;
@@ -180,12 +180,13 @@ Class Functions_Image extends Functions_Utility
     	{
     		//upload your image and give it a random name so no conflicts occur
     		$rand = rand(1000,9000);
-    		$save_path = $path . $rand . $file;
+    		$save_path = $path . $rand ."_". $file;
 
     		//prep file for db and gd manipulation
     		$bad_char_arr = array(' ', '&', '(', ')', '*', '[', ']', '<', '>', '{', '}');
     		$replace_char_arr = array('-', '_', '', '', '', '', '', '', '', '', '');
-    		$save_path = str_replace($bad_char_arr, $replace_char_arr, $save_path);
+    		$db_data   = str_replace($bad_char_arr, $replace_char_arr, $save_path);
+    		$save_path = ROOT_PATH.DASHBOARD_DIR.DS.str_replace($bad_char_arr, $replace_char_arr, $save_path);
 
     		//move the temp file to the proper place
     		if (move_uploaded_file($tmpfile, $save_path)) {
@@ -198,10 +199,13 @@ Class Functions_Image extends Functions_Utility
     			$this->createThumb("$base_path" . "_thumb" . "." . "$ext", $ext, 150);
     			$this->createThumb("$base_path" . "." . "$ext", $ext, 640);
 
-    			//chmod("$base_path" . "_thumb" . "." . "$ext", 0644);
-    			//chmod("$base_path" . "." . "$ext", 0644);
-
-    			return $save_path;
+            //For Prod
+    		    //chmod("$base_path" . "_thumb" . "." . "$ext", 0644);
+    			  //chmod("$base_path" . "." . "$ext", 0644);
+    			  //For Dev
+            chmod("$base_path" . "_thumb" . "." . "$ext", 0777);
+    			  chmod("$base_path" . "." . "$ext", 0777);
+    			return $db_data;
     		}
     		unlink($tmpfile);
     		return false;
@@ -239,7 +243,7 @@ Class Functions_Image extends Functions_Utility
 
     			$save_thumb_path = "$base_path" . "_thumb" . "." . "$ext";
     			//Uncomment the "unlink($save_path);" if you don't want the original pictures to be uploaded but if you want both original and thumb pictures to be uploaded then comment it
-    			unlink($save_path);
+    			unlink(ROOT_PATH.DASHBOARD_DIR.DS.$save_path);
 
     			$sql = "UPDATE users SET thumb_path = '" . $save_thumb_path . "', img_path = '" . $save_path . "' WHERE id = '".$id."'";
     			$res = $this->processSql($sql);
@@ -282,8 +286,8 @@ Class Functions_Image extends Functions_Utility
     			$base = pathinfo($del, PATHINFO_FILENAME);
     			$base_path = "$dir/$base";
 
-    			unlink("$del");
-    			unlink("$base_path" . "_thumb" . "." . "$ext");
+    			@unlink(ROOT_PATH.DASHBOARD_DIR.DS."$del");
+    			@unlink(ROOT_PATH.DASHBOARD_DIR.DS."$base_path" . "_thumb" . "." . "$ext");
     		}
 
     		if (!empty($delg)) {
@@ -292,8 +296,8 @@ Class Functions_Image extends Functions_Utility
     			$baseg = pathinfo($delg, PATHINFO_FILENAME);
     			$gbase_path = "$dirg/$baseg";
 
-    			unlink("$delg");
-    			unlink("$gbase_path" . "." . "$extg");
+    			@unlink(ROOT_PATH.DASHBOARD_DIR.DS."$delg");
+    			@unlink(ROOT_PATH.DASHBOARD_DIR.DS."$gbase_path" . "." . "$extg");
     		}
 
     		$save_path = $this->moveUploadImage($path, $file, $tmpfile, $max, $id);
@@ -305,7 +309,7 @@ Class Functions_Image extends Functions_Utility
 
     			$save_thumb_path = "$base_path" . "_thumb" . "." . "$ext";
     			//Uncomment the "unlink($save_path);" if you don't want the original pictures to be uploaded but if you want both original and thumb pictures to be uploaded then comment it
-    			unlink($save_path);
+    			unlink(ROOT_PATH.DASHBOARD_DIR.DS.$save_path);
 
     			$sql = "UPDATE users SET thumb_path = '" . $save_thumb_path . "', img_path = '" . $save_path . "' WHERE id = '" . $id . "'";
     			$res = $this->processSql($sql);
@@ -354,28 +358,25 @@ Class Functions_Image extends Functions_Utility
     		if ($res){return 99;} else {return 1;}
     	}
 
-    	//----------Function for displaying user image on User Home Page----------
       /**
-       *	This function is used to display user image anywhere
+       *	This function displayProfilePicture is used to display user image anywhere
        *
        * @param 		$id	User Id of the user who owns the image
        * @param 		$w	The width size of the image
        * @param 		$h	The height size of the image
        * @return 		Shows image if successful
        */
-    public function displayUserImg($id,$w='', $h='')
+    public function displayProfilePicture($id,$w='', $h='')
     	{
     		$sql = "SELECT thumb_path FROM users WHERE id = '".$id."'";
     		$row = $this->fetchOne($sql);
     		$w = !empty($w) ? $w : 150;
     		$h = !empty($h) ? $h : 150;
     		if (!empty($row['thumb_path'])){
-    			//echo "<img class='pic' src='".$row['thumb_path']."' width=$w height=$h border='0' alt='' hspace='2' />";
-          return $this->addImg(USER_URL. "profile_pic/".$row["thumb_path"], $w, $h, '', '', '', '');
+          return $this->addFile('Img',DASHBOARD.$row["thumb_path"], $w, $h, '', '', '', '');
     			} else {
     			//display a default image if user image does not exist
-    			//echo "<img class='pic' src='../users/pics/no_image.jpg' width=$w height=$h border='0' alt='' hspace='2' />";
-          return $this->addImg(USER_URL. "profile_pic/no_image.jpg", $w, $h, '', '', '', '');
+          return $this->addFile('Img',USER_URL. "profile_pic/no_image.jpg", $w, $h, '', '', '', '');
     		}
     	}
 

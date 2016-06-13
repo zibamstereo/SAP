@@ -7,10 +7,10 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 //include DBFunc and config.php via Autoloader
  require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS."..".DS).DS."app".DS."Autoloader.php");
 
-//Instantiate Functions_User Object
-$usr = new Functions_User();
+//Instantiate Functions_Admin Object
+$adm = new Functions_Admin();
 
-$usr->checkUserLogin('9');
+$adm->checkAdminLogin('1');
 
     if (empty($_POST['oldpassword']))
 		{
@@ -33,7 +33,7 @@ $usr->checkUserLogin('9');
       die(msg(0,"Password do not match"));
     }
     else{
-		  $res = $usr->updatePass($_SESSION['user_id'], $_POST['oldpassword'], $_POST['newpassword']);
+		  $res = $adm->adminUpdatePass($_SESSION['user_id'], $_POST['oldpassword'], $_POST['newpassword']);
 
 			if($res == 2){
 				die(msg(0,"Incorrect current password!"));

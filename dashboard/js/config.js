@@ -1,2 +1,2 @@
 var host = window.location.origin + '/';
-var app_path = host + 'sap-git/';
+var app_path = host + '';

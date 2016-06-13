@@ -7,14 +7,14 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 //include DBFunc and config.php via Autoloader
  require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS."..".DS).DS."app".DS."Autoloader.php");
 
-//Instantiate Functions_User Object
-$usr = new Functions_User();
+//Instantiate Functions_Admin Object
+$adm = new Functions_Admin();
 
 
 //Instantiate Functions_Image Object
 $img = new Functions_Image();
 
-$usr->checkUserLogin('9');
+$adm->checkAdminLogin('1');
 /*
 $id = isset($_REQUEST['id']) && is_numeric($_REQUEST['id']) ? $usr->secureInput($_REQUEST['id']) : '';
 
@@ -34,7 +34,7 @@ $id = isset($_REQUEST['id']) && is_numeric($_REQUEST['id']) ? $usr->secureInput(
 ############ Configuration ##############
 $id = !empty($_POST['id']) ? $_POST['id'] :"";
 $max_image_size  = 	100000;
-$imgpth = "users/profile_pic/";
+$imgpth = "admin/profile_pic/";
 ############ Configuration ##############
 
   if (array_key_exists('uploadphoto', $_POST)) {

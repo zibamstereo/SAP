@@ -1,4 +1,4 @@
-<?php 
+<?php
 // directory separator
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
@@ -24,17 +24,6 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 	</section>
 
 				<button class="close-button"><i class="fa fa-close"></i></button>
-
-
-	<div class"related">
-
-		<div class="profile-pic ">
-
-		</div>
-
-
-		 </div>
-
 
 <?php
 // require vertical menu

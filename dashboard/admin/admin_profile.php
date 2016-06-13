@@ -3,7 +3,7 @@
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
 // require header
- require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."header.php");
+ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_header.php");
  $row = !empty($_POST) ? $_POST : $getuser[0];
 ?>
 <script type='text/javascript'>
@@ -35,7 +35,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 	<section  class="one-head ">
 
-	<span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><?php echo $usr->addImg('ajebo.png', 111, 50, 'Ajebo Market'); ?></span>
+	<span style="width:auto;float:left;border: 1px solid rgba(0, 0, 0, 0.01);"><?php echo $adm->addImg('ajebo.png', 111, 50, 'Ajebo Market'); ?></span>
 	<span style="width:auto;float:left;margin:0.7em 0 0 0.5em;"> <i class="fa fa-th"></i> SALES AGENT PLATFORM </span>
 
 
@@ -47,7 +47,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 <?php
 // require vertical menu
- require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."vmenu.php");
+ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.php");
 
 ?>
 
@@ -83,7 +83,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
   <div class="form">
     <div id='acc_msg'></div>
   <!-- This is registration form -->
-    <form id="editForm" class="address-form" action="<?php echo USER_URL; ?>process/edit_profile" method="POST">
+    <form id="editForm" class="address-form" action="<?php echo ADMIN_URL; ?>process/edit_profile" method="POST">
       <span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
       <select name="title">
       <option value="<?php echo @$row['title']; ?>"><?php echo @$row['title']; ?></option>
@@ -107,7 +107,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <input type="text" id="country" name="country" placeholder="Country"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
 -->
 
-    <input class="button" type="submit" name="update-profile" value="Update Profile"> <?php echo $usr->addImg('loading.gif','','','loading..','','acc_loading') ?>
+    <input class="button" type="submit" name="update-profile" value="Update Profile"> <?php echo $adm->addImg('loading.gif','','','loading..','','acc_loading') ?>
           </form>
       <!-- This is registration form -->
     </div>
@@ -124,7 +124,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
      <div class="form">
      <div id='pic_msg'></div>
   <!-- This is for for uploading image -->
-       <form id="user_image" class="address-form" enctype="multipart/form-data" action="<?php echo USER_URL; ?>process/process_photo" method="POST">
+       <form id="admin_image" class="address-form" enctype="multipart/form-data" action="<?php echo ADMIN_URL; ?>process/process_photo" method="POST">
 
           <input type="hidden" name="id" value="<?php echo $row['id'];?>" />
          <input type="file" name="picture" accept="image/*" id="file" size="30"/>
@@ -132,11 +132,11 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
        <?php if (empty($row['thumb_path'])):?>
          <input type="hidden" name="uploadphoto" value="1" />
        <input class="button" type="submit" name="upload-image" value="Upload Image">
-       <?php echo $usr->addImg('loading.gif','','','loading..','','pic_loading') ?>
+       <?php echo $adm->addImg('loading.gif','','','loading..','','pic_loading') ?>
      <?php else:?>
        <input type="hidden" name="updatephoto" value="1" />
        <input class="button" type="submit" name="update-image" value="Update Image">
-       <?php echo $usr->addImg('loading.gif','','','loading..','','pic_loading') ?>
+       <?php echo $adm->addImg('loading.gif','','','loading..','','pic_loading') ?>
      <?php endif;?>
 
        </form>
@@ -151,7 +151,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <div class="form">
     <div id='pwd_msg'></div>
   <!-- This is change password form -->
-      <form id="change_pass" class="address-form" action="<?php echo USER_URL; ?>process/change_pass" method="POST">
+      <form id="change_pass" class="address-form" action="<?php echo ADMIN_URL; ?>process/change_pass" method="POST">
 
     <input type="password" id="oldpassword" name="oldpassword" placeholder="Current Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
     <input type="password" id="newpassword" name="newpassword" placeholder="New Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
@@ -159,7 +159,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
       </br>
       <input class="button" type="submit" name="update-password" value="Update Password">
-      <?php echo $usr->addImg('loading.gif','','','loading..','','pwd_loading') ?>
+      <?php echo $adm->addImg('loading.gif','','','loading..','','pwd_loading') ?>
 
     </form>
 
@@ -176,6 +176,6 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <?php
 
 // require header
- require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."footer.php");
+ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_footer.php");
 
 ?>

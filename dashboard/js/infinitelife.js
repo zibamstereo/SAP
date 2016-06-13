@@ -5,11 +5,15 @@ var user_process_path = app_path + 'dashboard/users/process/';
 
 // ======================================= User Jquery Proceccing Sections=============================================
 	//login page redirection function after a successful registration
-
+/**
+ * Jquery function for redirecting to login_page after registration
+ */
 function login_page()
 {window.location = app_path + 'login';}
 
-
+/**
+ *  Jqeury function for login_page
+ */
 function login()
 {
 	hideshow('loading',1);
@@ -36,6 +40,9 @@ function login()
 
 }
 
+/**
+ *  Jqeury function for register
+ */
 function register()
 {
 	hideshow('loading',1);
@@ -74,6 +81,9 @@ function register()
 
 }
 
+/**
+ *  Jqeury function for password recovery
+ */
 function pass_recovery()
 {
 	hideshow('loading',1);
@@ -103,64 +113,103 @@ function pass_recovery()
 
 }
 
-
-function updatepass()
+/**
+ *  Jqeury function for editing user profile by users
+ */
+function editForm()
 {
-	hideshow('loading',1);
-
-	$.ajax({
-		type: "POST",
-		url: 	user_process_path + "change_pass",
-		data: $('#updatePass').serialize(),
-		dataType: "json",
-		success: function(msg){
-
-			if(parseInt(msg.status)==1)
-			{
-				//show the success message
-				$('#msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
-			}
-			else if(parseInt(msg.status)==0)
-			{
-				hideshow('msg',1);
-				$('#msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
-			}
-
-			hideshow('loading',0);
-		}
-	});
-
-}
-
-
-function editprofile()
-{
-	hideshow('loading',1);
+	hideshow('acc_loading',1);
 
 	$.ajax({
 		type: "POST",
 		url: 	user_process_path + "edit_profile",
-		data: $('#editProfile').serialize(),
+		data: $('#editForm').serialize(),
 		dataType: "json",
 		success: function(msg){
 
 			if(parseInt(msg.status)==1)
 			{
 				//show the success message
-				$('#msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+				$('#acc_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
 			}
 			else if(parseInt(msg.status)==0)
 			{
-				hideshow('msg',1);
-				$('#msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+				hideshow('acc_msg',1);
+				$('#acc_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
 			}
 
-			hideshow('loading',0);
+			hideshow('acc_loading',0);
 		}
 	});
 
 }
 
+/**
+ *  Jqeury function for modifying images from the user panel
+ */
+$(document).ready(function (e) {
+	$("#user_image").on('submit',(function(e) {
+		e.preventDefault();
+		$.ajax({
+      url: user_process_path + "process_photo",
+			type: "POST",
+			data:  new FormData(this),
+			dataType: "json",
+			contentType: false,
+    	cache: false,
+			processData:false,
+			success: function(msg){
+
+				if(parseInt(msg.status)==1)
+				{
+					//show the success message
+					$('#pic_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+				}
+				else if(parseInt(msg.status)==0)
+				{
+					hideshow('pic_msg',1);
+					$('#pic_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+				}
+
+				hideshow('pic_loading',0);
+			}
+	   });
+	}));
+});
+
+
+
+
+/**
+ *  Jqeury function for changing password from the user panel
+ */
+function change_pass()
+{
+	hideshow('pwd_loading',1);
+
+	$.ajax({
+		type: "POST",
+		url: 	user_process_path + "change_pass",
+		data: $('#change_pass').serialize(),
+		dataType: "json",
+		success: function(msg){
+
+			if(parseInt(msg.status)==1)
+			{
+				//show the success message
+				$('#pwd_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+			}
+			else if(parseInt(msg.status)==0)
+			{
+				hideshow('pwd_msg',1);
+				$('#pwd_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+			}
+
+			hideshow('pwd_loading',0);
+		}
+	});
+
+}
 
 /**
  *  @Description:  Function that allows Users and Moderator delete their Profile Picture
@@ -228,6 +277,103 @@ function adminLogin()
 
 }
 
+/**
+ *  Jqeury function for editing user profile by users
+ */
+function editForm()
+{
+	hideshow('acc_loading',1);
+
+	$.ajax({
+		type: "POST",
+		url: 	admin_process_path + "admin_edit_profile",
+		data: $('#editForm').serialize(),
+		dataType: "json",
+		success: function(msg){
+
+			if(parseInt(msg.status)==1)
+			{
+				//show the success message
+				$('#acc_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+			}
+			else if(parseInt(msg.status)==0)
+			{
+				hideshow('acc_msg',1);
+				$('#acc_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+			}
+
+			hideshow('acc_loading',0);
+		}
+	});
+
+}
+
+/**
+ *  Jqeury function for modifying images from the user panel
+ */
+$(document).ready(function (e) {
+	$("#admin_image").on('submit',(function(e) {
+		e.preventDefault();
+		$.ajax({
+      url: admin_process_path + "admin_process_photo",
+			type: "POST",
+			data:  new FormData(this),
+			dataType: "json",
+			contentType: false,
+    	cache: false,
+			processData:false,
+			success: function(msg){
+
+				if(parseInt(msg.status)==1)
+				{
+					//show the success message
+					$('#pic_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+				}
+				else if(parseInt(msg.status)==0)
+				{
+					hideshow('pic_msg',1);
+					$('#pic_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+				}
+
+				hideshow('pic_loading',0);
+			}
+	   });
+	}));
+});
+
+
+
+
+/**
+ *  Jqeury function for changing password from the user panel
+ */
+function change_pass()
+{
+	hideshow('pwd_loading',1);
+
+	$.ajax({
+		type: "POST",
+		url: 	admin_process_path + "admin_change_pass",
+		data: $('#change_pass').serialize(),
+		dataType: "json",
+		success: function(msg){
+
+			if(parseInt(msg.status)==1)
+			{
+				//show the success message
+				$('#pwd_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+			}
+			else if(parseInt(msg.status)==0)
+			{
+				hideshow('pwd_msg',1);
+				$('#pwd_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+			}
+
+			hideshow('pwd_loading',0);
+		}
+	});
+
+}
 
 
 // ======================================= Admin Jquery Proceccing Sections=============================================

@@ -3,11 +3,14 @@
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
 //include DBFunc and config.php via Autoloader
- //require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."Autoloader.php");
   require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."app".DS."Autoloader.php");
 
 //Instantiate Functions_User Object
 $usr = new Functions_User();
+
+//Instantiate Functions_Image Object
+$img = new Functions_Image();
+
 $usr->checkUserLogin('9');
 
  $getuser = $usr->getUserRecords($_SESSION['user_id']);

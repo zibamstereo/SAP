@@ -212,7 +212,7 @@ Class Functions_User extends Functions_Utility
      * @return 		Returns the random strings
      */
 	//public function editProfile($id,$title,$full_name,$dob,$gender,$address,$city,$state,$country,$phone,$level_access)
-	public function editProfile($id,$title,$full_name,$dob,$gender,$address,$city,$state,$country,$phone)
+	public function editProfile($id,$title,$full_name,$dob,$gender,$address,$phone)
 	{
 		$title = $this->secureInput($title);
 		$full_name = $this->secureInput($full_name);
@@ -548,7 +548,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 	 */
 		public function updatePass($id,$opass,$pass)
 		{
-			$id = $this->ecureInput($id);
+			$id = $this->secureInput($id);
 			$opass = $this->secureInput($opass);
 			$pass = $this->secureInput($pass);
 

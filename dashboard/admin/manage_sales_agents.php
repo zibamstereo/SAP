@@ -26,15 +26,6 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 				<button class="close-button"><i class="fa fa-close"></i></button>
 
 
-	<div class"related">
-
-		<div class="profile-pic ">
-
-		</div>
-
-
-		 </div>
-
 <?php
 // require vertical menu
 require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.php");

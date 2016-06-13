@@ -738,7 +738,8 @@ button:focus {
 	-moz-box-shadow:  0 10px 6px -6px rgba(0,0,0,0.001);
 	box-shadow:  0 10px 6px -6px rgba(0,0,0,0.001);
 	height:120px;
-	margin-bottom: 0.5em;
+	padding-top: 6em;
+	margin-bottom: 10em;
 	position:relative;
 	z-index: 9
 
