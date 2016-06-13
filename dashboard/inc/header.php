@@ -28,6 +28,7 @@ $usr->checkUserLogin('9');
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>";
         echo $usr->addJs('config'); // Add jquery
         echo $usr->addJs('jquery.min'); // Add jquery
+        echo $usr->addJs('index'); // Add Dika's Js script
         echo $usr->addCss('infinitelife'); // Add Infinitelife Css for this page
         echo $usr->addJs('infinitelife'); // Add Infinitelife Js for this page
         // Add Css files needed
