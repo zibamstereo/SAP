@@ -66,9 +66,64 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <section class="grid">
 
 
+<div class="show view_details">
 
 
-<div class="grid__info animated fadeInDown" id="edit">
+<div class="grid__info animated fadeInDown" id="view">
+
+	<h2 class="title title--preview"><i class="fa fa-cogs"></i> View Profile</h2>
+
+  <div class="form">
+    <div id='msg'></div>
+  <!-- This is registration form -->
+    <form id="regForm" class="address-form" action="<?php echo USER_URL; ?>process/register" method="POST">
+    <input type="text" id="full_name" name="full_name" placeholder="Full Name"/><span class="form-icon"> <i class="fa fa-user"> </i></span>
+    <textarea name="address" id="address" placeholder="Address"></textarea><span class="form-icon"> <i class="fa fa-map"> </i></span>
+    <input type="text" id="phone" name="phone" placeholder="Phone"/><span class="form-icon"> <i class="fa fa-tablet"> </i></span>
+    <input type="text" id="dob" name="dob" placeholder="Date of Birth"/><span class="form-icon"> <i class="fa fa-calendar"> </i></span>
+    <span class="form-icon"> <i class="fa fa-get-pocket"> </i></span> <select name="gender">
+    <option value="">Gender</option>
+  <option value="male"> Male</option>
+  <option value="female">Female</option>
+  </select>
+
+
+  <!-- Later things
+   <input type="text" id="city" name="city" placeholder="City"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
+    <input type="text" id="state" name="state" placeholder="State"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
+    <input type="text" id="country" name="country" placeholder="Country"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
+-->
+    <!--<div class="button" name="register" onClick="create_account();"> Register</div>-->
+          </form>
+      <!-- This is registration form -->
+    </div>
+<a href="javascript:void(0);" onclick="activate_edit();" class="button"> <i class="fa fa-cogs"></i> Edit Profile </a>
+</div>
+
+
+<div class="grid__info animated fadeInDown">
+
+     <h2 class="title title--preview"><i class="fa fa-cogs"></i> View Profile Pic</h2>
+
+     <div class="form">
+     <div id='msg'></div>
+
+
+
+     </div>
+
+  <br clear=all>
+</div>
+
+
+</div>
+
+
+<!-- Hidden Update Form -->
+
+<div class="hide update_details">
+
+<div class="grid__info animated fadeInDown">
 
 	<h2 class="title title--preview"><i class="fa fa-cogs"></i> Update Profile</h2>
 
@@ -94,9 +149,15 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 -->
 
     <input class="button" type='submit' name="update-profile" value="Update Profile"> <?php echo $utils->addImg('loading.gif','','','loading..','','loading') ?>
+
       <!--<div class="button" name="register" onClick="create_account();"> Register</div>-->
+
+      <br clear="all">
+      <a href="javascript:void(0);" onclick="activate_view();" class="toggle"> <i class="fa fa-eye"></i> view Profile</a>
+
           </form>
-      <!-- This is registration form -->
+
+
     </div>
 
 </div>
@@ -141,14 +202,10 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     </form>
 
       <!-- This is login form -->
-    </div>
-
-
+</div>
 </div>
 
-
-
-
+</div>
 
 <?php
 
@@ -156,3 +213,21 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."footer.php");
 
 ?>
+
+<script type="text/javascript">//<![CDATA[
+      Calendar.setup({
+		 //The id of the target input form
+        inputField : "f_date1",
+		//The id of the target trigger either a button or am image, it must not be the same as the input id
+        trigger    : "f_btn1",
+		//This is used to auto hide the calendar when the date is picked
+        onSelect   : function() { this.hide() },
+		//This tell whether to show time on the calender or not, values= true/false default   is "false" and if true the time format is 12/24 default is 24
+        showTime   : 12,
+		//This tells the format of date to input into the form, check demo/multiplefields.html for examples
+        dateFormat : "%A, %B %e, %Y",
+		//This shows the first day of the week where 0=Sunday and 1=Monay and 6=Saturday i.e 0-6 default=1
+		fdow : 0
+
+      });
+    //]]></script>
