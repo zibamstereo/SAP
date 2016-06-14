@@ -50,7 +50,7 @@ border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: center;
 border: 1px solid rgba(0, 0, 0, 0.05);
 }
-.form input{
+.form input, .form select{
    font-family: 'open_sanssemibold';
   outline: 0;
   background: #f9f9f9;
@@ -268,7 +268,7 @@ opacity: 0.1;
     background: #f8f8f8;
       margin:auto;
       height:auto !important;
-      overflow:hidden !important;
+      overflow-y:auto !important;
 
   }
 
@@ -293,7 +293,7 @@ padding: 3.5% 0 0 0;
     background: #f8f8f8;
       margin:auto;
       height:auto !important;
-      overflow:hidden !important;
+      overflow-y:auto !important;
 
   }
 
@@ -318,7 +318,7 @@ padding: 3.5% 0 0 0;
     background: #f8f8f8;
       margin:auto;
       height:auto !important;
-      overflow:hidden !important;
+      overflow-y:auto !important;
 
   }
 
@@ -343,7 +343,7 @@ padding: 3.5% 0 0 0;
     background: #f8f8f8;
       margin:auto;
       height:auto !important;
-      overflow:hidden !important;
+      overflow-y:auto !important;
 
   }
 
