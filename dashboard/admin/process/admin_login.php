@@ -8,7 +8,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  //require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS."..".DS).DS."Autoloader.php");
  require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS."..".DS).DS."app".DS."Autoloader.php");
 // Get the return URL
- $returnURL = (isset($_POST['returnurl']) && !empty($_POST['returnurl'])) ? $_POST['returnurl']: ADM_URL.'index';
+ $returnURL = (isset($_POST['returnurl']) && !empty($_POST['returnurl'])) ? $_POST['returnurl']: ADMIN_URL.'index';
 
 //Instantiate Functions_Admin Object
 $adm = new Functions_Admin();

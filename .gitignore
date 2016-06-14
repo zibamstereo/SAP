@@ -1,3 +1,5 @@
-dashboard/users/profile_pic
-dashboard/admin/profile_pic
-app/config/config.ini
+dashboard/users/profile_pic/
+dashboard/admin/profile_pic/
+*config.ini
+*config.js
+

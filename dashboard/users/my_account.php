@@ -232,22 +232,6 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 </div>
 
-<!-- The below javascript code must be placed above the Ending </body> tag-->
-   <script type="text/javascript">//<![CDATA[
-     Calendar.setup({
-       inputField : "dob", //The id of the target input form
-       trigger    : "dob",  //The id of the target trigger either a button or am image
-       onSelect   : function() { this.hide() }, //This is used to auto hide the calendar when the date is picked
-   //This tell whether to show time on the calender or not, values= true/false default is "false" and if true the time format is 12/24 default is 24
-       showTime   : 12,
-   //This tells the format of date to input into the form, check demo/multiplefields.html for examples
-       dateFormat : "%A, %B %e, %Y",
-   //This shows the first day of the week where 0=Sunday and 1=Monay and 6=Saturday i.e 0-6 default=1
-   fdow : 0
-
-     });
-   //]]>
-   </script>
 </div>
 
 <?php

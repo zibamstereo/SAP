@@ -3,7 +3,6 @@
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognising the seperator (/ or \) slash based on the system type if its windows linux or mac
 
 //include DBFunc and config.php via Autoloader
- //require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."Autoloader.php");
   require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."app".DS."Autoloader.php");
 
 //Instantiate Functions_Admin Object
@@ -12,9 +11,14 @@ $adm = new Functions_Admin();
 //Instantiate Functions_Image Object
 $img = new Functions_Image();
 
+
+//Instantiate Functions_Sitesettings Object
+$set = new Functions_Sitesettings();
+
+// Check if the user logged in is admin
 $adm->checkAdminLogin('1');
 
- $getuser = $adm->getAdminRecords($_SESSION['user_id']);
+$getuser = $adm->getAdminRecords($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -30,6 +34,7 @@ $adm->checkAdminLogin('1');
         echo $adm->addJs('config'); // Add jquery
         echo $adm->addJs('jquery.min'); // Add jquery
         echo $adm->addJs('index'); // Add Dika's Js script
+        echo $adm->addCss('index'); // Add css file for the index.php in the root folder
         echo $adm->addCss('infinitelife'); // Add Infinitelife Css for this page
         echo $adm->addJs('infinitelife'); // Add Infinitelife Js for this page
         // Add Css files needed

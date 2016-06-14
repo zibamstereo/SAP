@@ -78,7 +78,6 @@ $adm = new Functions_Admin();
       <input type="password" id="password_login" name="password" placeholder="Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
 
         </br>
-        <!--<button class="button" name="Login" onClick="login_user();"> LOGIN</button>-->
         <input class="button" type='submit' name="login" value="Login"> <?php echo $adm->addImg('loading.gif','','','loading..','','loading') ?>
         <p class="message">Forgot Your Password ? <i class="fa fa-chevron-circle-right"></i> <a href='pass_recovery'> Recover </a></p>
 
