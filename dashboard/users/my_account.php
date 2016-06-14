@@ -5,12 +5,19 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 // require header
  require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."header.php");
  $row = !empty($_POST) ? $_POST : $getuser[0];
+/**
+ * Add Jscal for purpose of date of birth input
+ */
+ echo $usr->addFile("Js",LIB_URL."jscal/js/jscal2.js");
+ echo $usr->addFile("Js",LIB_URL."jscal/js/lang/en.js");
+ echo $usr->addFile("Css",LIB_URL."jscal/css/jscal2.css");
+ echo $usr->addFile("C",LIB_URL."jscal/css/border-radius.css");
 ?>
 <script type='text/javascript'>
     $(document).ready(function(){
 
-      $('#editForm').submit(function(e) {
-        editForm();
+      $('#editUserForm').submit(function(e) {
+        editUserForm();
         e.preventDefault();
       });
     });
@@ -19,8 +26,8 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		$('#change_pass').submit(function(e) {
-			change_pass();
+		$('#changeUserPass').submit(function(e) {
+			changeUserPass();
 			e.preventDefault();
 		});
 	});
@@ -82,30 +89,15 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 	<h2 class="title title--preview"><i class="fa fa-cogs"></i> View Profile</h2>
 
   <div class="form">
-    <div id='msg'></div>
-  <!-- This is registration form -->
-    <form id="regForm" class="address-form" action="<?php echo USER_URL; ?>process/register" method="POST">
-    <input type="text" id="full_name" name="full_name" placeholder="Full Name"/><span class="form-icon"> <i class="fa fa-user"> </i></span>
-    <textarea name="address" id="address" placeholder="Address"></textarea><span class="form-icon"> <i class="fa fa-map"> </i></span>
-    <input type="text" id="phone" name="phone" placeholder="Phone"/><span class="form-icon"> <i class="fa fa-tablet"> </i></span>
-    <input type="text" id="dob" name="dob" placeholder="Date of Birth"/><span class="form-icon"> <i class="fa fa-calendar"> </i></span>
-    <span class="form-icon"> <i class="fa fa-get-pocket"> </i></span> <select name="gender">
-    <option value="">Gender</option>
-  <option value="male"> Male</option>
-  <option value="female">Female</option>
-  </select>
+    <input type="text" disabled value="<?php echo !empty($row['full_name']) && !empty($row['title']) ? $row['title']." ".$row['full_name'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-user"> </i></span>
+    <textarea disabled><?php echo !empty($row['address']) ? $row['address'] : 'NIL'; ?></textarea><span class="form-icon"> <i class="fa fa-map"> </i></span>
+    <input disabled type="text" value="<?php echo !empty($row['phone']) ? $row['phone'] : 'NIL'; ?>" /><span class="form-icon"> <i class="fa fa-tablet"> </i></span>
+    <input type="text" disabled value="<?php echo !empty($row['dob']) ? $row['dob'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-calendar"> </i></span>
+    <input type="text" disabled value="<?php echo !empty($row['gender']) ? $row['gender'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
 
 
-  <!-- Later things
-   <input type="text" id="city" name="city" placeholder="City"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
-    <input type="text" id="state" name="state" placeholder="State"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
-    <input type="text" id="country" name="country" placeholder="Country"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
--->
-    <!--<div class="button" name="register" onClick="create_account();"> Register</div>-->
-          </form>
-      <!-- This is registration form -->
     </div>
-<a href="javascript:void(0);" onclick="activate_edit();" class="button"> <i class="fa fa-cogs"></i> Edit Profile </a>
+<a href="javascript:void(0);" onclick="activate_edit();" class="toggle"> <i class="fa fa-cogs"></i> Edit Profile </a>
 </div>
 
 
@@ -114,9 +106,8 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
      <h2 class="title title--preview"><i class="fa fa-cogs"></i> View Profile Pic</h2>
 
      <div class="form">
-     <div id='msg'></div>
 
-
+<?php echo $img->displayProfilePicture($_SESSION['user_id'],130,130);?>
 
      </div>
 
@@ -138,7 +129,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
   <div class="form">
     <div id='acc_msg'></div>
   <!-- This is registration form -->
-    <form id="editForm" class="address-form" action="<?php echo USER_URL; ?>process/edit_profile" method="POST">
+    <form id="editUserForm" class="address-form" action="<?php echo USER_URL; ?>process/edit_profile" method="POST">
       <span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
       <select name="title">
       <option value="<?php echo @$row['title']; ?>"><?php echo @$row['title']; ?></option>
@@ -150,6 +141,16 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <textarea name="address" id="address" placeholder="Address"><?php echo @$row['address']; ?></textarea><span class="form-icon"> <i class="fa fa-map"> </i></span>
     <input type="text" id="phone" name="phone" placeholder="Phone" value="<?php echo @$row['phone']; ?>" /><span class="form-icon"> <i class="fa fa-tablet"> </i></span>
     <input type="text" id="dob" name="dob" placeholder="Date of Birth" value="<?php echo @$row['dob']; ?>" /><span class="form-icon"> <i class="fa fa-calendar"> </i></span>
+    <script type="text/javascript">
+                      Calendar.setup({
+                        inputField : "dob",
+                        trigger    : "dob",
+                        onSelect   : function() { this.hide() },
+                        dateFormat : "%A, %B %e, %Y",
+                        fdow : 0
+
+                      });
+              </script>
     <span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
     <select name="gender">
     <option value="<?php echo @$row['gender']; ?>"><?php echo @$row['gender']; ?></option>
@@ -162,7 +163,8 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <input type="text" id="country" name="country" placeholder="Country"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
 -->
 
-    <input class="button" type='submit' name="update-profile" value="Update Profile"> <?php echo $usr->addImg('loading.gif','','','loading..','','loading') ?>
+    <input class="button" type='submit' name="update-profile" value="Update Profile">
+    <?php echo $usr->addImg('loading.gif','','','loading..','','acc_loading') ?>
 
       <!--<div class="button" name="register" onClick="create_account();"> Register</div>-->
 
@@ -212,7 +214,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <div class="form">
     <div id='pwd_msg'></div>
   <!-- This is change password form -->
-      <form id="change_pass" class="address-form" action="<?php echo USER_URL; ?>process/change_pass" method="POST">
+      <form id="changeUserPass" class="address-form" action="<?php echo USER_URL; ?>process/change_pass" method="POST">
 
     <input type="password" id="oldpassword" name="oldpassword" placeholder="Current Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
     <input type="password" id="newpassword" name="newpassword" placeholder="New Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
@@ -230,6 +232,22 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 </div>
 
+<!-- The below javascript code must be placed above the Ending </body> tag-->
+   <script type="text/javascript">//<![CDATA[
+     Calendar.setup({
+       inputField : "dob", //The id of the target input form
+       trigger    : "dob",  //The id of the target trigger either a button or am image
+       onSelect   : function() { this.hide() }, //This is used to auto hide the calendar when the date is picked
+   //This tell whether to show time on the calender or not, values= true/false default is "false" and if true the time format is 12/24 default is 24
+       showTime   : 12,
+   //This tells the format of date to input into the form, check demo/multiplefields.html for examples
+       dateFormat : "%A, %B %e, %Y",
+   //This shows the first day of the week where 0=Sunday and 1=Monay and 6=Saturday i.e 0-6 default=1
+   fdow : 0
+
+     });
+   //]]>
+   </script>
 </div>
 
 <?php
@@ -238,21 +256,3 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."footer.php");
 
 ?>
-
-<script type="text/javascript">//<![CDATA[
-      Calendar.setup({
-		 //The id of the target input form
-        inputField : "f_date1",
-		//The id of the target trigger either a button or am image, it must not be the same as the input id
-        trigger    : "f_btn1",
-		//This is used to auto hide the calendar when the date is picked
-        onSelect   : function() { this.hide() },
-		//This tell whether to show time on the calender or not, values= true/false default   is "false" and if true the time format is 12/24 default is 24
-        showTime   : 12,
-		//This tells the format of date to input into the form, check demo/multiplefields.html for examples
-        dateFormat : "%A, %B %e, %Y",
-		//This shows the first day of the week where 0=Sunday and 1=Monay and 6=Saturday i.e 0-6 default=1
-		fdow : 0
-
-      });
-    //]]></script>

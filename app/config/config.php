@@ -117,6 +117,9 @@ defined("USER_URL") || define("USER_URL", DASHBOARD."users/");
 // Define ADMIN URL PATH
 defined("ADMIN_URL") || define("ADMIN_URL", DASHBOARD."admin/");
 
+// Define LIB URL PATH
+defined("LIB_URL") || define("LIB_URL", DASHBOARD."lib/");
+
 // ========================== OTHER CONFIGURATIONS============================================================
 
 

@@ -71,7 +71,7 @@ $adm = new Functions_Admin();
   <div class="form">
   <div id='msg'></div>
 <!-- This is login form -->
-    <form id="adminLogin" class="address-form" action="<?php echo ADM_URL; ?>process/admin_login" method="POST">
+    <form id="adminLogin" class="address-form" action="<?php echo ADMIN_URL; ?>process/admin_login" method="POST">
       <!--Call the $url variable -->
             <input  name='returnurl' type='hidden' value='<?php echo $url ;?>'/>
       <input type="text" id="email_login" name="email" placeholder="Email"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>

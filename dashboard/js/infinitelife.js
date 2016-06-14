@@ -116,14 +116,14 @@ function pass_recovery()
 /**
  *  Jqeury function for editing user profile by users
  */
-function editForm()
+function editUserForm()
 {
 	hideshow('acc_loading',1);
 
 	$.ajax({
 		type: "POST",
 		url: 	user_process_path + "edit_profile",
-		data: $('#editForm').serialize(),
+		data: $('#editUserForm').serialize(),
 		dataType: "json",
 		success: function(msg){
 
@@ -183,14 +183,14 @@ $(document).ready(function (e) {
 /**
  *  Jqeury function for changing password from the user panel
  */
-function change_pass()
+function changeUserPass()
 {
 	hideshow('pwd_loading',1);
 
 	$.ajax({
 		type: "POST",
 		url: 	user_process_path + "change_pass",
-		data: $('#change_pass').serialize(),
+		data: $('#changeUserPass').serialize(),
 		dataType: "json",
 		success: function(msg){
 
@@ -280,14 +280,14 @@ function adminLogin()
 /**
  *  Jqeury function for editing user profile by users
  */
-function editForm()
+function editAdminForm()
 {
 	hideshow('acc_loading',1);
 
 	$.ajax({
 		type: "POST",
 		url: 	admin_process_path + "admin_edit_profile",
-		data: $('#editForm').serialize(),
+		data: $('#editAdminForm').serialize(),
 		dataType: "json",
 		success: function(msg){
 
@@ -347,14 +347,14 @@ $(document).ready(function (e) {
 /**
  *  Jqeury function for changing password from the user panel
  */
-function change_pass()
+function changeAdminPass()
 {
 	hideshow('pwd_loading',1);
 
 	$.ajax({
 		type: "POST",
 		url: 	admin_process_path + "admin_change_pass",
-		data: $('#change_pass').serialize(),
+		data: $('#changeAdminPass').serialize(),
 		dataType: "json",
 		success: function(msg){
 

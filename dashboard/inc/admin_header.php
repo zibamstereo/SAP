@@ -29,6 +29,7 @@ $adm->checkAdminLogin('1');
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>";
         echo $adm->addJs('config'); // Add jquery
         echo $adm->addJs('jquery.min'); // Add jquery
+        echo $adm->addJs('index'); // Add Dika's Js script
         echo $adm->addCss('infinitelife'); // Add Infinitelife Css for this page
         echo $adm->addJs('infinitelife'); // Add Infinitelife Js for this page
         // Add Css files needed

@@ -5,12 +5,19 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 // require header
  require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_header.php");
  $row = !empty($_POST) ? $_POST : $getuser[0];
+ /**
+  * Add Jscal for purpose of date of birth input
+  */
+  echo $adm->addFile("Js",LIB_URL."jscal/js/jscal2.js");
+  echo $adm->addFile("Js",LIB_URL."jscal/js/lang/en.js");
+  echo $adm->addFile("Css",LIB_URL."jscal/css/jscal2.css");
+  echo $adm->addFile("C",LIB_URL."jscal/css/border-radius.css");
 ?>
 <script type='text/javascript'>
     $(document).ready(function(){
 
-      $('#editForm').submit(function(e) {
-        editForm();
+      $('#editAdminForm').submit(function(e) {
+        editAdminForm();
         e.preventDefault();
       });
     });
@@ -19,8 +26,8 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		$('#change_pass').submit(function(e) {
-			change_pass();
+		$('#changeAdminPass').submit(function(e) {
+			changeAdminPass();
 			e.preventDefault();
 		});
 	});
@@ -62,7 +69,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <div id="user_welcome" class="animated slideDown">
 
 <div class="icon">
-<i class="fa fa-user"></i> <h2 class="top-bar__headline"> My Account </h2>
+<i class="fa fa-user"></i> <h2 class="top-bar__headline"> Admin Account </h2>
 
 </div>
 </div>
@@ -74,16 +81,55 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <section class="grid">
 
 
+<div class="show view_details">
 
 
-<div class="grid__info animated fadeInDown" id="edit">
+<div class="grid__info animated fadeInDown" id="view">
+
+	<h2 class="title title--preview"><i class="fa fa-cogs"></i> View Profile</h2>
+
+  <div class="form">
+    <input type="text" disabled value="<?php echo !empty($row['full_name']) && !empty($row['title']) ? $row['title']." ".$row['full_name'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-user"> </i></span>
+    <textarea disabled><?php echo !empty($row['address']) ? $row['address'] : 'NIL'; ?></textarea><span class="form-icon"> <i class="fa fa-map"> </i></span>
+    <input disabled type="text" value="<?php echo !empty($row['phone']) ? $row['phone'] : 'NIL'; ?>" /><span class="form-icon"> <i class="fa fa-tablet"> </i></span>
+    <input type="text" disabled value="<?php echo !empty($row['dob']) ? $row['dob'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-calendar"> </i></span>
+    <input type="text" disabled value="<?php echo !empty($row['gender']) ? $row['gender'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
+
+
+    </div>
+<a href="javascript:void(0);" onclick="activate_edit();" class="toggle"> <i class="fa fa-cogs"></i> Edit Profile </a>
+</div>
+
+
+<div class="grid__info animated fadeInDown">
+
+     <h2 class="title title--preview"><i class="fa fa-cogs"></i> View Profile Pic</h2>
+
+     <div class="form">
+
+<?php echo $img->displayProfilePicture($_SESSION['user_id'],130,130);?>
+
+     </div>
+
+  <br clear=all>
+</div>
+
+
+</div>
+
+
+<!-- Hidden Update Form -->
+
+<div class="hide update_details">
+
+<div class="grid__info animated fadeInDown">
 
 	<h2 class="title title--preview"><i class="fa fa-cogs"></i> Update Profile</h2>
 
   <div class="form">
     <div id='acc_msg'></div>
-  <!-- This is registration form -->
-    <form id="editForm" class="address-form" action="<?php echo ADMIN_URL; ?>process/edit_profile" method="POST">
+  <!-- form for editing admin profile-->
+    <form id="editAdminForm" class="address-form" action="<?php echo ADMIN_URL; ?>process/edit_profile" method="POST">
       <span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
       <select name="title">
       <option value="<?php echo @$row['title']; ?>"><?php echo @$row['title']; ?></option>
@@ -95,6 +141,16 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <textarea name="address" id="address" placeholder="Address"><?php echo @$row['address']; ?></textarea><span class="form-icon"> <i class="fa fa-map"> </i></span>
     <input type="text" id="phone" name="phone" placeholder="Phone" value="<?php echo @$row['phone']; ?>" /><span class="form-icon"> <i class="fa fa-tablet"> </i></span>
     <input type="text" id="dob" name="dob" placeholder="Date of Birth" value="<?php echo @$row['dob']; ?>" /><span class="form-icon"> <i class="fa fa-calendar"> </i></span>
+    <script type="text/javascript">
+                      Calendar.setup({
+                        inputField : "dob",
+                        trigger    : "dob",
+                        onSelect   : function() { this.hide() },
+                        dateFormat : "%A, %B %e, %Y",
+                        fdow : 0
+
+                      });
+              </script>
     <span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
     <select name="gender">
     <option value="<?php echo @$row['gender']; ?>"><?php echo @$row['gender']; ?></option>
@@ -107,9 +163,15 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <input type="text" id="country" name="country" placeholder="Country"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
 -->
 
-    <input class="button" type="submit" name="update-profile" value="Update Profile"> <?php echo $adm->addImg('loading.gif','','','loading..','','acc_loading') ?>
+    <input class="button" type='submit' name="update-profile" value="Update Profile"> <?php echo $adm->addImg('loading.gif','','','loading..','','loading') ?>
+
+      <!--<div class="button" name="register" onClick="create_account();"> Register</div>-->
+
+      <br clear="all">
+      <a href="javascript:void(0);" onclick="activate_view();" class="toggle"> <i class="fa fa-eye"></i> view Profile</a>
           </form>
-      <!-- This is registration form -->
+
+
     </div>
 
 </div>
@@ -151,7 +213,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <div class="form">
     <div id='pwd_msg'></div>
   <!-- This is change password form -->
-      <form id="change_pass" class="address-form" action="<?php echo ADMIN_URL; ?>process/change_pass" method="POST">
+      <form id="changeAdminPass" class="address-form" action="<?php echo ADMIN_URL; ?>process/change_pass" method="POST">
 
     <input type="password" id="oldpassword" name="oldpassword" placeholder="Current Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
     <input type="password" id="newpassword" name="newpassword" placeholder="New Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
@@ -163,15 +225,13 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
     </form>
 
+
         <!-- This is change password form -->
     </div>
 
-
 </div>
 
-
-
-
+</div>
 
 <?php
 
