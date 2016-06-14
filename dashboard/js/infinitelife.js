@@ -376,6 +376,39 @@ function changeAdminPass()
 }
 
 
+
+/**
+ *  Jqeury function for changing password from the user panel
+ */
+function config()
+{
+	hideshow('pwd_loading',1);
+
+	$.ajax({
+		type: "POST",
+		url: 	admin_process_path + "configuration",
+		data: $('#config').serialize(),
+		dataType: "json",
+		success: function(msg){
+
+			if(parseInt(msg.status)==1)
+			{
+				//show the success message
+				$('#pwd_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+			}
+			else if(parseInt(msg.status)==0)
+			{
+				hideshow('pwd_msg',1);
+				$('#pwd_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+			}
+
+			hideshow('pwd_loading',0);
+		}
+	});
+
+}
+
+
 // ======================================= Admin Jquery Proceccing Sections=============================================
 
 
