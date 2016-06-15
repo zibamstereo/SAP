@@ -131,6 +131,7 @@ function editUserForm()
 			{
 				//show the success message
 				$('#acc_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+				
 			}
 			else if(parseInt(msg.status)==0)
 			{

@@ -45,7 +45,7 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.ph
 <div id="user_welcome" class="animated slideDown">
 
 <div class="icon">
-<i class="fa fa-dashboard"></i><h2 class="top-bar__headline"> | Manage Sales Agents</h2>
+<i class="fa fa-dashboard"></i><h2 class="top-bar__headline"> | Manage Orders</h2>
 </div>
 </div>
 
