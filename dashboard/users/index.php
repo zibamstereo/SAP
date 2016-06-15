@@ -57,7 +57,7 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."vmenu.php");
 
 
 <span class="grid__info animated fadeInDown">
-	<h2 class="title title--preview"><i class="fa fa-database"></i> Block 1</h2>
+
 	<span class="category"> <i class="fa fa-info"></i>
 Block Data will come here
     </span>
@@ -65,7 +65,7 @@ Block Data will come here
 
 
 <span class="grid__info animated fadeInDown">
-     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 2</h2>
+
 
 	 <span class="category"> <i class="fa fa-info"></i>
 	 Block Data will come here
@@ -74,7 +74,7 @@ Block Data will come here
 
 
 <span class="grid__item animated fadeInDown">
-	<h2 class="title title--preview"><i class="fa fa-database"></i> Block 3</h2>
+
 	<span class="category"> <i class="fa fa-info"></i>
 Block Data will come here
     </span>
@@ -82,7 +82,7 @@ Block Data will come here
 
 
 <span class="grid__item animated fadeInDown">
-     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 4</h2>
+
 
 	 <span class="category"> <i class="fa fa-info"></i>
 	 Block Data will come here
@@ -90,7 +90,7 @@ Block Data will come here
 </span>
 
 <span class="grid__item animated fadeInDown">
-     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 5</h2>
+
 
 	 <span class="category"> <i class="fa fa-info"></i>
 	 Block Data will come here
@@ -98,7 +98,7 @@ Block Data will come here
 </span>
 
 <span class="grid__item animated fadeInDown">
-     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 6</h2>
+
 
 	 <span class="category"> <i class="fa fa-info"></i>
 	 Block Data will come here
@@ -106,7 +106,7 @@ Block Data will come here
 </span>
 
 <span class="grid__action animated fadeInDown">
-     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 7</h2>
+
 
 	 <span class="category"> <i class="fa fa-info"></i>
 	 Block Data will come here
@@ -114,7 +114,7 @@ Block Data will come here
 </span>
 
 <span class="grid__setting animated fadeInDown">
-     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 8</h2>
+
 
 	 <span class="category"> <i class="fa fa-info"></i>
 	 Block Data will come here

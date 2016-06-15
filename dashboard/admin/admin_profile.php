@@ -69,7 +69,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <div id="user_welcome" class="animated slideDown">
 
 <div class="icon">
-<i class="fa fa-user"></i> <h2 class="top-bar__headline"> Admin Account </h2>
+<i class="fa fa-user"></i> <h2 class="top-bar__headline"> | Admin Account </h2>
 
 </div>
 </div>
@@ -86,7 +86,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 <div class="grid__info animated fadeInDown" id="view">
 
-	<h2 class="title title--preview"><i class="fa fa-cogs"></i> View Profile</h2>
+  <span class="category">  <i class="fa fa-eye"></i> View Profile </span>
 
   <div class="form">
     <input type="text" disabled value="<?php echo !empty($row['full_name']) && !empty($row['title']) ? $row['title']." ".$row['full_name'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-user"> </i></span>
@@ -94,14 +94,17 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <input disabled type="text" value="<?php echo !empty($row['phone']) ? $row['phone'] : 'NIL'; ?>" /><span class="form-icon"> <i class="fa fa-tablet"> </i></span>
     <input type="text" disabled value="<?php echo !empty($row['dob']) ? $row['dob'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-calendar"> </i></span>
     <input type="text" disabled value="<?php echo !empty($row['gender']) ? $row['gender'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
-<a href="javascript:void(0);" onclick="activate_edit();" class="toggle"> <i class="fa fa-cogs"></i> Edit Profile </a>
+
+
+    <a href="javascript:void(0);" onclick="activate_edit();" class="toggle"> <i class="fa fa-cogs"></i> Edit Profile </a>
+
     </div>
 </div>
 
 
 <div class="grid__info animated fadeInDown">
 
-     <h2 class="title title--preview"><i class="fa fa-cogs"></i> View Profile Pic</h2>
+<span class="category">  <i class="fa fa-eye"></i> View Profile Pic </span>
 
      <div class="form">
 
@@ -122,7 +125,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 <div class="grid__info animated fadeInDown">
 
-	<h2 class="title title--preview"><i class="fa fa-cogs"></i> Update Profile</h2>
+<span class="category">  <i class="fa fa-user"></i> Update Profile </span>
 
   <div class="form">
     <div id='acc_msg'></div>
@@ -176,11 +179,11 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 
 <div class="grid__info animated fadeInDown">
-    <?php if (empty($row['thumb_path'])):?>
-     <h2 class="title title--preview"><i class="fa fa-cogs"></i> Upload Profile Pic</h2>
-     <?php else:?>
-       <h2 class="title title--preview"><i class="fa fa-cogs"></i> Update Profile Pic</h2>
-      <?php endif;?>
+  <?php if (empty($row['thumb_path'])):?>
+<span class="category">  <i class="fa fa-image"></i> Upload Profile Pic </span>
+  <?php else:?>
+  <span class="category"> <i class="fa fa-image"></i> Update Profile Pic </span>
+  <?php endif;?>
      <div class="form">
      <div id='pic_msg'></div>
   <!-- This is for for uploading image -->
@@ -206,7 +209,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
     <br clear=all>
 
-    <h2 class="title title--preview"><i class="fa fa-cogs"></i> Update Password</h2>
+    <span class="category">  <i class="fa fa-cogs"></i> Update Password </span>
 
     <div class="form">
     <div id='pwd_msg'></div>

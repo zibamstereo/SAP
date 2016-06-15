@@ -648,6 +648,8 @@ button:focus {
 	font-family: 'open_sanssemibold';
 	text-align: center;
 	display: block;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 .title--preview,
@@ -699,6 +701,8 @@ button:focus {
 	height:120px;
 	padding-top: 6em;
 	margin-bottom: 10em;
+	margin-left:auto;
+	margin-right:auto;
 	position:relative;
 	z-index: 9
 

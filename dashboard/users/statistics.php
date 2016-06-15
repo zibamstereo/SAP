@@ -46,7 +46,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <div id="user_welcome" class="animated slideDown">
 
 <div class="icon">
-<i class="fa fa-bar-chart"></i><h2 class="top-bar__headline"> Statistics</h2>
+<i class="fa fa-bar-chart"></i><h2 class="top-bar__headline">  | Statistics</h2>
 
 </div>
 </div>
@@ -59,7 +59,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 
 <span class="grid__info animated fadeInDown">
-	<h2 class="title title--preview"><i class="fa fa-database"></i> Block 1</h2>
+
 	<span class="category"> <i class="fa fa-info"></i>
 Block Data will come here
     </span>
@@ -67,7 +67,7 @@ Block Data will come here
 
 
 <span class="grid__info animated fadeInDown">
-     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 2</h2>
+
 
 	 <span class="category"> <i class="fa fa-info"></i>
 	 Block Data will come here
@@ -76,7 +76,7 @@ Block Data will come here
 
 
 <span class="grid__info animated fadeInDown">
-	<h2 class="title title--preview"><i class="fa fa-database"></i> Block 3</h2>
+
 	<span class="category"> <i class="fa fa-info"></i>
 Block Data will come here
     </span>
@@ -84,7 +84,7 @@ Block Data will come here
 
 
 <span class="grid__info animated fadeInDown">
-     <h2 class="title title--preview"><i class="fa fa-database"></i> Block 4</h2>
+
 
 	 <span class="category"> <i class="fa fa-info"></i>
 	 Block Data will come here
