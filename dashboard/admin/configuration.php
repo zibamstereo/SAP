@@ -5,37 +5,24 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 // require header
 require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_header.php");
 $row = !empty($_POST) ? $_POST : $getuser[0];
-/**
-* Add Jscal for purpose of date of birth input
-*/
-echo $adm->addFile("Js",LIB_URL."jscal/js/jscal2.js");
-echo $adm->addFile("Js",LIB_URL."jscal/js/lang/en.js");
-echo $adm->addFile("Css",LIB_URL."jscal/css/jscal2.css");
-echo $adm->addFile("C",LIB_URL."jscal/css/border-radius.css");
+
+//Instantiate Functions_SiteSettings Object
+$set = new Functions_Sitesettings();
+
+// Get thr site setting methods
+$config = $set->getSiteSettings();
 ?>
 <script type='text/javascript'>
-$(document).ready(function(){
+    $(document).ready(function(){
 
-  $('#editAdminForm').submit(function(e) {
-    editAdminForm();
-    e.preventDefault();
-  });
-});
-
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
-
-  $('#changeAdminPass').submit(function(e) {
-    changeAdminPass();
-    e.preventDefault();
-  });
-});
+      $('#config').submit(function(e) {
+        config();
+        e.preventDefault();
+      });
+    });
 
 </script>
 <body>
-
-
   <div class="container">
     <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
     <div id="theSidebar" class="sidebar">
@@ -82,31 +69,28 @@ $(document).ready(function(){
         <div class="grid animated fadeInDown">
           <div class="grid__setting animated fadeInDown" id="view">
             <div class="grid__50 animated fadeInDown" >
-
+              <div id='msg'></div>
               <div class="form">
-
-                <form id="regForm" class="address-form" action="<?php echo ADMIN_URL; ?>process/configuration" method="POST">
-                  <input type="text" id="site_name" name="site_name" placeholder="Website Name"/><span class="form-icon1"> <i class="fa fa-user"> </i></span>
-                  <input type="text" id="site_url" name="site_url" placeholder="Website URL"/><span class="form-icon1"> <i class="fa fa-user"> </i></span>
-                  <input type="text" id="site_name" name="site_name" placeholder="Website Name"/><span class="form-icon1"> <i class="fa fa-user"> </i></span>
-                  <input type="text" id="site_email" name="site_email" placeholder="Website Email"/><span class="form-icon1"> <i class="fa fa-envelope-o"> </i></span>
-                  <textarea name="site_email2" id="site_email2" placeholder="Website Email 2"></textarea><span class="form-icon1"> <i class="fa fa-envelope-o"> </i></span>
-
-
+                <form id="config" class="address-form" action="<?php echo ADMIN_URL; ?>process/configuration" method="POST">
+                  <input type="text" id="site_name" name="site_name" value="<?php echo !empty($config[0]['site_name']) ? $config[0]['site_name'] : "NIL" ?>"/><span class="form-icon1"> <i class="fa fa-user"> </i></span>
+                  <input type="text" id="site_url" name="site_url" value="<?php echo !empty($config[0]['site_url']) ? $config[0]['site_url'] : "NIL" ?>"/><span class="form-icon1"> <i class="fa fa-user"> </i></span>
+                  <textarea name="site_descr" id="site_descr"><?php echo !empty($config[0]['site_descr']) ? $config[0]['site_descr'] : "NIL" ?></textarea><span class="form-icon1"> <i class="fa fa-map"> </i></span>
+                  <textarea name="site_address" id="site_address"><?php echo !empty($config[0]['site_address']) ? $config[0]['site_address'] : "NIL" ?></textarea><span class="form-icon1"> <i class="fa fa-map"> </i></span>
                 </div>
               </div>
 
               <div class="grid__50 animated fadeInDown" id="view">
                 <div class="form">
 
-                  <textarea name="site_phone" id="site_phone" placeholder="Website Phone Contact"></textarea><span class="form-icon1"> <i class="fa fa-tablet"> </i></span>
-                  <textarea name="site_description" id="site_description" placeholder="Website Description"></textarea><span class="form-icon1"> <i class="fa fa-map"> </i></span>
-                  <textarea name="site_address" id="site_address" placeholder="Website Address"></textarea><span class="form-icon1"> <i class="fa fa-map"> </i></span>
-                  <input type="text" id="site_full_name" name="site_full_name" placeholder="Website Full Name"/><span class="form-icon1"> <i class="fa fa-user"> </i></span>
+                  <input type="text" id="admin_email" name="admin_email" value="<?php echo !empty($config[0]['admin_email']) ? $config[0]['admin_email'] : "NIL" ?>"/><span class="form-icon1"> <i class="fa fa-envelope-o"> </i></span>
+                  <input type="text" id="site_full_name" name="site_full_name" value="<?php echo !empty($config[0]['site_full_name']) ? $config[0]['site_full_name'] : "NIL" ?>"/><span class="form-icon1"> <i class="fa fa-user"> </i></span>
+                  <textarea name="site_emails" id="site_emails"><?php echo !empty($config[0]['site_emails']) ? $config[0]['site_emails'] : "NIL" ?></textarea><span class="form-icon1"> <i class="fa fa-envelope-o"> </i></span>
+                  <textarea name="site_phone" id="site_phone"><?php echo !empty($config[0]['site_phone']) ? $config[0]['site_phone'] : "NIL" ?></textarea><span class="form-icon1"> <i class="fa fa-tablet"> </i></span>
 
-
-                  <span class="form-icon1"> <i class="fa fa-get-pocket"> </i></span> <select name="Records">
-                    <option value="Records"> Records</option>
+                  <span class="form-icon1"> <i class="fa fa-get-pocket"> </i></span>
+                   <select name="records">
+                    <option value="<?php echo !empty($config[0]['records']) ? $config[0]['records'] : "NIL" ?>"><?php echo !empty($config[0]['records']) ? $config[0]['records'] : "NIL" ?></option>
+                    <option value="">----------</option>
                     <option value="5"> 5</option>
                     <option value="7"> 7</option>
                     <option value="10">10</option>
