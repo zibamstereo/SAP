@@ -94,10 +94,8 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <input disabled type="text" value="<?php echo !empty($row['phone']) ? $row['phone'] : 'NIL'; ?>" /><span class="form-icon"> <i class="fa fa-tablet"> </i></span>
     <input type="text" disabled value="<?php echo !empty($row['dob']) ? $row['dob'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-calendar"> </i></span>
     <input type="text" disabled value="<?php echo !empty($row['gender']) ? $row['gender'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
-
-
-    </div>
 <a href="javascript:void(0);" onclick="activate_edit();" class="toggle"> <i class="fa fa-cogs"></i> Edit Profile </a>
+    </div>
 </div>
 
 

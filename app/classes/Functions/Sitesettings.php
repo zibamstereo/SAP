@@ -32,7 +32,7 @@ Class Functions_Sitesettings extends Functions_Utility
 	 */
 	public function getSiteSettings()
 	{
-		$sql = "SELECT id,site_name,site_url,admin_email,site_full_name,site_descr,site_full_name,site_emails,site_phone,records,level_access FROM site_settings";
+		$sql = "SELECT * FROM configurations";
 		//return $this->fetch($sql);
 		$rows = $this->fetch($sql);
 		$c=0;
@@ -57,13 +57,13 @@ Class Functions_Sitesettings extends Functions_Utility
 		$records = $this->secureInput($records);
 		//$level_access = $this->secureInput($level_access);
 
-		$sql = "SELECT * FROM site_settings";
+		$sql = "SELECT * FROM configurations";
 		$numRows = $this->resultNum($sql);
 
 		if ($numRows == 0){
-		//	$sql = "INSERT INTO site_settings (site_name, site_url, admin_email, site_full_name, site_descr, site_full_name, site_emails, site_phone, records, level_access)
+		//	$sql = "INSERT INTO configurations (site_name, site_url, admin_email, site_full_name, site_descr, site_full_name, site_emails, site_phone, records, level_access)
 			//VALUES('".$site_name."', '".$site_url."', '".$admin_email."', '".$site_full_name."', '".$site_descr."', '".$site_full_name."', '".$site_emails."', '".$site_phone."', '".$records."', '".$level_access."')";
-			$sql = "INSERT INTO site_settings (site_name, site_url, admin_email, site_full_name, site_descr, site_full_name, site_emails, site_phone, records)
+			$sql = "INSERT INTO configurations (site_name, site_url, admin_email, site_full_name, site_descr, site_full_name, site_emails, site_phone, records)
 			VALUES('".$site_name."', '".$site_url."', '".$admin_email."', '".$site_full_name."', '".$site_descr."', '".$site_full_name."', '".$site_emails."', '".$site_phone."', '".$records."')";
 
       $res = $this->processSql($sql);
@@ -71,8 +71,8 @@ Class Functions_Sitesettings extends Functions_Utility
 			return 99;
 		}
 		if ($numRows > 0){
-			//$sql = "UPDATE site_settings SET site_name = '" . $site_name . "', site_url = '" . $site_url . "', admin_email = '" . $admin_email . "', site_full_name = '" . $site_full_name . "', site_descr = '" . $site_descr . "', site_full_name = '" . $site_full_name . "', site_emails = '" . $site_emails . "',site_phone = '" . $site_phone . "', records = '" . $records . "', level_access = '" . $level_access . "'";
-			$sql = "UPDATE site_settings SET site_name = '" . $site_name . "', site_url = '" . $site_url . "', admin_email = '" . $admin_email . "', site_full_name = '" . $site_full_name . "', site_descr = '" . $site_descr . "', site_full_name = '" . $site_full_name . "', site_emails = '" . $site_emails . "',site_phone = '" . $site_phone . "', records = '" . $records . "'";
+			//$sql = "UPDATE configurations SET site_name = '" . $site_name . "', site_url = '" . $site_url . "', admin_email = '" . $admin_email . "', site_full_name = '" . $site_full_name . "', site_descr = '" . $site_descr . "', site_full_name = '" . $site_full_name . "', site_emails = '" . $site_emails . "',site_phone = '" . $site_phone . "', records = '" . $records . "', level_access = '" . $level_access . "'";
+			$sql = "UPDATE configurations SET site_name = '" . $site_name . "', site_url = '" . $site_url . "', admin_email = '" . $admin_email . "', site_full_name = '" . $site_full_name . "', site_descr = '" . $site_descr . "', site_full_name = '" . $site_full_name . "', site_emails = '" . $site_emails . "',site_phone = '" . $site_phone . "', records = '" . $records . "'";
 			$res = $this->processSql($sql);
 			if(!$res) return 1;
 			return 99;

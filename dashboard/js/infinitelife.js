@@ -382,7 +382,7 @@ function changeAdminPass()
  */
 function config()
 {
-	hideshow('pwd_loading',1);
+	hideshow('loading',1);
 
 	$.ajax({
 		type: "POST",
@@ -394,15 +394,15 @@ function config()
 			if(parseInt(msg.status)==1)
 			{
 				//show the success message
-				$('#pwd_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+				$('#msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
 			}
 			else if(parseInt(msg.status)==0)
 			{
-				hideshow('pwd_msg',1);
-				$('#pwd_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+				hideshow('msg',1);
+				$('#msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
 			}
 
-			hideshow('pwd_loading',0);
+			hideshow('loading',0);
 		}
 	});
 

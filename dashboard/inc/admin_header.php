@@ -18,7 +18,6 @@ $set = new Functions_Sitesettings();
 // Check if the user logged in is admin
 $adm->checkAdminLogin('1');
 
-// Get the Admin records
 $getuser = $adm->getAdminRecords($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
@@ -35,7 +34,6 @@ $getuser = $adm->getAdminRecords($_SESSION['user_id']);
         echo $adm->addJs('config'); // Add jquery
         echo $adm->addJs('jquery.min'); // Add jquery
         echo $adm->addJs('index'); // Add Dika's Js script
-        echo $adm->addCss('index'); // Add css file for the index.php in the root folder
         echo $adm->addCss('infinitelife'); // Add Infinitelife Css for this page
         echo $adm->addJs('infinitelife'); // Add Infinitelife Js for this page
         // Add Css files needed

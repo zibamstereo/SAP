@@ -6,15 +6,15 @@ SET time_zone = "+00:00";
 
 
 
-CREATE TABLE IF NOT EXISTS `site_settings` (
+CREATE TABLE IF NOT EXISTS `configurations` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `site_name` varchar(85) NOT NULL,
   `site_url` varchar(85) NOT NULL,
-  `site_email` varchar(85) NOT NULL,
-  `site_f_name` varchar(85) NOT NULL,
+  `admin_email` varchar(85) NOT NULL,
+  `site_full_name` varchar(85) NOT NULL,
   `site_descr` varchar(250) NOT NULL,
-  `site_r_add` varchar(250) NOT NULL,
-  `site_email2` varchar(250) NOT NULL,
+  `site_address` varchar(250) NOT NULL,
+  `site_emails` varchar(250) NOT NULL,
   `site_phone` varchar(250) NOT NULL,
   `records` int(2) NOT NULL,
   `level_access` varchar(5) NOT NULL,
@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
 
 
 
-INSERT INTO `site_settings` (`id`, `site_name`, `site_url`, `site_email`, `site_f_name`, `site_descr`, `site_r_add`, `site_email2`, `site_phone`, `records`, `level_access`) VALUES
-(1, 'AMI', 'www.ajebomrket.com', 'noreply@ajebomarket.com', 'Ajebo Market INC', 'This Site gives widows widgets free of charge', '777, you address street, City, Province/State, Country', 'email1@yourdomain.com, email2@yourdomain.com, email3@yourdomain.com, email4@yourdomain.com', '08065432345, 08076435443, 08065433235, 08024535443', 5, 'Yes');
+INSERT INTO `configurations` (`id`, `site_name`, `site_url`, `admin_email`, `site_full_name`, `site_descr`, `site_address`, `site_emails`, `site_phone`, `records`, `level_access`) VALUES
+(1, 'AML', 'www.ajebomrket.com', 'noreply@ajebomarket.com', 'Ajebo Market INC', 'This Site gives widows widgets free of charge', '777, you address street, City, Province/State, Country', 'email1@yourdomain.com, email2@yourdomain.com, email3@yourdomain.com, email4@yourdomain.com', '08065432345, 08076435443, 08065433235, 08024535443', 5, 'Yes');
 
 
 

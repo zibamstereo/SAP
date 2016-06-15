@@ -10,14 +10,15 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
  //Instantiate Db_DBFunc Object
 //$db = new Db_DBFunc();
 
-//Instantiate Functions_User  and Functions_SiteSettings Object
+//Instantiate Functions_User
 $usr = new Functions_User();
+
+//Instantiate Functions_SiteSettings Object
 $set = new Functions_Sitesettings();
 
-
 // Get thr site setting methods
-$sitesettings = $set->getSiteSettings();
-$site_url = $sitesettings[0]['site_url'];
+$config = $set->getSiteSettings();
+$site_url = $config[0]['site_url'];
 
 	$level = !empty($_POST['level_access']) ? $_POST['level_access'] : 9 ;
 	//For registration

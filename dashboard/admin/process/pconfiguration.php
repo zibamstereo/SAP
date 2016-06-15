@@ -20,6 +20,7 @@ $set = new Functions_Sitesettings();
 // we check if everything is filled in and perform checks
 
 	//$res = $set->updateSiteSet($_POST['site_name'], $_POST['site_url'], $_POST['admin_email'], $_POST['site_full_name'], $_POST['site_descr'], $_POST['site_address'], $_POST['site_emails'], $_POST['site_phone'], $_POST['records'], $_POST['level_access']);
+
   $res = $set->updateSiteSet($_POST['site_name'], $_POST['site_url'], $_POST['admin_email'], $_POST['site_full_name'], $_POST['site_descr'], $_POST['site_address'], $_POST['site_emails'], $_POST['site_phone'], $_POST['records']);
 
 		//if successful
