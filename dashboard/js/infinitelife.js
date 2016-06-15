@@ -11,6 +11,9 @@ var user_process_path = app_path + 'dashboard/users/process/';
 function login_page()
 {window.location = app_path + 'login';}
 
+function effect_update()
+{window.location = app_path + 'd';}
+
 /**
  *  Jqeury function for login_page
  */
@@ -131,7 +134,9 @@ function editUserForm()
 			{
 				//show the success message
 				$('#acc_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
-				
+					//Refresh Page to show users updated profile content
+				 window.setTimeout(function(){location.reload()},3000)
+
 			}
 			else if(parseInt(msg.status)==0)
 			{
@@ -296,6 +301,8 @@ function editAdminForm()
 			{
 				//show the success message
 				$('#acc_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+					//Refresh form to show users their updated profile
+				 window.setTimeout(function(){location.reload()},3000)
 			}
 			else if(parseInt(msg.status)==0)
 			{
