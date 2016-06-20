@@ -69,7 +69,7 @@ $(document).ready(function(){
           <div id="user_welcome" class="animated slideDown">
 
             <div class="icon">
-              <i class="fa fa-user"></i> <h2 class="top-bar__headline"> DASHBOARD | My Account </h2>
+              <i class="fa fa-user"></i> <h2 class="top-bar__headline"> Dashboard | My Account </h2>
 
             </div>
           </div>

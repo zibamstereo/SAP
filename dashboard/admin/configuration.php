@@ -6,6 +6,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_header.php");
 $row = !empty($_POST) ? $_POST : $getuser[0];
 
+
 //Instantiate Functions_SiteSettings Object
 $set = new Functions_Sitesettings();
 
@@ -27,7 +28,6 @@ $(document).ready(function() {
 
 
 	</script>
-        
 <script type='text/javascript'>
     $(document).ready(function(){
 
@@ -72,7 +72,7 @@ $(document).ready(function() {
           <div id="user_welcome" class="animated slideDown">
 
             <div class="icon">
-              <i class="fa fa-cogs"></i> <h2 class="top-bar__headline"> | Configuration </h2>
+              <i class="fa fa-cogs"></i> <h2 class="top-bar__headline"> Dashboard | Configuration </h2>
 
             </div>
           </div>
