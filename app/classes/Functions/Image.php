@@ -357,6 +357,26 @@ Class Functions_Image extends Functions_Utility
     		$res = $this->processSql($sql);
     		if ($res){return 99;} else {return 1;}
     	}
+        
+    /**
+     *  This method add image files in the pages
+     *  Just initiate the class $var = new Functions_Utility and echo $var->addImg('name_of_image.ext');
+     *  Its relative to images folder i.e if images/image_file.ext use $var->addJs('image_file.ext'); if images/ie/image_file.ext use $var->addJs('ie/image_file.ext');
+     *  Note that if the image file is not within the website images folder in the dashboadrd in the root, use $var->addFile('absolute_path_to_image_file.ext');
+     *
+     * @param       $imgName is the image name with extention inclusive
+     * @param       $w  its optional its for image's width
+     * @param       $h  its optional its for image's height
+     * @param       $alt  its optional its for image's alternative text
+     * @param       $title  its optional its for image's title
+     * @param       $id  its optional its for image's id
+     * @param       $class  its optional its for image's class
+     * @return      Returns the image full path
+     */
+    public function addImg($imgName, $w='', $h='', $alt='', $title='',$id='', $class='')
+    {
+        return "<img src='".IMG_URL.$imgName."' width='".$w."px' heigth='".$h."px' alt='".$alt."' title='".$title."' id='".$id."' class='".$class."'>";
+    }
 
       /**
        *	This function displayProfilePicture is used to display user image anywhere
@@ -370,7 +390,7 @@ Class Functions_Image extends Functions_Utility
     	{
     		$sql = "SELECT thumb_path FROM users WHERE id = '".$id."'";
     		$row = $this->fetchOne($sql);
-    		$w = !empty($w) ? $w : 150;
+    		$w = !empty($w) ? $w : "95%";
     		$h = !empty($h) ? $h : 150;
     		if (!empty($row['thumb_path'])){
           return $this->addFile('Img',DASHBOARD.$row["thumb_path"], $w, $h, '', '', '', '');

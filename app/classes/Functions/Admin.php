@@ -383,6 +383,41 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 			return 1;
 		} else return 2;
 	}
+        
+   /**
+   *  This method  adminShowUserStatus is used to display the active status of the user in the Admin Panel
+   *
+   * @param 		$id  user id of the user to be shown
+   * @return 		Return the text to display for each user status
+   */
+	public function adminShowUserActiveStatus($id)
+	{
+		$sql = "SELECT id,active FROM users WHERE id = '".$id."'";
+		$row = $this->fetchOne($sql);
+                if($row['active'] == 0){$active = "<span style='color:#f40000;'>Not Confirmed</span>";}
+		if($row['active'] == 1){$active = "<span style='color:#008040;'>Active</span>";}
+		if($row['active'] == 2){$active = "<span style='color:#DB7093;'>Suspended</span>";}
+                return $active;
+
+	}
+        
+        
+      /**
+   *  This method  adminShowUserOnlineStatus is used to display the online status of the user in the Admin Panel
+   *
+   * @param 		$id  user id of the user to be shown
+   * @return 		Return the text to display for each user status
+   */
+	public function adminShowUserOnlineStatus($id)
+	{
+		$sql = "SELECT id,online FROM users WHERE id = '".$id."'";
+		$row = $this->fetchOne($sql);
+                if($row['online'] == "ON"){$online = "<span style='color:#008040;'>Online</span>";}
+		if($row['online'] == "OFF" || $row['online'] == "0"){$online = "<span style='color:#B2BEB5;'>Offline</span>";}
+                return $online;
+
+	}
+
 
   /**
    *  This method  contactUs is used to recieve contact messages from the custmers

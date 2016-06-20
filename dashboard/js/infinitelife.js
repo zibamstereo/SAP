@@ -11,6 +11,9 @@ var user_process_path = app_path + 'dashboard/users/process/';
 function login_page()
 {window.location = app_path + 'login';}
 
+function effect_update()
+{window.location = app_path + 'd';}
+
 /**
  *  Jqeury function for login_page
  */
@@ -131,6 +134,9 @@ function editUserForm()
 			{
 				//show the success message
 				$('#acc_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+					//Refresh Page to show users updated profile content
+				 window.setTimeout(function(){location.reload()},3000)
+
 			}
 			else if(parseInt(msg.status)==0)
 			{
@@ -278,7 +284,7 @@ function adminLogin()
 }
 
 /**
- *  Jqeury function for editing user profile by users
+ *  Jqeury function for editing user profile by Admin profile
  */
 function editAdminForm()
 {
@@ -295,6 +301,8 @@ function editAdminForm()
 			{
 				//show the success message
 				$('#acc_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+					//Refresh form to show users their updated profile
+				 window.setTimeout(function(){location.reload()},3000)
 			}
 			else if(parseInt(msg.status)==0)
 			{
@@ -382,7 +390,7 @@ function changeAdminPass()
  */
 function config()
 {
-	hideshow('pwd_loading',1);
+	hideshow('loading',1);
 
 	$.ajax({
 		type: "POST",
@@ -394,20 +402,42 @@ function config()
 			if(parseInt(msg.status)==1)
 			{
 				//show the success message
-				$('#pwd_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+				$('#msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
 			}
 			else if(parseInt(msg.status)==0)
 			{
-				hideshow('pwd_msg',1);
-				$('#pwd_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+				hideshow('msg',1);
+				$('#msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
 			}
 
-			hideshow('pwd_loading',0);
+			hideshow('loading',0);
 		}
 	});
 
 }
 
+/* Function used in Admin configuration page to toggle between view and edit access control level */
+function view_acl()
+{
+$(".update_acl").fadeOut(1000);
+$(".update_acl").removeClass('show');
+$(".update_acl").addClass('hide');
+$(".view_acl").fadeIn(1100);
+$(".view_acl").removeClass('hide');
+$(".view_acl").addClass('show');
+}
+
+function edit_acl()
+{
+$(".view_acl").fadeOut(1000);
+$(".view_acl").removeClass('show');
+$(".view_acl").addClass('hide');
+$(".update_acl").fadeIn(1100);
+$(".update_acl").removeClass('hide');
+$(".update_acl").addClass('show');
+}
+
+/* Function used in Admin configuration page to toggle between view and edit access control level */
 
 // ======================================= Admin Jquery Proceccing Sections=============================================
 

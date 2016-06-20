@@ -121,8 +121,8 @@ Class Functions_User extends Functions_Utility
 		/*$sql = "INSERT INTO users (email,password,full_name,address,city,state,country,phone,active,level_access,act_key,reg_date)
 		VALUES ('".$email."','".$pass."','".$full_name."','".$address."','".$city."','".$state."','".$country."','".$phone."',0,'".$level_access."','".$activation_key."','".$reg_date."')"; */
 
-		$sql = "INSERT INTO users (email,password,full_name,address,phone,active,level_access,act_key,reg_date)
-		VALUES ('".$email."','".$pass."','".$full_name."','".$address."','".$phone."', 0,'".$level_access."','".$activation_key."','".$reg_date."')";
+		$sql = "INSERT INTO users (email,password,full_name,address,phone,active,level_access,act_key,reg_date,online)
+		VALUES ('".$email."','".$pass."','".$full_name."','".$address."','".$phone."', 0,'".$level_access."','".$activation_key."','".$reg_date."',0)";
 
 		$res = $this->processSql($sql);
 		if($res){
