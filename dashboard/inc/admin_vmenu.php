@@ -3,7 +3,7 @@
 	<div class"related">
 
 		<div class="profile-pic ">
-<?php echo $img->displayProfilePicture($_SESSION['user_id'],130,130);?>
+<?php echo $img->displayProfilePicture($_SESSION['user_id'],"60%",130);?>
 		</div>
 
 

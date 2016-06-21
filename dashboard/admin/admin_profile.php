@@ -108,7 +108,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
      <div class="form">
 
-<?php echo $img->displayProfilePicture($_SESSION['user_id'],130,130);?>
+<?php echo $img->displayProfilePicture($_SESSION['user_id'],"35%",130);?>
 
      </div>
 

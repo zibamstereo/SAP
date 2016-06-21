@@ -390,7 +390,7 @@ Class Functions_Image extends Functions_Utility
     	{
     		$sql = "SELECT thumb_path FROM users WHERE id = '".$id."'";
     		$row = $this->fetchOne($sql);
-    		$w = !empty($w) ? $w : 150;
+    		$w = !empty($w) ? $w : "95%";
     		$h = !empty($h) ? $h : 150;
     		if (!empty($row['thumb_path'])){
           return $this->addFile('Img',DASHBOARD.$row["thumb_path"], $w, $h, '', '', '', '');
