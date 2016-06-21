@@ -284,7 +284,7 @@ function adminLogin()
 }
 
 /**
- *  Jqeury function for editing user profile by users
+ *  Jqeury function for editing user profile by Admin profile
  */
 function editAdminForm()
 {
@@ -416,6 +416,28 @@ function config()
 
 }
 
+/* Function used in Admin configuration page to toggle between view and edit access control level */
+function view_acl()
+{
+$(".update_acl").fadeOut(1000);
+$(".update_acl").removeClass('show');
+$(".update_acl").addClass('hide');
+$(".view_acl").fadeIn(1100);
+$(".view_acl").removeClass('hide');
+$(".view_acl").addClass('show');
+}
+
+function edit_acl()
+{
+$(".view_acl").fadeOut(1000);
+$(".view_acl").removeClass('show');
+$(".view_acl").addClass('hide');
+$(".update_acl").fadeIn(1100);
+$(".update_acl").removeClass('hide');
+$(".update_acl").addClass('show');
+}
+
+/* Function used in Admin configuration page to toggle between view and edit access control level */
 
 // ======================================= Admin Jquery Proceccing Sections=============================================
 

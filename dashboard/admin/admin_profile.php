@@ -69,7 +69,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <div id="user_welcome" class="animated slideDown">
 
 <div class="icon">
-<i class="fa fa-user"></i> <h2 class="top-bar__headline"> | Admin Account </h2>
+<i class="fa fa-user"></i> <h2 class="top-bar__headline"> Dashboard | Admin Account </h2>
 
 </div>
 </div>

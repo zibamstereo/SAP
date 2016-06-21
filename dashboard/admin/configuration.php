@@ -6,12 +6,28 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_header.php");
 $row = !empty($_POST) ? $_POST : $getuser[0];
 
+
 //Instantiate Functions_SiteSettings Object
 $set = new Functions_Sitesettings();
 
 // Get thr site setting methods
 $config = $set->getSiteSettings();
+/**
+  * Add Datatbles to manage sales agents view
+  */
+  echo $adm->addFile("Css",LIB_URL."datatable/css/jquery.dataTables.min.css");
+  echo $adm->addFile("Js",LIB_URL."datatable/js/jquery.dataTables.min.js");
 ?>
+<script type="text/javascript" language="javascript" class="init">
+$(document).ready(function() {
+    var paginate = $('#acl').DataTable({
+        "lengthMenu": null,
+    });
+    paginate.fnSort([1,'asc']);
+} );
+
+
+	</script>
 <script type='text/javascript'>
     $(document).ready(function(){
 
@@ -56,7 +72,7 @@ $config = $set->getSiteSettings();
           <div id="user_welcome" class="animated slideDown">
 
             <div class="icon">
-              <i class="fa fa-cogs"></i> <h2 class="top-bar__headline"> | Configuration </h2>
+              <i class="fa fa-cogs"></i> <h2 class="top-bar__headline"> Dashboard | Configuration </h2>
 
             </div>
           </div>
@@ -100,7 +116,7 @@ $config = $set->getSiteSettings();
                     <option value="15"> 22</option>
                     <option value="17">25</option>
                   </select>
-                  <input class="button" type='submit' name="configuration" value="Configure"> <?php echo $adm->addImg('loading.gif','','','loading..','','loading') ?>
+                  <input class="button" type="submit" name="configuration" value="Configure"> <?php echo $adm->addImg('loading.gif','','','loading..','','loading') ?>
 
                  </form>
 
@@ -110,9 +126,39 @@ $config = $set->getSiteSettings();
     </div>
 
             </div>
-
+            
             <div class="grid__action animated fadeInDown" id="view">
-
+                 <div class="form">
+                     <p>This configuration grid shows the Access Level ranging from ACL 1 - Admin to ACL 9 - Sales Agent, Other access control level can also be configured as deem fit </p>
+                     
+                         <table id='acl' width="100%" border="0" class="cell-border hover">
+                        <thead>
+				<tr>
+			<th></th>
+			<td>Level Access Key</th>
+			<th>Level Access Name</th>
+                            </tr>
+			</thead>
+			
+                        <tbody>
+                    <?php
+                     $sql = "SELECT * FROM user_level_access WHERE level_access != ''";
+                     $result = $adm->fetch($sql);
+                     foreach ($result AS $row):
+                     $key = $row['level_access_id'];
+                     $access = !empty($row['level_access']) ? $row['level_access'] : 'N/A' ;
+                     ?>
+                     <tr>
+	<td><a ></a></td>
+    <td><?php echo $key; ?></td>
+    <td><?php echo $access; ?></td>
+  </tr>
+  <?php
+   endforeach;
+  ?>
+  </tbody>
+  </table>
+                 </div>
             </div>
 
 
