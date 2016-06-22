@@ -469,7 +469,7 @@ function adminChangeUserPass()
 			}
 		})
 		.done(function(data, textStatus, xhr){
-		console.log('data='+data); //to detect if there an error in the console
+		//console.log('data='+data); //to detect if there an error in the console
                     if($.trim(action)=='suspend'){
 			if($.trim(data)=='success')
 			{
