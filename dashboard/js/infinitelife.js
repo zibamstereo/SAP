@@ -284,7 +284,7 @@ function adminLogin()
 }
 
 /**
- *  Jqeury function for editing Admin profile by Admin 
+ *  Jqeury function for editing Admin profile by Admin
  */
 function editAdminForm()
 {
@@ -458,7 +458,7 @@ function adminChangeUserPass()
 	function admin_actions(event,id,action) {
 	event.preventDefault(); // Prevent from redirection very important
 			$.ajax({
-			type:"POST",	
+			type:"POST",
 			url: admin_process_path + "admin_actions",
 			data:{id:id,action:action},
 			dataType: "html",
@@ -469,7 +469,7 @@ function adminChangeUserPass()
 			}
 		})
 		.done(function(data, textStatus, xhr){
-		//console.log('data='+data); //to detect if there an error in the console
+		console.log('data='+data); //to detect if there an error in the console
                     if($.trim(action)=='suspend'){
 			if($.trim(data)=='success')
 			{
@@ -477,7 +477,7 @@ function adminChangeUserPass()
                             $('#real_status_'+id).fadeOut(500).remove();
                             $('#changed_status_'+id).css('display', 'compact').fadeIn('slow').html("<em><span style='color:#DB7093;'>Suspended</span></em>");
                             $('#real_action_'+id).fadeOut(500).remove();
-                            $('#changed_action_'+id).css('display', 'compact').fadeIn('slow').html("<a href='' onClick=\"admin_actions(event,"+id+",'unsuspend');\">Unsuspend</a>");
+                            $('#changed_action_'+id).css('display', 'compact').fadeIn('slow').html("<a title='Unsuspend User' href='' onClick=\"admin_actions(event,"+id+",'unsuspend');\"><i class='fa fa-dot-circle-o'></i></a>");
 			}
 			else if($.trim(data) == 'unknown error')
 			{
@@ -492,7 +492,7 @@ function adminChangeUserPass()
 				$('#action').addClass('error').html(data);
 			}
                     }
-                    
+
                     if($.trim(action)=='unsuspend'){
                         if($.trim(data)=='success')
 			{
@@ -500,7 +500,7 @@ function adminChangeUserPass()
                             $('#real_status_'+id).fadeOut(500).remove();
                             $('#changed_status_'+id).css('display', 'compact').fadeIn('slow').html("<em><span style='color:#008040;'>Active</span></em>");
                             $('#real_action_'+id).fadeOut(500).remove();
-                            $('#changed_action_'+id).css('display', 'compact').fadeIn('slow').html("<a href='' onClick=\"admin_actions(event,"+id+",'suspend');\">Suspend</a>");
+                            $('#changed_action_'+id).css('display', 'compact').fadeIn('slow').html("<a title='Suspend User' href='' onClick=\"admin_actions(event,"+id+",'suspend');\"><i class='fa fa-ban'></i></a>");
 			}
 			else if($.trim(data) == 'unknown error')
 			{
@@ -515,7 +515,7 @@ function adminChangeUserPass()
 				$('#action').addClass('error').html(data);
 			}
                     }
-                    
+
                     if($.trim(action)=='delete'){
                         if($.trim(data)=='success')
 			{

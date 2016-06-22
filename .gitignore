@@ -1,6 +1,6 @@
 /dashboard/users/profile_pic/
 /dashboard/admin/profile_pic/
-*config.ini
-*config.js
+/app/config/config.ini
+/dashboard/js/config.js
 
 /nbproject/private/

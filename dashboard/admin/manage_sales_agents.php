@@ -12,7 +12,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 ?>
 
 <script type="text/javascript" language="javascript" class="init">
- 
+
 $(document).ready(function() {
     var paginate = $('#manage_sales_agents').DataTable({
         "lengthMenu": [3,10, 25, 50, 100, 200],
@@ -73,7 +73,8 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.ph
 
     <span class="grid__info animated fadeInDown" style="width:100% ">
 
-    	<span class="category"> <i class="fa fa-info"></i>
+
+      <span>
             <!-- This table is meant for the action returned message -->
           <table width='100%' border='0'>
 	  <tr>
@@ -109,14 +110,14 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.ph
                                 <tbody>
    <?php
                 //Select all users and display paginated results
-		$sql = "SELECT * FROM users WHERE level_access != 1";  
+		$sql = "SELECT * FROM users WHERE level_access != 1";
                 // Fetch the array of the users selected
 		$results = $adm->fetch($sql);
                 foreach ($results as $res)
                 {
                     $id=$res['id'];
 	  ?>
-            
+
 					<tr class='user_<?php echo $res['id'];?>'>
 						<td><?php echo $res['title']." ".$res['full_name'];?></td>
 						<td><?php echo $res['email'];?></td>
@@ -128,20 +129,20 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.ph
                                                 </td>
 						<td><?php echo $adm->adminShowUserOnlineStatus($id);?></td>
                                                 <td>
-                                                  <a href='<?php echo ADMIN_URL."edit_user_profile?id=$id";?>'>View User</a> | 
-                                                  <?php echo "<a href='' onClick=\"admin_actions(event,".$id.",'delete');\">Delete User</a>"; ?> | 
-                                                  <div id='real_action_<?php echo $id;?>'>  
-                                                      <?php 
+                                                  <a title='View User' href='<?php echo ADMIN_URL."edit_user_profile?id=$id";?>'><i class="fa fa-eye"></i></a>
+                                                  <?php echo "<a title='Delete User' href='' onClick=\"admin_actions(event,".$id.",'delete');\"><i class='fa fa-times'></i></a>"; ?>
+                                                  <div id='real_action_<?php echo $id;?>' class="sule">
+                                                      <?php
 	  if($res['active']==0){
-	  echo "<a href='".APP_PATH."confirm_user_reg.php?activation_key=".$res['act_key']."&id=".$id."&level_access=".$res['level_access']."' target='_blank'>Activate</a>";
+	  echo "<a title='Confirm User' href='".APP_PATH."confirm_user_reg.php?activation_key=".$res['act_key']."&id=".$id."&level_access=".$res['level_access']."' target='_blank'><i class='fa fa-check-circle'></i></a>";
 	  }
       elseif($res['active']==1){
-	   echo "<a href='' onClick=\"admin_actions(event,".$id.",'suspend');\">Suspend</a>";
+	   echo "<a title='Suspend User' href='' onClick=\"admin_actions(event,".$id.",'suspend');\"><i class='fa fa-ban'></i></a>";
 	   }
 	  elseif($res['active']== 2){
-	   echo "<a href='' onClick=\"admin_actions(event,".$id.",'unsuspend');\">Unsuspend</a>";
-	   } 
-           ?></div><div style='display:none' id='changed_action_<?php echo $id;?>'></div>
+	   echo "<a title='Unsuspend User' href='' onClick=\"admin_actions(event,".$id.",'unsuspend');\"><i class='fa fa-dot-circle-o'></i></a>";
+	   }
+           ?></div><div class='sule' style='display:none' id='changed_action_<?php echo $id;?>'></div>
                                                 </td>
 					</tr>
          <?php
@@ -149,7 +150,7 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.ph
         ?>
              </tbody>
             </table>
-                
+
         </span>
     </span>
 

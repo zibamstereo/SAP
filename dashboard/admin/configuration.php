@@ -126,20 +126,20 @@ $(document).ready(function() {
     </div>
 
             </div>
-            
+
             <div class="grid__action animated fadeInDown" id="view">
                  <div class="form">
-                     <p>This configuration grid shows the Access Level ranging from ACL 1 - Admin to ACL 9 - Sales Agent, Other access control level can also be configured as deem fit </p>
-                     
-                         <table id='acl' width="100%" border="0" class="cell-border hover">
+                     <p style="font-size:0.9em;">This configuration grid shows the Access Level Control (ALC) ranging from Admin to ACL 9 - Sales Agent, Other access control level can also be configured as deem fit </p>
+
+                         <table id='acl' width="100%" border="0" class="cell-border hover" style="font-size:0.9em;">
                         <thead>
 				<tr>
-			<th></th>
+			<th>Edit</th>
 			<td>Level Access Key</th>
 			<th>Level Access Name</th>
                             </tr>
 			</thead>
-			
+
                         <tbody>
                     <?php
                      $sql = "SELECT * FROM user_level_access WHERE level_access != ''";
@@ -149,7 +149,7 @@ $(document).ready(function() {
                      $access = !empty($row['level_access']) ? $row['level_access'] : 'N/A' ;
                      ?>
                      <tr>
-	<td><a ></a></td>
+	  <td><a ><i style="color:#ee3d43;" class="fa fa-cog"></i></a></td>
     <td><?php echo $key; ?></td>
     <td><?php echo $access; ?></td>
   </tr>
@@ -158,8 +158,14 @@ $(document).ready(function() {
   ?>
   </tbody>
   </table>
-                 </div>
+  <br clear="all">
+  <i style="color:#ee3d43;" class="fa fa-plus-circle"></i> Add ALC
+
+   </div>
+
+
             </div>
+
 
 
           </div>
