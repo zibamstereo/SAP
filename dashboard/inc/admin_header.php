@@ -18,7 +18,8 @@ $set = new Functions_Sitesettings();
 // Check if the user logged in is admin
 $adm->checkAdminLogin('1');
 
-$getuser = $adm->getAdminRecords($_SESSION['user_id']);
+// Get admin informatoin
+$getAdmin = $adm->getAdminRecords($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">

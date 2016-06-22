@@ -43,7 +43,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <div id="user_welcome" class="animated slideDown">
 
 <div class="icon">
-<i class="fa fa-sitemap"></i><h2 class="top-bar__headline"> | Manage Customers</h2>
+<i class="fa fa-sitemap"></i><h2 class="top-bar__headline"> Dashboard | Manage Customers</h2>
 
 </div>
 </div>

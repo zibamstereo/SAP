@@ -139,8 +139,8 @@ class Functions_Utility extends Db_DBFunc
      *  Note that if the image file is not within the website images folder in the dashboadrd in the root, use $var->addFile('absolute_path_to_image_file.ext');
      *
      * @param       $imgName is the image name with extention inclusive
-     * @param       $w  its optional its for image's width
-     * @param       $h  its optional its for image's height
+     * @param       $w  its optional its for image's width. Note: Put in quote if % or px is used
+     * @param       $h  its optional its for image's height. Note: Put in quote if % or px is used
      * @param       $alt  its optional its for image's alternative text
      * @param       $title  its optional its for image's title
      * @param       $id  its optional its for image's id
@@ -149,7 +149,9 @@ class Functions_Utility extends Db_DBFunc
      */
     public function addImg($imgName, $w='', $h='', $alt='', $title='',$id='', $class='')
     {
-        return "<img src='".IMG_URL.$imgName."' width='".$w."px' heigth='".$h."px' alt='".$alt."' title='".$title."' id='".$id."' class='".$class."'>";
+        $w = preg_match("/px|%/", $w) ? $w : $w.'px';
+        $h = preg_match("/px|%/", $h) ? $h : $h.'px';
+        return "<img src='".IMG_URL.$imgName."' width='".$w."' heigth='".$h."' alt='".$alt."' title='".$title."' id='".$id."' class='".$class."'>";
     }
 
 
@@ -160,8 +162,8 @@ class Functions_Utility extends Db_DBFunc
      *
      * @param       $type is the type of file adding which are Img, Js, Css
      * @param       $fileName is the  path_to_file/file name with extention inclusive
-     * @param       $w  its optional its for image's width if the file is an image
-     * @param       $h  its optional its for image's height if the file is an image
+     * @param       $w  its optional its for image's width if the file is an image. Note: Put in quote if % or px is used
+     * @param       $h  its optional its for image's height if the file is an image. Note: Put in quote if % or px is used
      * @param       $alt  its optional its for image's alternative text if the file is an image
      * @param       $title  its optional its for image's title if the file is an image
      * @param       $id  its optional its for image's id if the file is an image
@@ -179,7 +181,9 @@ class Functions_Utility extends Db_DBFunc
         }
 
         if (strtoupper($type) === 'IMG' ){
-        return "<img src='".$fileName."' width='".$w."px' heigth='".$h."px' alt='".$alt."' title='".$title."' id='".$id."' class='".$class."'>";
+        $w = preg_match("/px|%/", $w) ? $w : $w.'px';
+        $h = preg_match("/px|%/", $h) ? $h : $h.'px';
+        return "<img src='".$fileName."' width='".$w."' heigth='".$h."' alt='".$alt."' title='".$title."' id='".$id."' class='".$class."'>";
         }
 
     }

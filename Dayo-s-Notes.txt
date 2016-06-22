@@ -76,3 +76,12 @@ Code 1115
 --  login.php
 --  pass_recovery.php
 --  register.php
+
+
+
+June 22 2016
+============
+Code 1116
+
+--	commence work on manage_sales_agent page 
+--	done with active, suspended, unsuspended, and so on

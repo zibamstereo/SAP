@@ -1,3 +1,25 @@
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+		text-align: left;
+		color:#343f4f;
+}
+td a{
+  color:#ee3d43 !important;
+  }
+
+.sule{
+  float:right;
+  margin-right:15%;
+  width:auto;
+}
+
+tr{
+		border: 1px solid rgba(0, 0, 0, 0.01);
+}
 
 .form {
 	position: relative;

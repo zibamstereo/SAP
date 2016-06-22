@@ -69,7 +69,7 @@ $(document).ready(function(){
           <div id="user_welcome" class="animated slideDown">
 
             <div class="icon">
-              <i class="fa fa-user"></i> <h2 class="top-bar__headline"> | My Account </h2>
+              <i class="fa fa-user"></i> <h2 class="top-bar__headline"> Dashboard | My Account </h2>
 
             </div>
           </div>
@@ -106,7 +106,7 @@ $(document).ready(function(){
 
             <div class="form">
 
-              <?php echo $img->displayProfilePicture($_SESSION['user_id'],130,130);?>
+              <?php echo $img->displayProfilePicture($_SESSION['user_id'],'35%',130);?>
 
             </div>
 

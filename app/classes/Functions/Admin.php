@@ -264,7 +264,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 		$uid = $this->secureInput($uid);
 		$pass = $this->secureInput($pass);
 
-    //Encrypt password for database
+                //Encrypt password for database
 		$salt1 = 's+(_a*';
 		$salt2 = '@-)(%#';
 		$new_password = md5($salt1.$pass.$salt2);
@@ -277,7 +277,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 
 
   /**
-     *  This method  adminEditUser is used to edit users in the Admin platform
+     *  This method  adminEditUserProfile is used to edit users in the Admin platform
      *
      * @param 		$title is the user's title to be edited eg. Mr, Mrs,
      * @param 		$dob is the user's date of birth
@@ -290,8 +290,8 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
      * @param 		$level_access the user's Access Level
      * @return 		Returns the random strings
      */
-  //public function editProfile($id,$title,$full_name,$dob,$gender,$address,$city,$state,$country,$phone,$level_access)
-  public function adminEditUser($id,$title,$full_name,$dob,$gender,$address,$city,$state,$country,$phone,$level_access)
+  //public function adminEditUser($id,$title,$full_name,$dob,$gender,$address,$city,$state,$country,$phone,$level_access)
+  public function adminEditUserProfile($id,$title,$full_name,$dob,$gender,$address,$phone)
   {
     $title = $this->secureInput($title);
     $full_name = $this->secureInput($full_name);
@@ -302,19 +302,18 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
     //$state = $this->secureInput($state);
     //$country = $this->secureInput($country);
     $phone = $this->secureInput($phone);
-    $level_access = $this->secureInput($level_access);
 
 //$sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name . "', dob = '" . $dob . "', gender = '" . $gender . "', address = '" . $address . "', city = '" . $city . "', state = '" . $state . "', country = '" . $country . "', phone = '" . $phone . "', level_access = '" . $level_access . "' WHERE id = '" . $id . "'";
 
-$sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name . "', dob = '" . $dob . "', gender = '" . $gender . "', address = '" . $address . "', phone = '" . $phone . "', level_access = '" . $level_access . "' WHERE id = '" . $id . "'";
+$sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name . "', dob = '" . $dob . "', gender = '" . $gender . "', address = '" . $address . "', phone = '" . $phone . "' WHERE id = '" . $id . "'";
 
       $res = $this->processSql($sql);
       if(!$res) return 4;
       return 99;
   }
 
-
-
+ 	
+  
   /**
    *  This method  adminDeleteUser is used to delete user by the Admin
    *
@@ -324,16 +323,14 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 	public function adminDeleteUser($id)
 	{
     $sql = "SELECT * FROM users WHERE id = '".$id."'";
-    $res = $this->processSql($sql);
+    $row = $this->fetchOne($sql);
 
-		if ($res){
-			// delete user photo first
-			$row = $this->fetchOne($res);
+		if ($row){
 
 			// Delete Profile Picure first
 			if (!empty($row["thumb_path"]))
 			{
-				unlink(USER_URL. "profile_pic/".$row["thumb_path"]);
+				unlink(DASHBOARD.$row["thumb_path"]);
 			}
 
 			// Then delete user from the database
@@ -383,6 +380,41 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 			return 1;
 		} else return 2;
 	}
+        
+   /**
+   *  This method  adminShowUserStatus is used to display the active status of the user in the Admin Panel
+   *
+   * @param 		$id  user id of the user to be shown
+   * @return 		Return the text to display for each user status
+   */
+	public function adminShowUserActiveStatus($id)
+	{
+		$sql = "SELECT id,active FROM users WHERE id = '".$id."'";
+		$row = $this->fetchOne($sql);
+                if($row['active'] == 0){$active = "<em><span style='color:#f40000;'>Not Confirmed</span></em>";}
+		if($row['active'] == 1){$active = "<em><span style='color:#008040;'>Active</span></em>";}
+		if($row['active'] == 2){$active = "<em><span style='color:#DB7093;'>Suspended</span></em>";}
+                return $active;
+
+	}
+        
+        
+      /**
+   *  This method  adminShowUserOnlineStatus is used to display the online status of the user in the Admin Panel
+   *
+   * @param 		$id  user id of the user to be shown
+   * @return 		Return the text to display for each user status
+   */
+	public function adminShowUserOnlineStatus($id)
+	{
+		$sql = "SELECT id,online FROM users WHERE id = '".$id."'";
+		$row = $this->fetchOne($sql);
+                if($row['online'] == "ON"){$online = "<span style='color:#008040;'>Online</span>";}
+		if($row['online'] == "OFF" || $row['online'] == "0"){$online = "<span style='color:#B2BEB5;'>Offline</span>";}
+                return $online;
+
+	}
+
 
   /**
    *  This method  contactUs is used to recieve contact messages from the custmers
