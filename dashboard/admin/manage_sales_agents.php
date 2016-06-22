@@ -7,18 +7,19 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 /**
   * Add Datatbles to manage sales agents view
   */
-  echo $adm->addFile("Css",LIB_URL."datatable/css/jquery.dataTables.min.css");
-  echo $adm->addFile("Js",LIB_URL."datatable/js/jquery.dataTables.min.js");
+    echo $adm->addFile("Css",LIB_URL."datatable/css/jquery.dataTables.min.css");
+    echo $adm->addFile("Js",LIB_URL."datatable/js/jquery.dataTables.min.js");
 ?>
+
 <script type="text/javascript" language="javascript" class="init">
+ 
 $(document).ready(function() {
     var paginate = $('#manage_sales_agents').DataTable({
         "lengthMenu": [3,10, 25, 50, 100, 200],
         "processing": true
     });
-    paginate.fnSort([1,'asc']);
+   // paginate.fnSort([1,'asc']);
 } );
-
 
 	</script>
 
@@ -73,6 +74,13 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.ph
     <span class="grid__info animated fadeInDown" style="width:100% ">
 
     	<span class="category"> <i class="fa fa-info"></i>
+            <!-- This table is meant for the action returned message -->
+          <table width='100%' border='0'>
+	  <tr>
+		<td><div id='action'></div></td>
+	  </tr>
+	</table>
+            <!-- This table is meant for the action returned message -->
             <table id="manage_sales_agents" class="display cell-border hover" cellspacing="0" width="100%">
 				<thead>
 					<tr>
@@ -80,7 +88,7 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.ph
 						<th>Email</th>
 						<th>Phone No</th>
 						<th>Address</th>
-						<th>Start date</th>
+						<th>Registration Date</th>
 						<th>User Status</th>
 						<th>Online Status</th>
 						<th>Admin Actions</th>
@@ -92,7 +100,7 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.ph
 						<th>Email</th>
 						<th>Phone No</th>
 						<th>Address</th>
-						<th>Registration date</th>
+						<th>Registration Date</th>
 						<th>User Status</th>
 						<th>Online Status</th>
 						<th>Admin Actions</th>
@@ -106,17 +114,35 @@ require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_vmenu.ph
 		$results = $adm->fetch($sql);
                 foreach ($results as $res)
                 {
+                    $id=$res['id'];
 	  ?>
             
-					<tr>
+					<tr class='user_<?php echo $res['id'];?>'>
 						<td><?php echo $res['title']." ".$res['full_name'];?></td>
 						<td><?php echo $res['email'];?></td>
 						<td><?php echo $res['phone'];?></td>
 						<td><?php echo $res['dob'];?></td>
 						<td><?php echo $res['reg_date'];?></td>
-						<td><?php echo $adm->adminShowUserActiveStatus($res['id']);?></td>
-						<td><?php echo $adm->adminShowUserOnlineStatus($res['id']);?></td>
-						<td><?php //echo $res['salary'];?></td>
+                                                <td> <div id='real_status_<?php echo $id;?>'><?php echo $adm->adminShowUserActiveStatus($id);?></div>
+                                                <div style='display:none' id='changed_status_<?php echo $id;?>'></div>
+                                                </td>
+						<td><?php echo $adm->adminShowUserOnlineStatus($id);?></td>
+                                                <td>
+                                                  <a href='<?php echo ADMIN_URL."edit_user_profile?id=$id";?>'>View User</a> | 
+                                                  <?php echo "<a href='' onClick=\"admin_actions(event,".$id.",'delete');\">Delete User</a>"; ?> | 
+                                                  <div id='real_action_<?php echo $id;?>'>  
+                                                      <?php 
+	  if($res['active']==0){
+	  echo "<a href='".APP_PATH."confirm_user_reg.php?activation_key=".$res['act_key']."&id=".$id."&level_access=".$res['level_access']."' target='_blank'>Activate</a>";
+	  }
+      elseif($res['active']==1){
+	   echo "<a href='' onClick=\"admin_actions(event,".$id.",'suspend');\">Suspend</a>";
+	   }
+	  elseif($res['active']== 2){
+	   echo "<a href='' onClick=\"admin_actions(event,".$id.",'unsuspend');\">Unsuspend</a>";
+	   } 
+           ?></div><div style='display:none' id='changed_action_<?php echo $id;?>'></div>
+                                                </td>
 					</tr>
          <?php
                 }

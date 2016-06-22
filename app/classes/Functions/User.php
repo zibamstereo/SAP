@@ -264,7 +264,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 		{
 			$row = $this->fetchOne($query);
 			if ($row['active'] == 1 ) {
-				$this->set_login_sessions ( $row['id'], $row['password'] ? TRUE : FALSE );
+				$this->setLoginSessions ( $row['id'], $row['password'] ? TRUE : FALSE );
 				if ($row['level_access'] != 1)  {
 				$update = $this->processSql('UPDATE users SET last_login = "'.$lastLogin.'",online = "'.$online.'" WHERE id = "'.$row['id'].'"');
 					return 99;
@@ -284,7 +284,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
      * @param 		$pass	The password the user
      * @return 		It redirects to the dashboard
 	 */
-	public function set_login_sessions ( $userId, $pass )
+	public function setLoginSessions ( $userId, $pass )
 	{
 		//start the session
 		session_start();
@@ -307,7 +307,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
      * @return 		returns the level access
 	 */
 
-	public function get_level_access ($userId)
+	public function getAccessLevel ($userId)
 	{
 		$query = "SELECT `level_access` FROM `users` WHERE `id` = '" . 	$this->quote($userId) . "'";
 		if ( $this->resultNum($query) == 1 )
@@ -345,7 +345,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 					$_SESSION['logged_in'] = TRUE;
 
 					//now we check the level access, we might not have the permission
-					if ( in_array ( $this->get_level_access( $_SESSION['user_id'] ), $kt ) ) {
+					if ( in_array ( $this->getAccessLevel( $_SESSION['user_id'] ), $kt ) ) {
 						//we do?! horray!
 						$access = TRUE;
 					}
@@ -355,7 +355,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 		else {
 			$access = FALSE;
 
-			if ( in_array ( $this->get_level_access($_SESSION['user_id']), $kt ) ) {
+			if ( in_array ( $this->getAccessLevel($_SESSION['user_id']), $kt ) ) {
 				$access = TRUE;
 			}
 		}
@@ -379,7 +379,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 	public function getUserRecords($id)
 	{
 
-		$sql = "SELECT * FROM users WHERE id = '". $id . "'";
+		$sql = "SELECT * FROM users WHERE id = '". $id . "' AND level_access != 1";
 		//return $this->fetch($sql);
 		$rows = $this->fetch($sql);
 		$c=0;

@@ -284,7 +284,7 @@ function adminLogin()
 }
 
 /**
- *  Jqeury function for editing user profile by Admin profile
+ *  Jqeury function for editing Admin profile by Admin 
  */
 function editAdminForm()
 {
@@ -317,18 +317,18 @@ function editAdminForm()
 }
 
 /**
- *  Jqeury function for modifying images from the user panel
+ *  Jqeury function for modifying Admin profile picture from the admin panel
  */
 $(document).ready(function (e) {
 	$("#admin_image").on('submit',(function(e) {
 		e.preventDefault();
 		$.ajax({
-      url: admin_process_path + "admin_process_photo",
+                        url: admin_process_path + "admin_process_photo",
 			type: "POST",
 			data:  new FormData(this),
 			dataType: "json",
 			contentType: false,
-    	cache: false,
+                        cache: false,
 			processData:false,
 			success: function(msg){
 
@@ -353,7 +353,7 @@ $(document).ready(function (e) {
 
 
 /**
- *  Jqeury function for changing password from the user panel
+ *  Jqeury function for changing Admin password from the Admin panel
  */
 function changeAdminPass()
 {
@@ -384,9 +384,172 @@ function changeAdminPass()
 }
 
 
+/**
+ *  Jqeury function for editing user profile by Admin profile
+ */
+function adminEditUserProfile()
+{
+	hideshow('acc_loading',1);
+
+	$.ajax({
+		type: "POST",
+		url: 	admin_process_path + "admin_edit_user_profile",
+		data: $('#adminEditUserProfile').serialize(),
+		dataType: "json",
+		success: function(msg){
+
+			if(parseInt(msg.status)==1)
+			{
+				//show the success message
+				$('#acc_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+					//Refresh form to show users their updated profile
+				 window.setTimeout(function(){location.reload()},3000)
+			}
+			else if(parseInt(msg.status)==0)
+			{
+				hideshow('acc_msg',1);
+				$('#acc_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+			}
+
+			hideshow('acc_loading',0);
+		}
+	});
+
+}
+
+
+
 
 /**
- *  Jqeury function for changing password from the user panel
+ *  Jqeury function for changing User password from the Admin panel
+ */
+function adminChangeUserPass()
+{
+	hideshow('pwd_loading',1);
+
+	$.ajax({
+		type: "POST",
+		url:  admin_process_path + "admin_change_user_pass",
+		data: $('#adminChangeUserPass').serialize(),
+		dataType: "json",
+		success: function(msg){
+
+			if(parseInt(msg.status)==1)
+			{
+				//show the success message
+				$('#pwd_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+			}
+			else if(parseInt(msg.status)==0)
+			{
+				hideshow('pwd_msg',1);
+				$('#pwd_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+			}
+
+			hideshow('pwd_loading',0);
+		}
+	});
+
+}
+
+/**
+ *  @Description:  Function Admin actions over the users
+*/
+
+	function admin_actions(event,id,action) {
+	event.preventDefault(); // Prevent from redirection very important
+			$.ajax({
+			type:"POST",	
+			url: admin_process_path + "admin_actions",
+			data:{id:id,action:action},
+			dataType: "html",
+			cache: false,
+			async: true,
+			beforeSend: function () {
+				//$('#loading_'+id).show();
+			}
+		})
+		.done(function(data, textStatus, xhr){
+		console.log('data='+data); //to detect if there an error in the console
+                    if($.trim(action)=='suspend'){
+			if($.trim(data)=='success')
+			{
+                            $('#action').addClass('done').html("User Suspended Successfully.").fadeIn('slow').delay(2000).fadeOut();
+                            $('#real_status_'+id).fadeOut(500).remove();
+                            $('#changed_status_'+id).css('display', 'compact').fadeIn('slow').html("<em><span style='color:#DB7093;'>Suspended</span></em>");
+                            $('#real_action_'+id).fadeOut(500).remove();
+                            $('#changed_action_'+id).css('display', 'compact').fadeIn('slow').html("<a href='' onClick=\"admin_actions(event,"+id+",'unsuspend');\">Unsuspend</a>");
+			}
+			else if($.trim(data) == 'unknown error')
+			{
+				$('#action').addClass('error').html("An error occured while attempting to suspend user. Please try again.").fadeIn('slow').delay(2000).fadeOut();
+			}
+			else if($.trim(data) == 'no user')
+			{
+				$('#action').addClass('error').html("An error occured selecting user to suspend.").fadeIn('slow').delay(2000).fadeOut();
+			}
+			else
+			{
+				$('#action').addClass('error').html(data);
+			}
+                    }
+                    
+                    if($.trim(action)=='unsuspend'){
+                        if($.trim(data)=='success')
+			{
+                            $('#action').addClass('done').html("User Unsuspended Successfully.").fadeIn('slow').delay(2000).fadeOut();
+                            $('#real_status_'+id).fadeOut(500).remove();
+                            $('#changed_status_'+id).css('display', 'compact').fadeIn('slow').html("<em><span style='color:#008040;'>Active</span></em>");
+                            $('#real_action_'+id).fadeOut(500).remove();
+                            $('#changed_action_'+id).css('display', 'compact').fadeIn('slow').html("<a href='' onClick=\"admin_actions(event,"+id+",'suspend');\">Suspend</a>");
+			}
+			else if($.trim(data) == 'unknown error')
+			{
+				$('#action').addClass('error').html("An error occured while attempting to unsuspend user. Please try again.").fadeIn('slow').delay(2000).fadeOut();
+			}
+			else if($.trim(data) == 'no user')
+			{
+				$('#action').addClass('error').html("An error occured selecting user to unsuspend.").fadeIn('slow').delay(2000).fadeOut();
+			}
+			else
+			{
+				$('#action').addClass('error').html(data);
+			}
+                    }
+                    
+                    if($.trim(action)=='delete'){
+                        if($.trim(data)=='success')
+			{
+				$('.user_'+id).fadeOut(500).remove();
+				$('#action').addClass('done').html("User Deleted Successfully.").fadeIn('slow').delay(2000).fadeOut();
+			}
+			else if($.trim(data) == 'unknown error')
+			{
+				$('#action').addClass('error').html("An error occured while attempting to delete user. Please try again.").fadeIn('slow').delay(2000).fadeOut();
+			}
+			else if($.trim(data) == 'no user')
+			{
+				$('#action').addClass('error').html("An error occured selecting user to delete.").fadeIn('slow').delay(2000).fadeOut();
+			}
+			else
+			{
+				$('#action').addClass('error').html(data);
+			}
+                    }
+		})
+		.fail(function(xhr, textStatus, errorThrown){
+			$('#action').addClass('error').html("opps: " + textStatus + " : " + errorThrown).fadeIn('slow').delay(2000).fadeOut();
+		})
+		.complete(function(){
+			//$('#loading_'+id).hide();
+		});
+}
+/**
+ *  @Description:  Function Admin actions over the users
+*/
+
+
+/**
+ *  Jqeury function for changing user password from the admin panel
  */
 function config()
 {

@@ -4,7 +4,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 // require header
 require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_header.php");
-$row = !empty($_POST) ? $_POST : $getuser[0];
+$row = !empty($_POST) ? $_POST : $getAdmin[0];
 
 
 //Instantiate Functions_SiteSettings Object

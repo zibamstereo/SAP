@@ -4,7 +4,16 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 // require header
  require_once (realpath(dirname(__FILE__).DS.'..'.DS).DS."inc".DS."admin_header.php");
- $row = !empty($_POST) ? $_POST : $getAdmin[0];
+ 
+ //Instantiate Functions_User Object
+$usr = new Functions_User();
+
+// Get user id from GET Request
+$id = isset($_REQUEST['id']) ? $_REQUEST['id'] : "";
+
+// Get user informatoin
+$getUser = $usr->getUserRecords($id);
+ $row = !empty($_POST) ?  $_POST : $getUser[0];
  /**
   * Add Jscal for purpose of date of birth input
   */
@@ -16,8 +25,8 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <script type='text/javascript'>
     $(document).ready(function(){
 
-      $('#editAdminForm').submit(function(e) {
-        editAdminForm();
+      $('#adminEditUserProfile').submit(function(e) {
+        adminEditUserProfile();
         e.preventDefault();
       });
     });
@@ -26,8 +35,8 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		$('#changeAdminPass').submit(function(e) {
-			changeAdminPass();
+		$('#adminChangeUserPass').submit(function(e) {
+			adminChangeUserPass();
 			e.preventDefault();
 		});
 	});
@@ -69,7 +78,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 <div id="user_welcome" class="animated slideDown">
 
 <div class="icon">
-<i class="fa fa-user"></i> <h2 class="top-bar__headline"> Dashboard | Admin Account </h2>
+<i class="fa fa-user"></i> <h2 class="top-bar__headline"> Dashboard | Admin Edit Sales Agent Profile </h2>
 
 </div>
 </div>
@@ -86,7 +95,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 <div class="grid__info animated fadeInDown" id="view">
 
-  <span class="category">  <i class="fa fa-eye"></i> View Profile </span>
+  <span class="category">  <i class="fa fa-eye"></i> View User Profile </span>
 
   <div class="form">
     <input type="text" disabled value="<?php echo !empty($row['full_name']) && !empty($row['title']) ? $row['title']." ".$row['full_name'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-user"> </i></span>
@@ -96,7 +105,7 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <input type="text" disabled value="<?php echo !empty($row['gender']) ? $row['gender'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
 
 
-    <a href="javascript:void(0);" onclick="activate_edit();" class="toggle"> <i class="fa fa-cogs"></i> Edit Profile </a>
+    <a href="javascript:void(0);" onclick="activate_edit();" class="toggle"> <i class="fa fa-cogs"></i> Edit User Profile </a>
 
     </div>
 </div>
@@ -104,11 +113,11 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 <div class="grid__info animated fadeInDown">
 
-<span class="category">  <i class="fa fa-eye"></i> View Profile Pic </span>
+<span class="category">  <i class="fa fa-eye"></i> View User Profile Pic </span>
 
      <div class="form">
 
-<?php echo $img->displayProfilePicture($_SESSION['user_id'],"35%",130);?>
+<?php echo $img->displayProfilePicture($id,"35%",130);?>
 
      </div>
 
@@ -125,13 +134,15 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 <div class="grid__info animated fadeInDown">
 
-<span class="category">  <i class="fa fa-user"></i> Update Profile </span>
+<span class="category">  <i class="fa fa-user"></i> Update User Profile </span>
 
   <div class="form">
     <div id='acc_msg'></div>
   <!-- form for editing admin profile-->
-    <form id="editAdminForm" class="address-form" action="<?php echo ADMIN_URL; ?>process/admin_edit_profile" method="POST">
+    <form id="adminEditUserProfile" class="address-form" action="<?php echo ADMIN_URL; ?>process/admin_edit_user_profile" method="POST">
       <span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
+      <!-- Put the user id gotten above in an hidden input -->
+      <input type="hidden"  name="id" value="<?php echo $id; ?>"/>
       <select name="title">
       <option value="<?php echo @$row['title']; ?>"><?php echo @$row['title']; ?></option>
     <option value="Mr"> Mr</option>
@@ -164,12 +175,12 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <input type="text" id="country" name="country" placeholder="Country"/><span class="form-icon"> <i class="fa fa-envelope-o"> </i></span>
 -->
 
-    <input class="button" type='submit' name="update-profile" value="Update Profile"> <?php echo $adm->addImg('loading.gif','','','loading..','','loading') ?>
+    <input class="button" type='submit' name="update-profile" value="Update User Profile"> <?php echo $adm->addImg('loading.gif','','','loading..','','loading') ?>
 
       <!--<div class="button" name="register" onClick="create_account();"> Register</div>-->
 
       <br clear="all">
-      <a href="javascript:void(0);" onclick="activate_view();" class="toggle"> <i class="fa fa-eye"></i> view Profile</a>
+      <a href="javascript:void(0);" onclick="activate_view();" class="toggle"> <i class="fa fa-eye"></i> View User Profile</a>
           </form>
 
 
@@ -179,32 +190,9 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
 
 
 <div class="grid__info animated fadeInDown">
-  <?php if (empty($row['thumb_path'])):?>
-<span class="category">  <i class="fa fa-image"></i> Upload Profile Pic </span>
-  <?php else:?>
-  <span class="category"> <i class="fa fa-image"></i> Update Profile Pic </span>
-  <?php endif;?>
+  <span class="category"> <i class="fa fa-image"></i> View User Profile Pic </span>
      <div class="form">
-     <div id='pic_msg'></div>
-  <!-- This is for for uploading image -->
-       <form id="admin_image" class="address-form" enctype="multipart/form-data" action="<?php echo ADMIN_URL; ?>process/admin_process_photo" method="POST">
-
-          <input type="hidden" name="id" value="<?php echo $row['id'];?>" />
-         <input type="file" name="picture" accept="image/*" id="file" size="30"/>
-       </br>
-       <?php if (empty($row['thumb_path'])):?>
-         <input type="hidden" name="uploadphoto" value="1" />
-       <input class="button" type="submit" name="upload-image" value="Upload Image">
-       <?php echo $adm->addImg('loading.gif','','','loading..','','pic_loading') ?>
-     <?php else:?>
-       <input type="hidden" name="updatephoto" value="1" />
-       <input class="button" type="submit" name="update-image" value="Update Image">
-       <?php echo $adm->addImg('loading.gif','','','loading..','','pic_loading') ?>
-     <?php endif;?>
-
-       </form>
-
-       <!-- This is for for uploading image -->
+    <?php echo $img->displayProfilePicture($id,"35%",130);?>
      </div>
 
     <br clear=all>
@@ -214,14 +202,14 @@ defined("DS") || define("DS", DIRECTORY_SEPARATOR);//we are dynamically recognis
     <div class="form">
     <div id='pwd_msg'></div>
   <!-- This is change password form -->
-      <form id="changeAdminPass" class="address-form" action="<?php echo ADMIN_URL; ?>process/admin_change_pass" method="POST">
-
-    <input type="password" id="oldpassword" name="oldpassword" placeholder="Current Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
-    <input type="password" id="newpassword" name="newpassword" placeholder="New Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
-    <input type="password" id="cnewpassword" name="cnewpassword" placeholder="Confirm New Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
-
+      <form id="adminChangeUserPass" class="address-form" action="<?php echo ADMIN_URL; ?>process/admin_change_user_pass" method="POST">
+          
+      <!-- Put the user id gotten above in an hidden input -->
+    <input type="hidden"  name="id" value="<?php echo $id; ?>"/>
+    <input type="password" id="newpassword" name="newpassword" placeholder="New User Password"/><span class="form-icon"> <i class="fa fa-ellipsis-h"> </i></span>
+   
       </br>
-      <input class="button" type="submit" name="update-password" value="Update Password">
+      <input class="button" type="submit" name="update-password" value="Update User Password">
       <?php echo $adm->addImg('loading.gif','','','loading..','','pwd_loading') ?>
 
     </form>
