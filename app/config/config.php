@@ -32,7 +32,7 @@ defined("APP_PATH") || define("APP_PATH", SITE_URL.AFN);// www.yoursite.com/app_
 //defined("ROOT_PATH") || define("ROOT_PATH", realpath(dirname(__FILE__) . DS."..".DS));//we are dynamcially getting to root of our application like ../store/
 
 
-if(!empty(AFN)){
+if(!empty($config['app_folder'])){ // Better than using if !empty on a constant AFN to avoid error
 // If app folder is not empty get root path as:
 // root path
 defined("ROOT_PATH") || define("ROOT_PATH", $_SERVER['DOCUMENT_ROOT'] . DS.str_replace("/", DS,AFN));//we are dynamcially getting to root of our application like ../store/
@@ -48,60 +48,60 @@ defined("ROOT_PATH") || define("ROOT_PATH", $_SERVER['DOCUMENT_ROOT'] . DS);//we
 // ========================== OTHER CONFIGURATIONS============================================================
 
 // dashboard folder
-defined("APP_DIR") || define("APP_DIR", "app");
+defined("APP_DIR") || define("APP_DIR", ROOT_PATH."app".DS);
 
 // dashboard folder
-defined("DASHBOARD_DIR") || define("DASHBOARD_DIR", "dashboard");
+defined("DASHBOARD_DIR") || define("DASHBOARD_DIR", ROOT_PATH."dashboard".DS);
+
+// pages directory
+defined("PAGES_DIR") || define("PAGES_DIR", ROOT_PATH."pages".DS);
 
 // classes folder
-defined("CLASSES_DIR") || define("CLASSES_DIR", APP_DIR.DS."classes");
+defined("CLASSES_DIR") || define("CLASSES_DIR", APP_DIR."classes");
 
 // config folder
-defined("CONFIG_DIR") || define("CONFIG_DIR", APP_DIR.DS."config");
+defined("CONFIG_DIR") || define("CONFIG_DIR", APP_DIR."config");
 
 // css directory
-defined("CSS_DIR") || define("CSS_DIR", DASHBOARD_DIR.DS."css");
+defined("CSS_DIR") || define("CSS_DIR", DASHBOARD_DIR."css");
 
   // fonts directory
-defined("FONTS_DIR") || define("FONTS_DIR", DASHBOARD_DIR.DS."fonts");
+defined("FONTS_DIR") || define("FONTS_DIR", DASHBOARD_DIR."fonts");
 
 
 // JS directory
-defined("JS_DIR") || define("JS_DIR", DASHBOARD_DIR.DS."js");
-
-// pages directory
-defined("PAGES_DIR") || define("PAGES_DIR", "pages");
+defined("JS_DIR") || define("JS_DIR", DASHBOARD_DIR."js");
 
 // modules folder
-defined("MOD_DIR") || define("MOD_DIR", DASHBOARD_DIR.DS."mod");
+defined("MOD_DIR") || define("MOD_DIR", DASHBOARD_DIR."mod");
 
 
 // library folder
-defined("LIB_DIR") || define("LIB_DIR", APP_DIR.DS."lib");
+defined("LIB_DIR") || define("LIB_DIR", APP_DIR."lib");
 
 // inc folder
-defined("INC_DIR") || define("INC_DIR", DASHBOARD_DIR.DS."inc");
+defined("INC_DIR") || define("INC_DIR", DASHBOARD_DIR."inc");
 
 // inc folder
-defined("USER_DIR") || define("USER_DIR", DASHBOARD_DIR.DS."users");
+defined("USER_DIR") || define("USER_DIR", DASHBOARD_DIR."users");
 
 // inc folder
-defined("ADMIN_DIR") || define("ADMIN_DIR", DASHBOARD_DIR.DS."admin");
+defined("ADMIN_DIR") || define("ADMIN_DIR", DASHBOARD_DIR."admin");
 
 // templates folder
-//defined("TEMPLATE_DIR") || define("TEMPLATE_DIR", DASHBOARD_DIR.DS."template");
+//defined("TEMPLATE_DIR") || define("TEMPLATE_DIR", DASHBOARD_DIR."template");
 
 // emails path
-//defined("EMAILS_PATH") || define("EMAILS_PATH", ROOT_PATH.DS."emails");
+//defined("EMAILS_PATH") || define("EMAILS_PATH", ROOT_PATH."emails".DS);
 
 // catalogue images path
-//defined("CATALOGUE_PATH") || define("CATALOGUE_PATH", ROOT_PATH.DS."media".DS."catalogue");
+//defined("CATALOGUE_PATH") || define("CATALOGUE_PATH", ROOT_PATH."media".DS."catalogue".DS);
 
 
 // ====================URL PATHS=============================================================================
 
 // Define DASHBOARD URL PATH
-defined("DASHBOARD") || define("DASHBOARD", APP_PATH.DASHBOARD_DIR."/");
+defined("DASHBOARD") || define("DASHBOARD", APP_PATH."dashboard/");
 // Define JS URL PATH
 defined("JS_URL") || define("JS_URL", DASHBOARD."js/");
 
@@ -127,20 +127,20 @@ defined("LIB_URL") || define("LIB_URL", DASHBOARD."lib/");
 // ========================== PHP SET INCLUDE PATH============================================================
 // add all above directories to the include path
 set_include_path(implode(PS, array(
-	realpath(ROOT_PATH.CLASSES_DIR), //eg /store/Classes/
-	realpath(ROOT_PATH.APP_DIR), //eg /store/app/
-	realpath(ROOT_PATH.CONFIG_DIR), //eg /store/config/
-	realpath(ROOT_PATH.LIB_DIR), //eg /store/lib/
-	realpath(ROOT_PATH.INC_DIR), //eg /store/dashboard/inc/
-	//realpath(ROOT_PATH.ADMIN_DIR), //eg /store/dashboard/admin/
-	//realpath(ROOT_PATH.CSS_DIR),//eg /store/Css/
-	//realpath(ROOT_PATH.FONTS_DIR),//eg /fonts/Css/
-	//realpath(ROOT_PATH.DASHBOARD_DIR), //eg /store/dashboard/
-	//realpath(ROOT_PATH.PAGES_DIR),//eg /store/Pages/
-	//realpath(ROOT_PATH.JS_DIR), //eg /store/Js/
-	//realpath(ROOT_PATH.MOD_DIR), //eg /store/Mod/
-	//realpath(ROOT_PATH.TEMPLATE_DIR), //eg /store/Templates/
-	//realpath(ROOT_PATH.USER_DIR), //eg /store/dashboard/users/
+	realpath(CLASSES_DIR), //eg /store/Classes/
+	realpath(APP_DIR), //eg /store/app/
+	realpath(CONFIG_DIR), //eg /store/config/
+	realpath(LIB_DIR), //eg /store/lib/
+	realpath(INC_DIR), //eg /store/dashboard/inc/
+	//realpath(ADMIN_DIR), //eg /store/dashboard/admin/
+	//realpath(CSS_DIR),//eg /store/Css/
+	//realpath(FONTS_DIR),//eg /fonts/Css/
+	//realpath(DASHBOARD_DIR), //eg /store/dashboard/
+	//realpath(PAGES_DIR),//eg /store/Pages/
+	//realpath(JS_DIR), //eg /store/Js/
+	//realpath(MOD_DIR), //eg /store/Mod/
+	//realpath(TEMPLATE_DIR), //eg /store/Templates/
+	//realpath(USER_DIR), //eg /store/dashboard/users/
 	get_include_path()//function to get the current path before adding other directories
 )));
 

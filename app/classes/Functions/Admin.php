@@ -99,8 +99,8 @@ Class Functions_Admin extends Functions_Utility
     	/**
     	 *	This function Check the level access of the Admin
     	 *
-         * @param 		$levels The user levels to determine access level of the user logging in
-         * @return 		returns boolean true or false
+       * @param 		$levels The user levels to determine access level of the user logging in
+       * @return 		returns boolean true or false
     	 */
     	public function checkAdminLogin ( $levels )
     	{
@@ -312,8 +312,8 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
       return 99;
   }
 
- 	
-  
+
+
   /**
    *  This method  adminDeleteUser is used to delete user by the Admin
    *
@@ -380,7 +380,40 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 			return 1;
 		} else return 2;
 	}
-        
+
+
+            /**
+             *	This method allows admin to confirm users from the admin panel
+             *
+	     * @param 	$id The user id of the user to be activated
+	     * @return 	returns log out the user and set online off
+		 */
+		public function adminConfirmUserReg($id)
+		{
+			$query = "SELECT id,active,act_key FROM users WHERE id = '".$id."' AND act_key !='' ";
+
+			if($this->resultNum($query)==1)
+			{
+				$row = $this->fetchOne($query);
+				$id = $row['id'];
+				if($row['active']==0)
+				{
+					$update = $this->processSql("UPDATE users SET active=1,act_key='',online='OFF' WHERE id = '".$id."'");
+					if($update){
+						return 99;
+					} else return 1;
+				}
+				if($row['active']==1)
+				{
+					return 2;
+				}
+			}
+			else {
+				return 3;
+			}
+		}
+
+
    /**
    *  This method  adminShowUserStatus is used to display the active status of the user in the Admin Panel
    *
@@ -397,8 +430,8 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
                 return $active;
 
 	}
-        
-        
+
+
       /**
    *  This method  adminShowUserOnlineStatus is used to display the online status of the user in the Admin Panel
    *
@@ -419,7 +452,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
   /**
    *  This method  contactUs is used to recieve contact messages from the custmers
    *
-   * @param 		$name  The name of the potential customer or current customer
+   * @param 		$full_name  The name of the potential customer or current customer
    * @param 		$email  The email of the potential customer or current customer
    * @param 		$phone  The phone number of the potential customer or current customer
    * @param 		$subject  The subject of the intent or message
@@ -427,34 +460,33 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
    * @param 		$site_email  The organisation email the message is to be sent to
    * @return 		changes user from being suspended to being active in the database
    */
-  //----------Function for inserting info to contact us----------
-	public function contactUs($name,$email,$phone,$subject,$message,$site_email)
+        public function contactUs($full_name,$email,$phone,$subject,$message,$site_email)
 	{
-		$name = $this->secureInput($name);
+		$full_name = $this->secureInput($full_name);
 		$email = $this->secureInput($email);
 		$phone = $this->secureInput($phone);
 		$subject = $this->secureInput($subject);
 		$message = $this->secureInput($message);
 		$site_email = $this->secureInput($site_email);
 
-		$c_date = date("l, M j, Y, g:i a");
+		$contact_date = date("l, M j, Y, g:i a");
 
-		$sql = "INSERT INTO contact_us ( name, email, phone, subject, message, reply,	c_date)	VALUES ('".$name."','".$email."','".$phone."', '".$subject."','".$message."','','".$c_date."')"; //Edit 3
-
+		$sql = "INSERT INTO contact_us ( full_name, email, phone, subject, message, reply,contact_date)
+                        VALUES ('".$full_name."','".$email."','".$phone."', '".$subject."','".$message."','','".$contact_date."')";
 		$res = $this->processSql($sql);
 		if($res){
 			//build email to be sent
 			$to = $site_email;
 			$subject = "New message from ".$email;
 
-			$message = "
+			$admin_message = "
 			<html>
 			<head>
-			<title>New message from".$name."</title>
+			<title>New message from".$full_name."</title>
 			</head>
 			<body>
 			<h3>Query / Comment</h3>
-			<p>Site Admin, ".$name." has sent a query/comment. It is as below:</p>
+			<p>Hello Site Admin, ".$full_name." has sent a query/message. It is as below:</p>
 			<p>".$message."</p>
 			</body>
 			</html>
@@ -463,11 +495,14 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 			// To send HTML mail, the Content-type header must be set
 			$headers = "MIME-Version: 1.0\r\n";
 			$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-			$headers .= "From: '".$name."'<".$email.">" . "\r\n";//Modified By GENTLE to show the FROM in the message
+			$headers .= "From: '".$full_name."'<".$email.">" . "\r\n";//Modified By GENTLE to show the FROM in the message
 
-			$mail_send = mail($to, $subject, $message, $headers );
-			if ($mail_send)
+			$mail_send = mail($to, $subject, $admin_message, $headers );
+			if ($mail_send):
 			return 99;
+                        else:
+                            return 2;
+                        endif;
 			}else{
 			return 1;
 		}
@@ -490,7 +525,42 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
     }
     return $contactinfo;
 	}
-
+        
+        
+    
+  /**
+   * 	This is used to get Access Control Level and edit them
+   * 	@param  $acl means access control level
+   * 	@return it returns the select form with acl ids 
+   */
+	public function getAclId()
+	{
+	$sql = "SELECT * FROM acl WHERE id != 1 ";
+    $rows = $this->fetch($sql);
+    $acl = '<select name="acl_id">
+           <option value="">ACL IDs</option>';
+    foreach($rows AS $row){
+    $acl .= "<option value=".$row['acl_id'].">".$row['acl_id']."</option>";
+    }
+    $acl .= '</select>';
+    return $acl;
+	}
+        
+        
+     /**
+   * 	This is used to process the access control level
+   * 	@param  $acl_id the id of the access control level to process
+   * 	@param  $acl_name the name of the access control level to process
+   * 	@return it processes and store the access control level into the database
+   */
+	public function processAcl($acl_id,$acl_name)
+	{
+	$sql = "UPDATE acl SET acl_name='$acl_name' WHERE id = $acl_id ";
+        $result = $this->processSql($sql);
+			
+        return $result ? 99 :  1;
+       
+        }
 
 }
 ?>

@@ -105,7 +105,7 @@ $getUser = $usr->getUserRecords($id);
     <input type="text" disabled value="<?php echo !empty($row['gender']) ? $row['gender'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
 
 
-    <a href="javascript:void(0);" onclick="activate_edit();" class="toggle"> <i class="fa fa-cogs"></i> Edit User Profile </a>
+    <a href="javascript:void(0);" onclick="activate_edit();" class="toggle" style="color:#ee3d43"> <i class="fa fa-cogs"></i> Edit User Profile </a>
 
     </div>
 </div>
@@ -180,7 +180,7 @@ $getUser = $usr->getUserRecords($id);
       <!--<div class="button" name="register" onClick="create_account();"> Register</div>-->
 
       <br clear="all">
-      <a href="javascript:void(0);" onclick="activate_view();" class="toggle"> <i class="fa fa-eye"></i> View User Profile</a>
+      <a href="javascript:void(0);" onclick="activate_view();" class="toggle" style="color:#ee3d43"> <i class="fa fa-eye"></i> View User Profile</a>
           </form>
 
 

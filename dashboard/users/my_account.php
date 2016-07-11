@@ -94,7 +94,7 @@ $(document).ready(function(){
               <input type="text" disabled value="<?php echo !empty($row['dob']) ? $row['dob'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-calendar"> </i></span>
               <input type="text" disabled value="<?php echo !empty($row['gender']) ? $row['gender'] : 'NIL'; ?>"/><span class="form-icon"> <i class="fa fa-get-pocket"> </i></span>
 
-              <a href="javascript:void(0);" onclick="activate_edit();" class="toggle"> <i class="fa fa-cogs"></i> Edit Profile </a>
+              <a href="javascript:void(0);" onclick="activate_edit();" class="toggle" style="color:#ee3d43"> <i class="fa fa-cogs"></i> Edit Profile </a>
 
             </div>
           </div>
@@ -167,7 +167,7 @@ $(document).ready(function(){
               <!--<div class="button" name="register" onClick="create_account();"> Register</div>-->
 
               <br clear="all">
-              <a href="javascript:void(0);" onclick="activate_view();" class="toggle"> <i class="fa fa-eye"></i> view Profile</a>
+              <a href="javascript:void(0);" onclick="activate_view();" class="toggle" style="color:#ee3d43"> <i class="fa fa-eye"></i> view Profile</a>
             </form>
 
 
@@ -177,7 +177,7 @@ $(document).ready(function(){
 
 
         <div class="grid__info animated fadeInDown">
-          <?php if (empty($row['thumb_path'])):?>
+          <?php if (empty($row['thumb_path']) || !file_exists(DASHBOARD_DIR.$row["thumb_path"])):?>
 <span class="category">  <i class="fa fa-image"></i> Upload Profile Pic </span>
           <?php else:?>
           <span class="category"> <i class="fa fa-image"></i> Update Profile Pic </span>
@@ -190,7 +190,7 @@ $(document).ready(function(){
               <input type="hidden" name="id" value="<?php echo $row['id'];?>" />
               <input type="file" name="picture" accept="image/*" id="file" size="30"/>
             </br>
-            <?php if (empty($row['thumb_path'])):?>
+            <?php if (empty($row['thumb_path']) || !file_exists(DASHBOARD_DIR.$row["thumb_path"])):?>
               <input type="hidden" name="uploadphoto" value="1" />
               <input class="button" type="submit" name="upload-image" value="Upload Image">
               <?php echo $usr->addImg('loading.gif','','','loading..','','pic_loading') ?>

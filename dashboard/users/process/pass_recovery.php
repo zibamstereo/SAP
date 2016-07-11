@@ -33,7 +33,7 @@ $site_url = $sitesettings[0]['site_url'];
   		die(msg(0,"<i class='fa fa-envelope-o'></i> Invalid Email Address.","email"));
   	}
 		else{
-			$res = $usr->pass_recovery($_POST['email'],$site_url);
+			$res = $usr->passRecovery($_POST['email'],$site_url);
 				if($res == 1){
 					die(msg(0,"There was an error sending your new password. Please contact the site admin."));
 				}

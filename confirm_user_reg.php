@@ -22,7 +22,7 @@ $usr = new Functions_User();
 
 
 
-  $res = $usr->confirm_user_reg($activation_key);
+  $res = $usr->confirmUserReg($activation_key);
   if ($res == 1){
     $error = "Failed to activate account. Please contact the site admin.";
   }

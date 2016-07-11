@@ -96,12 +96,6 @@ class Functions_Utility extends Db_DBFunc
     // Public Methods
     //===================================================
 
-    // Class Construct
-        public function __construct()
-    {
-        parent::__construct();
-    }
-
 
     /**
      *  This method add css files in the pages
@@ -135,7 +129,7 @@ class Functions_Utility extends Db_DBFunc
     /**
      *  This method add image files in the pages
      *  Just initiate the class $var = new Functions_Utility and echo $var->addImg('name_of_image.ext');
-     *  Its relative to images folder i.e if images/image_file.ext use $var->addJs('image_file.ext'); if images/ie/image_file.ext use $var->addJs('ie/image_file.ext');
+     *  Its relative to images folder i.e if images/image_file.ext use $var->addImg('image_file.ext'); if images/ie/image_file.ext use $var->addImg('ie/image_file.ext');
      *  Note that if the image file is not within the website images folder in the dashboadrd in the root, use $var->addFile('absolute_path_to_image_file.ext');
      *
      * @param       $imgName is the image name with extention inclusive

@@ -140,9 +140,9 @@ Class Functions_User extends Functions_Utility
 			<h3>Account Activation</h3>
 			<p>Dear ".$full_name.", thank you for registering at ".$site_url.".</p>
 			<p>Please click on the link below to activate your account:</p>
-			<a href='".$site_url."/confirm_user_reg.php?activation_key=".$activation_key."&level_access=".$level_access."'>http://www.".$site_url."</a>.
+			<a href='".APP_PATH."confirm_user_reg.php?activation_key=".$activation_key."&level_access=".$level_access."'>http://".$site_url."</a>.
 			<p>If the above link does not work, copy and paste the below URL to your browser's address bar:</p>
-			<p><i>http://".$site_url."/confirm_user_reg.php?activation_key=".$activation_key."&level_access=".$level_access."</i></p><br/>
+			<p><i>".APP_PATH."confirm_user_reg.php?activation_key=".$activation_key."&level_access=".$level_access."</i></p><br/>
 			<p>If you did not initiate this request, simply disregard this email, and we're sorry for bothering you.</p>
 			<br/><br/>
 			<p>Sincerely,</p>
@@ -170,7 +170,7 @@ Class Functions_User extends Functions_Utility
 	     * @param 		$activation_key The activation key for activation
 	     * @return 		returns log out the user and set online off
 		 */
-		public function confirm_user_reg($activation_key)
+		public function confirmUserReg($activation_key)
 		{
 			$activation_key = $this->quote($activation_key);
 
@@ -182,7 +182,7 @@ Class Functions_User extends Functions_Utility
 				$id = $row['id'];
 				if($row['active']==0)
 				{
-					$update = $this->processSql("UPDATE users SET active=1,act_key='' WHERE id = '".$id."'");
+					$update = $this->processSql("UPDATE users SET active=1,act_key='',online='OFF' WHERE id = '".$id."'");
 					if($update){
 						return 99;
 					} else return 1;
@@ -443,7 +443,7 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
    * @return 		sends the recovery password to the user email address
 	 */
 
-	public function pass_recovery($email,$site_url)
+	public function passRecovery($email,$site_url)
 	{
 		$email = $this->secureInput($email);
 		$site_url = $this->secureInput($site_url);
@@ -477,9 +477,9 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 				<p>Dear ".$row['username'].", someone (presumably you), has requested a password reset.</p>
 				<p>Your new temporary password is: ".$temp_password.".</p>
 				<p>To confirm this change and activate your new password, please follow this link to our website:</p>
-				<a href=\"".$site_url."/confirm_pass.php?id=".$row['id']."&new=".$temp_password."&level_access=".$row['level_access']."\">".$site_url."</a>.
+				<a href='".APP_PATH."confirm_pass.php?id=".$row['id']."&new=".$temp_password."&level_access=".$row['level_access']."'>".$site_url."</a>.
 				<p>If the above link does not work, copy and paste the below URL to your browser's address bar:</p>
-				<b><i>http://".$site_url."/confirm_pass.php?id=".$row['id']."&new=".$temp_password."&level_access=".$row['level_access']."</b></i>
+				<b><i>".APP_PATH."confirm_pass.php?id=".$row['id']."&new=".$temp_password."&level_access=".$row['level_access']."</b></i>
 				<p>Don't forget to update your profile as well after confirming this change and create a new password.</p><br/>
 				<p>If you did not initiate this request, simply disregard this email, and we're sorry for bothering you.</p>
 				<br/><br/>
@@ -505,11 +505,11 @@ $sql = "UPDATE users SET title = '" . $title . "', full_name = '" . $full_name .
 	 *	This function confirms password based on pass_recovery above
 	 *
    * @param 		$id The id of the user to confirm password for
-   * @param			$new The new password sent to the user email address to know if the user is the one requesting for password recovery
+   * @param		$new The new password sent to the user email address to know if the user is the one requesting for password recovery
    * @return 		confirms the password sent
 	 */
 
-	public function confirm_pass($id,$new)
+	public function confirmPass($id,$new)
 	{
 		$id = $this->secureInput($id);
 		$new = $this->secureInput($new);

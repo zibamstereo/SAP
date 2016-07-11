@@ -34,7 +34,7 @@ $id = isset($_REQUEST['id']) && is_numeric($_REQUEST['id']) ? $usr->secureInput(
 ############ Configuration ##############
 $id = !empty($_POST['id']) ? $_POST['id'] :"";
 $max_image_size  = 	100000;
-$imgpth = "admin/profile_pic/";
+$imgpth = "admin".DS."profile_pic".DS;
 ############ Configuration ##############
 
   if (array_key_exists('uploadphoto', $_POST)) {

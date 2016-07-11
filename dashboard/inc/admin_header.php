@@ -34,14 +34,14 @@ $getAdmin = $adm->getAdminRecords($_SESSION['user_id']);
         echo "<link rel='shortcut icon' href='".IMG_URL."ajebo.ico'>";
         echo $adm->addJs('config'); // Add jquery
         echo $adm->addJs('jquery.min'); // Add jquery
-        echo $adm->addJs('index'); // Add Dika's Js script
-        echo $adm->addCss('infinitelife'); // Add Infinitelife Css for this page
-        echo $adm->addJs('infinitelife'); // Add Infinitelife Js for this page
         // Add Css files needed
         echo $adm->addCss('normalize'); // Add css file for the index.php in the root folder
         echo $adm->addFile('Css', '../../dashboard/fonts/font-awesome/css/font-awesome.min.css');
         echo $adm->addCss('user-panel'); // Add css file for user panel
         echo $adm->addFile('Css', '../../dashboard/fonts/fonts.css');
         echo $adm->addJs('modernizr.custom');
+        echo $adm->addJs('index'); // Add Dika's Js script
+        echo $adm->addCss('infinitelife'); // Add Infinitelife Css for this page
+        echo $adm->addJs('infinitelife'); // Add Infinitelife Js for this page
         ?>
 </head>

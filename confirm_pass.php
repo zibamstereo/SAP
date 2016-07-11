@@ -23,7 +23,7 @@ $new = isset($_REQUEST['new']) ? $usr->secureInput($_REQUEST['new']) : '';
 
 
 
-  $res = $usr->confirm_pass($id,$new);
+  $res = $usr->confirmPass($id,$new);
 	if ($res == 1){
 		$error = "Unable to update new password. Please contact the site admin.";
 	}

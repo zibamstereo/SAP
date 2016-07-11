@@ -12,27 +12,24 @@ $set = new Functions_Sitesettings();
 
 // Get thr site setting methods
 $config = $set->getSiteSettings();
-/**
-  * Add Datatbles to manage sales agents view
-  */
-  echo $adm->addFile("Css",LIB_URL."datatable/css/jquery.dataTables.min.css");
-  echo $adm->addFile("Js",LIB_URL."datatable/js/jquery.dataTables.min.js");
+
 ?>
-<script type="text/javascript" language="javascript" class="init">
-$(document).ready(function() {
-    var paginate = $('#acl').DataTable({
-        "lengthMenu": null,
-    });
-    paginate.fnSort([1,'asc']);
-} );
 
-
-	</script>
 <script type='text/javascript'>
     $(document).ready(function(){
 
       $('#config').submit(function(e) {
         config();
+        e.preventDefault();
+      });
+    });
+
+</script>
+<script type='text/javascript'>
+    $(document).ready(function(){
+
+      $('#processAcl').submit(function(e) {
+        processAcl();
         e.preventDefault();
       });
     });
@@ -83,9 +80,9 @@ $(document).ready(function() {
 
       <section class="grid">
         <div class="grid animated fadeInDown">
+              <div id='config_msg'></div>
           <div class="grid__setting animated fadeInDown" id="view">
             <div class="grid__50 animated fadeInDown" >
-              <div id='msg'></div>
               <div class="form">
                 <form id="config" class="address-form" action="<?php echo ADMIN_URL; ?>process/configuration" method="POST">
                   <input type="text" id="site_name" name="site_name" value="<?php echo !empty($config[0]['site_name']) ? $config[0]['site_name'] : "NIL" ?>"/><span class="form-icon1"> <i class="fa fa-user"> </i></span>
@@ -126,30 +123,29 @@ $(document).ready(function() {
     </div>
 
             </div>
-
+<!-- Viewing the access control level -->
+<div class="show view_acl">
             <div class="grid__action animated fadeInDown" id="view">
                  <div class="form">
                      <p style="font-size:0.9em;">This configuration grid shows the Access Level Control (ALC) ranging from Admin to ACL 9 - Sales Agent, Other access control level can also be configured as deem fit </p>
 
-                         <table id='acl' width="100%" border="0" class="cell-border hover" style="font-size:0.9em;">
+                         <table id='viewAcl' width="100%" border="1"  style='font-size:0.9em;'>
                         <thead>
 				<tr>
-			<th>Edit</th>
-			<td>Level Access Key</th>
-			<th>Level Access Name</th>
+			<td>ACL Key</th>
+			<th>ACL Name</th>
                             </tr>
 			</thead>
 
                         <tbody>
                     <?php
-                     $sql = "SELECT * FROM user_level_access WHERE level_access != ''";
+                     $sql = "SELECT * FROM acl WHERE acl_name != ''";
                      $result = $adm->fetch($sql);
                      foreach ($result AS $row):
-                     $key = $row['level_access_id'];
-                     $access = !empty($row['level_access']) ? $row['level_access'] : 'N/A' ;
+                     $key = $row['acl_id'];
+                     $access = !empty($row['acl_name']) ? $row['acl_name'] : 'N/A' ;
                      ?>
                      <tr>
-	  <td><a ><i style="color:#ee3d43;" class="fa fa-cog"></i></a></td>
     <td><?php echo $key; ?></td>
     <td><?php echo $access; ?></td>
   </tr>
@@ -159,14 +155,42 @@ $(document).ready(function() {
   </tbody>
   </table>
   <br clear="all">
-  <i style="color:#ee3d43;" class="fa fa-plus-circle"></i> Add ALC
+  <a href="javascript:void(0);" onclick="edit_acl();" class="toggle" style="color:#ee3d43;"> <i class="fa fa-plus-circle"></i> Add/<i class="fa fa-cogs"></i> Edit ACL</a>
 
    </div>
 
 
             </div>
+            
+        </div>
+
+<!-- Editting the access control level -->
+
+<div class="hide edit_acl">
+            <div class="grid__action animated fadeInDown" id="view">
+                 <div class="form">
+                     <p style="font-size:0.9em;">This configuration grid shows the Access Level Control (ALC) ranging from Admin to ACL 9 - Sales Agent, Other access control level can also be configured as deem fit </p>
+                       <div id='acl_msg'></div>
+                     <form id="processAcl" class="address-form" action="<?php echo ADMIN_URL; ?>process/process_acl" method="POST">
+                         <table id='editAcl' width="100%"  style='font-size:0.9em;'>
+                          <tr>
+    <td><span class="form-icon1"> <i class="fa fa-sort-numeric-asc"> </i></span><?php echo $adm->getAclId(); ?></td>
+    <td>
+        <input style="margin-left:5px;" type="text" id="acl_name" name="acl_name" placeholder="ACL Name" />
+    </td>
+  </tr>
+  </table>
+        <input class="button" type="submit" name="acl" value="Save ACL">
+</form>
+  <br clear="all">
+  <a href="javascript:void(0);" onclick="view_acl();" class="toggle" style="color:#ee3d43;"> <i class="fa fa-eye"></i> Back to ACL list</a>
+
+   </div>
 
 
+            </div>
+            
+        </div>
 
           </div>
 

@@ -51,8 +51,26 @@ $adm->checkAdminLogin('1');
 			echo 'success';
 		}
 	}
+        
 	
-	if($action == "delete"){
+	if($action == "confirm_user"){
+		$res = $adm->adminConfirmUserReg($id);
+		
+		if($res == 1){
+			echo 'unknown error';
+		}
+		if($res == 2){
+			echo 'user exist';
+		}
+		if($res == 3){
+			echo 'no user';
+		}
+		if($res == 99){
+			echo 'success';
+		}
+	}
+        
+        if($action == "delete"){
 		$res = $adm->adminDeleteUser($id);
 		
 		if($res == 1){

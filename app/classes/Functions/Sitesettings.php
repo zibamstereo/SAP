@@ -17,12 +17,6 @@ require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."Autoloader.ph
 Class Functions_Sitesettings extends Functions_Utility
 {
 
-    // Class Construct
-        public function __construct()
-    {
-        parent::__construct();
-    }
-
 
 
 	/**

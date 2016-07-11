@@ -11,8 +11,8 @@ var user_process_path = app_path + 'dashboard/users/process/';
 function login_page()
 {window.location = app_path + 'login';}
 
-function effect_update()
-{window.location = app_path + 'd';}
+/*function effect_update()
+{window.location = app_path + 'd';}*/
 
 /**
  *  Jqeury function for login_page
@@ -170,7 +170,9 @@ $(document).ready(function (e) {
 				{
 					//show the success message
 					$('#pic_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
-				}
+                                        //Refresh Page to show users updated profile content
+                                        window.setTimeout(function(){location.reload()},3000)
+                                }
 				else if(parseInt(msg.status)==0)
 				{
 					hideshow('pic_msg',1);
@@ -204,6 +206,8 @@ function changeUserPass()
 			{
 				//show the success message
 				$('#pwd_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+                                //Refresh Page to show users updated profile content
+				 window.setTimeout(function(){location.reload()},3000)
 			}
 			else if(parseInt(msg.status)==0)
 			{
@@ -336,7 +340,9 @@ $(document).ready(function (e) {
 				{
 					//show the success message
 					$('#pic_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
-				}
+                                        //Refresh Page to show users updated profile content
+                                        window.setTimeout(function(){location.reload()},3000)
+                                }
 				else if(parseInt(msg.status)==0)
 				{
 					hideshow('pic_msg',1);
@@ -370,7 +376,9 @@ function changeAdminPass()
 			{
 				//show the success message
 				$('#pwd_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
-			}
+                                //Refresh Page to show users updated profile content
+				 window.setTimeout(function(){location.reload()},3000)
+                        }
 			else if(parseInt(msg.status)==0)
 			{
 				hideshow('pwd_msg',1);
@@ -438,7 +446,9 @@ function adminChangeUserPass()
 			{
 				//show the success message
 				$('#pwd_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
-			}
+                                //Refresh Page to show users updated profile content
+				 window.setTimeout(function(){location.reload()},3000)
+                        }
 			else if(parseInt(msg.status)==0)
 			{
 				hideshow('pwd_msg',1);
@@ -473,7 +483,7 @@ function adminChangeUserPass()
                     if($.trim(action)=='suspend'){
 			if($.trim(data)=='success')
 			{
-                            $('#action').addClass('done').html("User Suspended Successfully.").fadeIn('slow').delay(2000).fadeOut();
+                            $('#msg').removeClass('error').addClass('done').html("User Suspended Successfully.").hide().fadeIn(3000).fadeOut(3000);
                             $('#real_status_'+id).fadeOut(500).remove();
                             $('#changed_status_'+id).css('display', 'compact').fadeIn('slow').html("<em><span style='color:#DB7093;'>Suspended</span></em>");
                             $('#real_action_'+id).fadeOut(500).remove();
@@ -481,22 +491,22 @@ function adminChangeUserPass()
 			}
 			else if($.trim(data) == 'unknown error')
 			{
-				$('#action').addClass('error').html("An error occured while attempting to suspend user. Please try again.").fadeIn('slow').delay(2000).fadeOut();
+				$('#msg').removeClass('done').addClass('error').html("An error occured while attempting to suspend user. Please try again.").hide().fadeIn(3000).fadeOut(3000);
 			}
 			else if($.trim(data) == 'no user')
 			{
-				$('#action').addClass('error').html("An error occured selecting user to suspend.").fadeIn('slow').delay(2000).fadeOut();
+				$('#msg').removeClass('done').addClass('error').html("An error occured selecting user to suspend.").hide().fadeIn(3000).fadeOut(3000);
 			}
 			else
 			{
-				$('#action').addClass('error').html(data);
+				$('#msg').removeClass('done').addClass('error').html(data);
 			}
                     }
 
                     if($.trim(action)=='unsuspend'){
                         if($.trim(data)=='success')
 			{
-                            $('#action').addClass('done').html("User Unsuspended Successfully.").fadeIn('slow').delay(2000).fadeOut();
+                            $('#msg').removeClass('error').addClass('done').html("User Unsuspended Successfully.").hide().fadeIn(3000).fadeOut(3000);
                             $('#real_status_'+id).fadeOut(500).remove();
                             $('#changed_status_'+id).css('display', 'compact').fadeIn('slow').html("<em><span style='color:#008040;'>Active</span></em>");
                             $('#real_action_'+id).fadeOut(500).remove();
@@ -504,15 +514,42 @@ function adminChangeUserPass()
 			}
 			else if($.trim(data) == 'unknown error')
 			{
-				$('#action').addClass('error').html("An error occured while attempting to unsuspend user. Please try again.").fadeIn('slow').delay(2000).fadeOut();
+				$('#msg').removeClass('done').addClass('error').html("An error occured while attempting to unsuspend user. Please try again.").hide().fadeIn(3000).fadeOut(3000);
 			}
 			else if($.trim(data) == 'no user')
 			{
-				$('#action').addClass('error').html("An error occured selecting user to unsuspend.").fadeIn('slow').delay(2000).fadeOut();
+				$('#msg').removeClass('done').addClass('error').html("An error occured selecting user to unsuspend.").hide().fadeIn(3000).fadeOut(3000);
 			}
 			else
 			{
-				$('#action').addClass('error').html(data);
+				$('#msg').removeClass('done').addClass('error').html(data);
+			}
+                    }
+                    
+                    if($.trim(action)=='confirm_user'){
+			if($.trim(data)=='success')
+			{
+                            $('#msg').removeClass('error').addClass('done').html("User Confirmed Successfully.").hide().fadeIn(3000).fadeOut(3000);
+                            $('#real_status_'+id).fadeOut(500).remove();
+                            $('#changed_status_'+id).css('display', 'compact').fadeIn('slow').html("<em><span style='color:#008040;'>Active</span></em>");
+                            $('#real_action_'+id).fadeOut(500).remove();
+                            $('#changed_action_'+id).css('display', 'compact').fadeIn('slow').html("<a title='Suspend User' href='' onClick=\"admin_actions(event,"+id+",'suspend');\"><i class='fa fa-ban'></i></a>");
+			}
+			else if($.trim(data) == 'unknown error')
+			{
+				$('#msg').removeClass('done').addClass('error').html("An error occured while attempting to confirm user. Please try again.").hide().fadeIn(3000).fadeOut(3000);
+			}
+			else if($.trim(data) == 'user exist')
+			{
+				$('#msg').removeClass('done').addClass('error').html("User already activated.").hide().fadeIn(3000).fadeOut(3000);
+			}
+			else if($.trim(data) == 'no user')
+			{
+				$('#msg').removeClass('done').addClass('error').html("An error occured selecting user to confirm.").hide().fadeIn(3000).fadeOut(3000);
+			}
+			else
+			{
+				$('#msg').removeClass('done').addClass('error').html(data);
 			}
                     }
 
@@ -520,24 +557,24 @@ function adminChangeUserPass()
                         if($.trim(data)=='success')
 			{
 				$('.user_'+id).fadeOut(500).remove();
-				$('#action').addClass('done').html("User Deleted Successfully.").fadeIn('slow').delay(2000).fadeOut();
-			}
+				$('#msg').removeClass('error').addClass('done').html("User Deleted Successfully.").hide().fadeIn(3000).fadeOut(3000);
+                        }
 			else if($.trim(data) == 'unknown error')
 			{
-				$('#action').addClass('error').html("An error occured while attempting to delete user. Please try again.").fadeIn('slow').delay(2000).fadeOut();
+				$('#msg').removeClass('done').addClass('error').html("An error occured while attempting to delete user. Please try again.").hide().fadeIn(3000).fadeOut(3000);
 			}
 			else if($.trim(data) == 'no user')
 			{
-				$('#action').addClass('error').html("An error occured selecting user to delete.").fadeIn('slow').delay(2000).fadeOut();
+				$('#msg').removeClass('done').addClass('error').html("An error occured selecting user to delete.").hide().fadeIn(3000).fadeOut(3000);
 			}
 			else
 			{
-				$('#action').addClass('error').html(data);
+				$('#msg').removeClass('done').addClass('error').html(data);
 			}
                     }
 		})
 		.fail(function(xhr, textStatus, errorThrown){
-			$('#action').addClass('error').html("opps: " + textStatus + " : " + errorThrown).fadeIn('slow').delay(2000).fadeOut();
+			$('#msg').removeClass('done').addClass('error').html("opps: " + textStatus + " : " + errorThrown).hide().fadeIn(3000).fadeOut(3000);
 		})
 		.complete(function(){
 			//$('#loading_'+id).hide();
@@ -547,18 +584,17 @@ function adminChangeUserPass()
  *  @Description:  Function Admin actions over the users
 */
 
-
 /**
- *  Jqeury function for changing user password from the admin panel
+ *  Jqeury function for processing contact information
  */
-function config()
+function contactUs()
 {
 	hideshow('loading',1);
 
 	$.ajax({
 		type: "POST",
-		url: 	admin_process_path + "configuration",
-		data: $('#config').serialize(),
+		url:  admin_process_path + "contact_us",
+		data: $('#contactUs').serialize(),
 		dataType: "json",
 		success: function(msg){
 
@@ -566,7 +602,8 @@ function config()
 			{
 				//show the success message
 				$('#msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
-			}
+                               
+                        }
 			else if(parseInt(msg.status)==0)
 			{
 				hideshow('msg',1);
@@ -579,12 +616,79 @@ function config()
 
 }
 
+/**
+ *  Jqeury function for processing contact information
+ */
+function config()
+{
+	hideshow('loading',1);
+
+	$.ajax({
+		type: "POST",
+		url:   admin_process_path + "configuration",
+		data:  $('#config').serialize(),
+		dataType: "json",
+		success: function(msg){
+
+			if(parseInt(msg.status)==1)
+			{
+				//show the success message
+				$('#config_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+			}
+			else if(parseInt(msg.status)==0)
+			{
+				hideshow('config_msg',1);
+				$('#config_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+			}
+
+			hideshow('loading',0);
+		}
+	});
+
+}
+
+
+
+
+/**
+ *  Jqeury function for processing Access Control Level
+ */
+function processAcl()
+{
+	//hideshow('loading',1);
+
+	$.ajax({
+		type: "POST",
+		url: 	admin_process_path + "process_acl",
+		data: $('#processAcl').serialize(),
+		dataType: "json",
+		success: function(msg){
+
+			if(parseInt(msg.status)==1)
+			{
+				//show the success message
+				$('#acl_msg').removeClass('error').addClass('done').fadeIn('slow').html(msg.txt).delay(3000).fadeOut('slow');
+                                //Refresh Page to show users updated profile content
+				 window.setTimeout(function(){location.reload()},3000)
+                        }
+			else if(parseInt(msg.status)==0)
+			{
+				hideshow('acl_msg',1);
+				$('#acl_msg').removeClass('done').addClass('error').fadeIn('slow').html(msg.txt);
+			}
+
+			//hideshow('loading',0);
+		}
+	});
+
+}
+
 /* Function used in Admin configuration page to toggle between view and edit access control level */
 function view_acl()
 {
-$(".update_acl").fadeOut(1000);
-$(".update_acl").removeClass('show');
-$(".update_acl").addClass('hide');
+$(".edit_acl").fadeOut(1000);
+$(".edit_acl").removeClass('show');
+$(".edit_acl").addClass('hide');
 $(".view_acl").fadeIn(1100);
 $(".view_acl").removeClass('hide');
 $(".view_acl").addClass('show');
@@ -595,9 +699,9 @@ function edit_acl()
 $(".view_acl").fadeOut(1000);
 $(".view_acl").removeClass('show');
 $(".view_acl").addClass('hide');
-$(".update_acl").fadeIn(1100);
-$(".update_acl").removeClass('hide');
-$(".update_acl").addClass('show');
+$(".edit_acl").fadeIn(1100);
+$(".edit_acl").removeClass('hide');
+$(".edit_acl").addClass('show');
 }
 
 /* Function used in Admin configuration page to toggle between view and edit access control level */

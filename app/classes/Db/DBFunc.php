@@ -5,17 +5,22 @@
 */
 
     //include DBSingleton via Autoloader
-   // require_once ("./Autoloader.php");
      require_once (realpath(dirname(__FILE__) . DS."..".DS."..".DS).DS."Autoloader.php");
-	/*
-	* Creating Class for DB Functions called DBFunc
-	*/
 
+    /**
+     *  Creating Class for DB Functions called DBFunc
+     *
+     */
 class Db_DBFunc
 {
     protected $db;
 
-    // Create a construct to initiate  Db_DBSingleton class
+    /**
+     *  Create a construct to initiate  Db_DBSingleton class
+     *
+     * @param       N/A
+     * @return      Returns the database initiation
+     */
     public function __construct()
     {
         $this->db = Db_DBSingleton::init();

@@ -32,7 +32,7 @@ $dbconn->select_db($db)or die('Unable to select database!');
 
 
 //SQL FILE
-$file = 'umdb.sql';
+$file = 'sap.sql';
 
 //UPLOAD SQL
 if($fp = file_get_contents($file)) {
