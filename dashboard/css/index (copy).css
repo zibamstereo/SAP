@@ -21,7 +21,7 @@ font-family: 'open_sanssemibold';
   z-index: 1;
   background: #FFFFFF;
   max-width: 100%;
-  margin: 12% auto 10px 0;
+  margin: 0 auto 10px 0;
   padding: 15px;
   min-height:500px;
   text-align: center;
@@ -29,7 +29,13 @@ border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 
-
+.sap-wrapper-header {
+  padding:3% 0 3% 5%;
+  margin: auto;
+  background: #ee3343;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  color:#fff;
+}
 .form {
   position: relative;
   z-index: 1;
@@ -227,14 +233,6 @@ opacity: 0.1;
 
 @media screen and (min-width: 600px) {
 
-  .sap-wrapper-header {
-  padding:3% 0 3% 5%;
-  margin: auto;
-  background: #ee3343;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  color:#fff;
-}
-
   body {font-family: 'open_sanssemibold';
     background: #f8f8f8;
       margin:auto;
@@ -262,13 +260,6 @@ opacity: 0.1;
 }
 @media screen and (min-width: 900px) {
 
-.sap-wrapper-header {
-  padding:3% 0 3% 5%;
-  margin: auto;
-  background: #ee3343;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  color:#fff;
-}
   body {font-family: 'open_sanssemibold';
     background: #f8f8f8;
       margin:auto;
@@ -301,13 +292,7 @@ padding: 3.5% 0 0 0;
       overflow-y:auto !important;
 
   }
-.sap-wrapper-header {
-  padding:3% 0 3% 5%;
-  margin: auto;
-  background: #ee3343;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  color:#fff;
-}
+
   .sap-welcome{
 
       width: 90%;
@@ -332,13 +317,6 @@ padding: 3.5% 0 0 0;
       overflow-y:auto !important;
 
   }
-  .sap-wrapper-header {
-  padding:3% 0 3% 5%;
-  margin: auto;
-  background: #ee3343;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  color:#fff;
-}
 
   .sap-welcome{
 
@@ -356,13 +334,6 @@ padding: 3.5% 0 0 0;
 
 }
 @media screen and (min-width: 2100px) {
-  .sap-wrapper-header {
-  padding:3% 0 3% 5%;
-  margin: auto;
-  background: #ee3343;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  color:#fff;
-}
 
   body {font-family: 'open_sanssemibold';
     background: #f8f8f8;
@@ -393,17 +364,11 @@ padding: 3.5% 0 0 0;
   body {font-family: 'open_sanssemibold';
     background: #f8f8f8;
       margin:auto;
+      height:auto !important;
+      overflow-x:hidden !important;
       overflow-y: auto;
 
   }
-
-  .sap-wrapper-header {
-  padding:3% 0 3% 5%;
-  margin: 25% auto 0 0;
-  background: #ee3343;
-  border: 1px solid rgba(0, 0, 0, 0.02);
-  color:#fff;
-}
   .sap-welcome{
 
       width: 90%;
@@ -413,14 +378,14 @@ padding: 3.5% 0 0 0;
 
   .sap-wrapper {
     width: 360px;
-    padding: 0;
-    margin: auto auto 5em auto;
+    padding: 15% 0 0;
+    margin: auto auto 2em auto;
   }
 
 
   .top {
     padding: 0.1em 0 0.1em 3em;
-    font-size:1em;
+    font-size:0.95em;
    border: 1px solid rgba(0,0,0,0.08);
     background: #5d0e5b;
     color: #F9F9F9;

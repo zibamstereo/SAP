@@ -17,6 +17,7 @@ $usr = new Functions_User();
 <html >
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <?php echo $usr->addTitle(); ?></title>
 
         <?php
@@ -56,10 +57,7 @@ $usr = new Functions_User();
 
 <div class="wrapper">
   <br clear="all">
-  <br clear="all">
-  <br clear="all">
-  <br clear="all">
-  <br clear="all">
+
 
   <div class="sap-wrapper">
 
